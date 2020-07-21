@@ -1,12 +1,29 @@
 import React from 'react';
-import './App.css';
-import fire from '../src/config/firebase'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Register from './Pages/Register';
 
-function App() {
+
+const App = () => {
   return ( <
-    p > Ola! < /p>
-
-  );
+    Router >
+    <
+    Switch >
+    <
+    Route path = "/"
+    exact >
+    <
+    Register / >
+    <
+    /Route> <
+    Route path = "/login" >
+    Rota de login <
+    /Route> <
+    Route path = "/admin" >
+    Rota adm <
+    /Route> <
+    /Switch> <
+    /Router>
+  )
 }
 
-export default App;
+export default App
