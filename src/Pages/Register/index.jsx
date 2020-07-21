@@ -37,7 +37,7 @@ const Form = () => {
   }
 
 
-  const register = React.useCallback(async () => {
+  const register = React.useCallback(async() => {
     try {
       const loginData = await auth.createUserWithEmailAndPassword(email, pass)
       console.log(loginData.user)
@@ -66,23 +66,48 @@ const Form = () => {
   }, [email, pass, name])
 
 
-  return (
-    <div>
-      <h3 className="text-center">Registro</h3>
-      <hr />
-      <form>
-        <Input class='input-register' onChange={e => (setName(e.target.value))} value={name} type='text' placeholder='Nome' />
-        <Input class='input-register' onChange={e => (setEmail(e.target.value))} value={email} type='email' placeholder='E-mail' />
-        <Input class='input-register' onChange={e => (setPass(e.target.value))} value={pass} type='text' placeholder='Senha' />
-        <label>Em qual setor você trabalha?
-          <select className="sector" onChange={e => (setOption(e.targer.value))} value={option}>
-            <option value={'Cozinha'}>Cozinha</option>
-            <option value={'Salão'}>Salão</option>
-          </select>
-        </label>
-        <Button handleCLick={createRegister} class='submit' name='Registrar' />
-      </form>
-    </div >
+  return ( <
+    div >
+    <
+    h3 className = "text-center" > Registro < /h3> <
+    hr / >
+    <
+    form >
+    <
+    Input class = 'input-register'
+    onChange = { e => (setName(e.target.value)) }
+    value = { name }
+    type = 'text'
+    placeholder = 'Nome' / >
+    <
+    Input class = 'input-register'
+    onChange = { e => (setEmail(e.target.value)) }
+    value = { email }
+    type = 'email'
+    placeholder = 'E-mail' / >
+    <
+    Input class = 'input-register'
+    onChange = { e => (setPass(e.target.value)) }
+    value = { pass }
+    type = 'text'
+    placeholder = 'Senha' / >
+    <
+    label > Em qual setor você trabalha ?
+    <
+    select className = "sector"
+    onChange = { e => (setOption(e.targer.value)) }
+    value = { option } >
+    <
+    option value = { 'Cozinha' } > Cozinha < /option> <
+    option value = { 'Salão' } > Salão < /option> <
+    /select> <
+    /label> <
+    Button handleCLick = { createRegister }
+    class = 'submit'
+    name = 'Registrar' / >
+    <
+    /form> <
+    /div >
   )
 
 
