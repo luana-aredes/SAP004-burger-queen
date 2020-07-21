@@ -1,19 +1,29 @@
 import React from 'react';
-import './App.css';
-import firebase from '../src/config/firebase';
-import Button from './Components/Button/Button'
-import Input from './Components/Input/Input'
-const submit = () => {
-  console.log('Registrei')
-}
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Register from './Pages/Register';
 
-function App() {
+
+const App = () => {
   return (
-    <form>
-      <Input class='input-register' type='e-mail' placeholder='Email' />
-      <Button handleCLick={submit} class='submit' name='Registrar' />
-    </form>
-  );
+    <Router>
+
+      <Switch>
+        <Route path="/" exact>
+          <Register />
+        </Route>
+        <Route path="/login">
+          Rota de login
+          </Route>
+        <Route path="/admin">
+          Rota adm
+          </Route>
+
+      </Switch>
+
+    </Router>
+  )
 }
 
-export default App;
+export default App
+
+
