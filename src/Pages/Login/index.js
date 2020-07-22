@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Button from '../../Components/Button/Button'
 import Input from '../../Components/Input/Input'
-import firebase from '../../config/firebase'
+import { auth } from '../../config/firebase'
 import authMainErrors from './firebase-error'
+import { Link } from 'react-router-dom';
 
 
 
@@ -12,7 +13,7 @@ const LoginPage = () => {
   let [errorMsg, setErrorMsg] = useState();
 
   const signIn = (email, password) => {
-    firebase.auth()
+    auth
       .signInWithEmailAndPassword(email, password)
       .catch(function (error) {
         const errorCode = error.code;
@@ -38,26 +39,26 @@ const LoginPage = () => {
     onChange = {
       (event) => setEmail(event.target.value)
     }
-    />  <
+    /> <
     Input type = 'password'
     value = { password }
     placeholder = 'Digite sua senha'
     onChange = {
       (event) => setPassword(event.target.value)
     }
-    />  <
+    /> <
     Button name = 'Entrar'
     handleCLick = {
       (e) => sendForm(e)
     }
-    />  < /
-    form > <
-    p > Se não tem uma conta, registre - se. < /p> <
+    />  <
+    /form> <
+    p > Se não tem uma conta, <
+    Link to = '/' > registre - se! < /Link> <
+    /p> <
     p style = {
-      { color: 'red' }
-    } > { errorMsg } <
-    /p>  < /
-    div >
+      { color: 'red' } } > { errorMsg } < /p>  <
+    /div>
   );
 }
 

@@ -69,8 +69,9 @@ const Form = () => {
   return ( <
     div >
     <
-    h3 className = "text-center" > Registro < /h3> <
+    h3 className = "text-center" > Registro < /h3>  <
     hr / >
+
     <
     form >
     <
@@ -100,17 +101,15 @@ const Form = () => {
     <
     option value = { 'Cozinha' } > Cozinha < /option> <
     option value = { 'Salão' } > Salão < /option> <
-    /select> <
-    /label> <
+    /select>  <
+    /label>  <
     Button handleCLick = { createRegister }
     class = 'submit'
     name = 'Registrar' / >
     <
     /form> <
-    /div >
+    /div>
   )
-
-
 }
 
 export default Form;

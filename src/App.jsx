@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Register from './Pages/Register';
+import LoginPage from './Pages/Login/index'
 
 const App = () => {
   return ( <
@@ -9,8 +10,8 @@ const App = () => {
     Switch >
     <
     Route path = "/"
-    exact > < Register / > < /Route> <
-    Route path = "/login" > Rota de login < /Route> <
+    exact > < Register / > < /Route>  <
+    Route path = "/login" > < LoginPage / > < /Route> <
     Route path = "/admin" > Rota adm < /Route> <
     /Switch> <
     /Router>
