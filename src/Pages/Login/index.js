@@ -9,12 +9,11 @@ import authMainErrors from './firebase-error'
 const LoginPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  let [errorMsg, setErrorMsg] = useState('Possível Msg de erro');
+  let [errorMsg, setErrorMsg] = useState();
 
   const signIn = (email, password) => {
     firebase.auth()
       .signInWithEmailAndPassword(email, password)
-      .then(console.log('Redirecione para a próxima página'))
       .catch(function (error) {
         const errorCode = error.code;
         if (authMainErrors[errorCode]) {
@@ -37,26 +36,28 @@ const LoginPage = () => {
     value = { email }
     placeholder = 'Digite seu e-mail'
     onChange = {
-      (event) => setEmail(event.target.value) }
-    /> <
+      (event) => setEmail(event.target.value)
+    }
+    />  <
     Input type = 'password'
     value = { password }
     placeholder = 'Digite sua senha'
     onChange = {
-      (event) => setPassword(event.target.value) }
-    /> <
+      (event) => setPassword(event.target.value)
+    }
+    />  <
     Button name = 'Entrar'
     handleCLick = {
-      (e) => sendForm(e) }
-    /> <
-    /form> <
-    p >
-    Se não tem uma conta, registre - se. <
-    /p> <
+      (e) => sendForm(e)
+    }
+    />  < /
+    form > <
+    p > Se não tem uma conta, registre - se. < /p> <
     p style = {
-      { color: 'red' } } > { errorMsg } <
-    /p> <
-    /div>
+      { color: 'red' }
+    } > { errorMsg } <
+    /p>  < /
+    div >
   );
 }
 

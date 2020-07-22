@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Register from './Pages/Register';
 
-
 const App = () => {
   return ( <
     Router >
@@ -10,17 +9,9 @@ const App = () => {
     Switch >
     <
     Route path = "/"
-    exact >
-    <
-    Register / >
-    <
-    /Route> <
-    Route path = "/login" >
-    Rota de login <
-    /Route> <
-    Route path = "/admin" >
-    Rota adm <
-    /Route> <
+    exact > < Register / > < /Route> <
+    Route path = "/login" > Rota de login < /Route> <
+    Route path = "/admin" > Rota adm < /Route> <
     /Switch> <
     /Router>
   )
