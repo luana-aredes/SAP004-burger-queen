@@ -4,10 +4,10 @@ import Input from '../../Components/Input/Input'
 import { auth } from '../../config/firebase'
 import authMainErrors from './firebase-error'
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 
-
-const LoginPage = () => {
+const Login = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   let [errorMsg, setErrorMsg] = useState();
@@ -15,6 +15,7 @@ const LoginPage = () => {
   const signIn = (email, password) => {
     auth
       .signInWithEmailAndPassword(email, password)
+      .then((result) => props.history.push('/admin'))
       .catch(function (error) {
         const errorCode = error.code;
         if (authMainErrors[errorCode]) {
@@ -23,7 +24,7 @@ const LoginPage = () => {
       })
   };
 
-  const sendForm = (event) => {
+  const sendFormToAuth = (event) => {
     event.preventDefault();
     signIn(email, password);
   }
@@ -49,12 +50,12 @@ const LoginPage = () => {
     /> <
     Button name = 'Entrar'
     handleCLick = {
-      (e) => sendForm(e)
+      (e) => sendFormToAuth(e)
     }
     />  <
     /form> <
     p > Se não tem uma conta, <
-    Link to = '/' > registre - se! < /Link> <
+    Link to = '/register' > registre - se < /Link> <
     /p> <
     p style = {
       { color: 'red' } } > { errorMsg } < /p>  <
@@ -62,4 +63,4 @@ const LoginPage = () => {
   );
 }
 
-export default LoginPage;
+export default withRouter(Login);
