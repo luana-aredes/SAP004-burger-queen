@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Register from './Pages/Register';
-
+import LoginPage from './Pages/Login/index';
 
 const App = () => {
   return (
@@ -12,10 +12,13 @@ const App = () => {
           <Register />
         </Route>
         <Route path="/login">
-          Rota de login
+          <LoginPage />
+        </Route>
+        <Route path="/salao">
+          Rota salao
           </Route>
-        <Route path="/admin">
-          Rota adm
+        <Route path="/cozinha">
+          Rota Cozinha
           </Route>
 
       </Switch>
