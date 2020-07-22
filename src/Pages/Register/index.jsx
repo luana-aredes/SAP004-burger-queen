@@ -111,8 +111,7 @@ const Form = (props) => {
         Name: name,
         email: email,
         uid: loginData.user.uid,
-        uidUser: loginData.user.
-          Sector: sector
+        Sector: sector
       })
       setEmail('')
       setPass('')
