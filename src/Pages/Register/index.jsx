@@ -4,70 +4,12 @@ import Input from '../../Components/Input/Input';
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 import { db, auth } from '../../config/firebase';
-import { StyleSheet, css } from 'aphrodite';
-const styles = StyleSheet.create({
-  red: {
-    backgroundColor: 'red'
-  },
-  input: {
-    width: '350px',
-    height: '50px',
-    boxSizing: 'border-box',
-    alignSelf: 'center',
-    color: '#420029',
-    border: '1px solid #586B9F',
-    borderRadius: '6px',
-    margin: '0 0 5%',
-    padding: '2%',
-    fontSize: '1rem',
-  },
-  div: {
-    display: 'block',
-  },
-  form: {
-    width: '500px',
-  },
-  fieldset: {
-    padding: '1vw 5vw',
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    border: 'none'
-  },
-  button: {
-    width: '350px',
-    height: '50px',
-    borderRadius: '20px',
-    background: '#C3846D'
-  },
-  select: {
-    width: '350px',
-    height: '50px',
-    alignSelf: 'center',
-    color: '#420029',
-    border: '3px solid #E5B163',
-    boxSizing: 'border-box',
-    borderRadius: '10px',
-    margin: '0 0 5%',
-    padding: '2%',
-    fontSize: '1rem',
-    backgroundColor: ' #4543B5;'
-  },
-  body: {
-    width: '100%',
-    height: '100%',
-    background: ' #8E3712'
-  },
-  circle: {
-    width: '400px',
-    height: '400px',
-    backgroundColor: '#E5B163',
-    borderRadius: '200px',
-    position: 'fixed',
-    marginTop: '30px',
-    marginLeft: '-10px',
-  }
-})
+import styles from '../Style/login-register'
+import { css } from 'aphrodite';
+import Logotype from '../../../src/assets/logotipo.png';
+import BurguerImg from '../../../src/assets/circle-burger.png';
+
+
 const Form = (props) => {
   const [email, setEmail] = React.useState('')
   const [pass, setPass] = React.useState('')
@@ -123,33 +65,45 @@ const Form = (props) => {
     }
   }, [email, pass, name, sector, props.history])
   return ( <
-    main >
+    main className = { css(styles.pageContainer) } >
+    <
+    section className = { css(styles.imagesContainer) } >
+    <
+    img className = { css(styles.logoImg) }
+    src = { Logotype }
+    alt = "Logotipo" / >
+    <
+    img className = { css(styles.burguerImg) }
+    src = { BurguerImg }
+    alt = "Imagem de hamburguer" / >
+    <
+    /section>
+
+    <
+    section className = { css(styles.formContainer) } >
     <
     form className = { css(styles.form) } >
     <
     fieldset className = { css(styles.fieldset) } >
     <
-    Input class = { css(styles.input) }
-    onChange = { e => (setName(e.target.value)) }
+    Input onChangefieldset = { e => (setName(e.target.value)) }
     value = { name }
     type = 'text'
     placeholder = 'Nome' / >
     <
-    Input class = { css(styles.input) }
-    onChange = { e => (setEmail(e.target.value)) }
+    Input onChange = { e => (setEmail(e.target.value)) }
     value = { email }
     type = 'email'
     placeholder = 'E-mail' / >
     <
-    Input class = { css(styles.input) }
-    onChange = { e => (setPass(e.target.value)) }
+    Input onChange = { e => (setPass(e.target.value)) }
     value = { pass }
     type = 'text'
     placeholder = 'Senha' / >
     <
-    div className = { css(styles.div) } >
+    div >
     <
-    label > Em qual setor você trabalha ? < /label> <
+    label className = { css(styles.grayFont) } > Em qual setor você trabalha ? < /label> <
     select className = { css(styles.select) }
     onChange = { e => (setSector(e.target.value)) }
     value = { sector } >
@@ -162,14 +116,13 @@ const Form = (props) => {
     Link to = { `/login` } >
     <
     Button handleCLick = { createRegister }
-    class = 'submit'
-    class = { css(styles.button) }
-    name = 'Registrar' / >
-    <
+    name = 'Registrar'
+    class = { css(styles.red) }
+    /> <
     /Link> <
     /fieldset> <
     /form> <
-    div className = { css(styles.circle) } > < /div> <
+    /section> <
     /main>
   )
 }
