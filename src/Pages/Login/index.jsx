@@ -5,6 +5,10 @@ import { auth } from '../../config/firebase'
 import authMainErrors from './firebase-error'
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
+import styles from '../Style/login-register'
+import { css } from 'aphrodite';
+import Logotype from '../../../src/assets/logotipo.png';
+import BurguerImg from '../../../src/assets/circle-burger.png';
 
 
 const Login = (props) => {
@@ -15,7 +19,7 @@ const Login = (props) => {
   const signIn = (email, password) => {
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => props.history.push('/admin'))
+      .then(() => props.history.push('/admin'))
       .catch(function (error) {
         const errorCode = error.code;
         if (authMainErrors[errorCode]) {
@@ -30,9 +34,26 @@ const Login = (props) => {
   }
 
   return ( <
-    div >
+    main className = { css(styles.pageContainer) } >
     <
-    form >
+    section className = { css(styles.imagesContainer) } >
+    <
+    img className = { css(styles.logoImg) }
+    src = { Logotype }
+    alt = "Logotipo" / >
+    <
+    img className = { css(styles.burguerImg) }
+    src = { BurguerImg }
+    alt = "Imagem de hamburguer" / >
+    <
+    /section>
+
+    <
+    section className = { css(styles.formContainer) } >
+    <
+    form className = { css(styles.form) } >
+    <
+    fieldset className = { css(styles.fieldset) } >
     <
     Input type = 'email'
     value = { email }
@@ -50,16 +71,22 @@ const Login = (props) => {
     /> <
     Button name = 'Entrar'
     handleCLick = {
-      (e) => sendFormToAuth(e)
-    }
-    />  <
-    /form> <
+      (e) => sendFormToAuth(e) }
+    /> <
+    /fieldset> <
+    /form>
+
+    <
+    div className = { css(styles.registerLink) } >
+    <
     p > Se não tem uma conta, <
-    Link to = '/register' > registre - se < /Link> <
-    /p> <
-    p style = {
-      { color: 'red' } } > { errorMsg } < /p>  <
-    /div>
+    Link to = '/register'
+    className = { css(styles.registerLink) } > registre - se! < /Link>  <
+    /p>  <
+    p > { errorMsg } < /p> <
+    /div> <
+    /section> <
+    /main>
   );
 }
 
