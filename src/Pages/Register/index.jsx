@@ -110,20 +110,20 @@ const Form = (props) => {
     <
     option value = '' > Selecione... < /option> <
     option value = 'Cozinha' > Cozinha < /option> <
-    option value = 'Salão' > Salão < /option> <
-    /select> <
+    option value = 'Salão' > Salão < /option> < /
+    select > <
     /div> <
     Link to = { `/login` } >
     <
     Button handleCLick = { createRegister }
     name = 'Registrar'
     class = { css(styles.red) }
-    /> <
-    /Link> <
-    /fieldset> <
-    /form> <
-    /section> <
-    /main>
+    /> < /
+    Link > <
+    /fieldset> < /
+    form > <
+    /section> < /
+    main >
   )
 }
 export default withRouter(Form);
