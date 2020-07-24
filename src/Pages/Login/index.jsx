@@ -49,12 +49,9 @@ const Login = (props) => {
       <section className={css(styles.formContainer)} >
         <form className={css(styles.form)} >
           <fieldset className={css(styles.fieldset)} >
-            <Input type='email'
-              value={email}
+            <Input type='email' value={email}
               placeholder='Digite seu e-mail'
-              onChange={
-                (event) => setEmail(event.target.value)
-              }
+              onChange={(event) => setEmail(event.target.value)}
             />
             <Input type='password'
               value={password}
@@ -62,7 +59,8 @@ const Login = (props) => {
               onChange={
                 (event) => setPassword(event.target.value)
               }
-            /> <Button name='Entrar'
+            />
+            <Button name='Entrar'
               handleCLick={
                 (e) => sendFormToAuth(e)
               }
@@ -70,15 +68,12 @@ const Login = (props) => {
           </fieldset>
         </form>
         <div className={css(styles.registerLink)} >
-          <
-    p > Se não tem uma conta, <
-    Link to='/register'
-              className={css(styles.registerLink)} > registre - se! < /Link>  < /
-    p > <
-    p > {errorMsg} < /p> < /
-    div > <
-    /section> < /
-    main >
+          <p > Se não tem uma conta,
+          <Link to='/register' className={css(styles.registerLink)} > registre - se!
+          </Link>
+          </p>
+          <p> {errorMsg} </p>
+        </div> </section> </main>
   );
 }
 
