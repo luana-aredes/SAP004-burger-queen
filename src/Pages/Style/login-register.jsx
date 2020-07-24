@@ -47,6 +47,14 @@ const styles = StyleSheet.create({
     backgroundColor: ' #4543B5;',
     margin: '15px auto',
   },
+  alertError: {
+    color: '#FF0000',
+    border: '2px solid #FF0000',
+    borderRadius: '5px',
+    backgroundColor: '#FFFFCC',
+    padding: '5px',
+    marginBottom: '5px'
+  }
 })
 
 export default styles;

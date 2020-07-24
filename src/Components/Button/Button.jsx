@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 const Button = (props) => {
-  return ( <
-    button className = { css(styles.button) }
-    onClick = { props.handleCLick } > { props.name } <
-    /button>
+  return (
+    <button className={css(styles.button)}
+      onClick={props.handleCLick} > {props.name}
+    </button>
   );
 }
 
