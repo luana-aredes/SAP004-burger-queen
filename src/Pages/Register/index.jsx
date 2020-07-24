@@ -66,7 +66,6 @@ const Form = (props) => {
         <img className={css(styles.logoImg)} src={Logotype} alt="Logotipo" />
         <img className={css(styles.burguerImg)} src={BurguerImg} alt="Imagem de hamburguer" />
       </section>
-
       <section className={css(styles.formContainer)} >
         <form className={css(styles.form)} >
           <fieldset className={css(styles.fieldset)} >
