@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 const Input = (props) => {
-  return ( <
-    input type = { props.type }
-    className = { css(styles.input) }
-    placeholder = { props.placeholder }
-    value = { props.value }
-    onChange = { props.onChange }
+  return (
+    <input type={props.type}
+      className={css(styles.input)}
+      placeholder={props.placeholder}
+      value={props.value}
+      onChange={props.onChange}
     />
   );
 }

@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 import styles from '../Style/login-register'
 import { css } from 'aphrodite';
-import Logotype from '../../../src/assets/logotipo.png';
-import BurguerImg from '../../../src/assets/circle-burger.png';
+import HomeImages from '../../Components/HomeImages/HomeImages'
 
 
 const Login = (props) => {
@@ -37,19 +36,15 @@ const Login = (props) => {
 
   return (
     <main className={css(styles.pageContainer)} >
-      <section className={css(styles.imagesContainer)} >
-        <img className={css(styles.logoImg)}
-          src={Logotype}
-          alt="Logotipo" />
-        <img className={css(styles.burguerImg)}
-          src={BurguerImg}
-          alt="Imagem de hamburguer" />
+      <section>
+        <HomeImages />
       </section>
 
       <section className={css(styles.formContainer)} >
         <form className={css(styles.form)} >
           <fieldset className={css(styles.fieldset)} >
-            <Input type='email' value={email}
+            <Input type='email'
+              value={email}
               placeholder='Digite seu e-mail'
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -60,20 +55,24 @@ const Login = (props) => {
                 (event) => setPassword(event.target.value)
               }
             />
-            <Button name='Entrar'
+            <Button
+              name='Entrar'
               handleCLick={
                 (e) => sendFormToAuth(e)
               }
             />
           </fieldset>
         </form>
-        <div className={css(styles.registerLink)} >
+        <div className={css(styles.registerText)} >
           <p > Se não tem uma conta,
-          <Link to='/register' className={css(styles.registerLink)} > registre - se!
+          <Link to='/register' className={css(styles.registerLink)} >
+              registre - se!
           </Link>
           </p>
           <p> {errorMsg} </p>
-        </div> </section> </main>
+        </div>
+      </section>
+    </main>
   );
 }
 

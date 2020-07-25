@@ -6,8 +6,7 @@ import { withRouter } from "react-router-dom";
 import { db, auth } from '../../config/firebase';
 import styles from '../Style/login-register'
 import { css } from 'aphrodite';
-import Logotype from '../../../src/assets/logotipo.png';
-import BurguerImg from '../../../src/assets/circle-burger.png';
+import HomeImages from '../../Components/HomeImages/HomeImages';
 
 
 const Form = (props) => {
@@ -62,9 +61,8 @@ const Form = (props) => {
   }, [email, pass, name, sector, props.history])
   return (
     <main className={css(styles.pageContainer)} >
-      <section className={css(styles.imagesContainer)} >
-        <img className={css(styles.logoImg)} src={Logotype} alt="Logotipo" />
-        <img className={css(styles.burguerImg)} src={BurguerImg} alt="Imagem de hamburguer" />
+      <section>
+        <HomeImages />
       </section>
       <section className={css(styles.formContainer)} >
         <form className={css(styles.form)} >

@@ -30,11 +30,15 @@ const styles = StyleSheet.create({
     maxHeight: '650px',
     backgroundColor: '#8E3712',
   },
-  registerLink: {
+  registerText: {
     textAlign: 'center',
     fontSize: '20px',
     color: '#E5E5E5',
-    textDecoration: 'none',
+  },
+  registerLink: {
+    marginLeft: '7px',
+    fontWeight: 'bold',
+    color: '#C3846D'
   },
   select: {
     width: '100%',
