@@ -25,7 +25,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   deliveryList: {
-    fontSize: '20px',
+    fontSize: '1.3em',
     color: '#E5E5E5',
     fontWeight: 'bold',
     textDecoration: 'none'

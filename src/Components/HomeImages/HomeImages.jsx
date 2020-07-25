@@ -3,11 +3,10 @@ import { StyleSheet, css } from 'aphrodite'
 import Logotype from '../../../src/assets/logotipo.png';
 import BurguerImg from '../../../src/assets/circle-burger.png';
 
-
 const HomeImages = () => {
   return (
-    <main className={css(styles.pageContainer)} >
-      <section>
+    <main>
+      <section className={css(styles.container)} >
         <img className={css(styles.logoImg)}
           src={Logotype}
           alt="Logotipo" />
@@ -23,19 +22,21 @@ export default HomeImages;
 
 const styles = StyleSheet.create({
   burguerImg: {
-    width: '70%',
-    marginTop: '80px',
+    position: 'absolute',
+    bottom: '0',
+    '@media (max-width: 481px)': {
+      display: 'none',
+    },
   },
   logoImg: {
     width: '60%',
-    marginTop: '3%',
-    marginLeft: '3%',
+    margin: '3%'
   },
-  pageContainer: {
+  container: {
     display: 'flex',
-    flexDirection: 'row',
-    maxWidth: '768px',
-    maxHeight: '650px',
-    backgroundColor: '#8E3712',
+    flexDirection: 'column',
+    '@media (max-width: 481px)': {
+      alignItems: 'center'
+    },
   }
 });

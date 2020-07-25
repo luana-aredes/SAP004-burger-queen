@@ -9,7 +9,6 @@ import styles from '../Style/login-register'
 import { css } from 'aphrodite';
 import HomeImages from '../../Components/HomeImages/HomeImages'
 
-
 const Login = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -20,11 +19,10 @@ const Login = (props) => {
       .signInWithEmailAndPassword(email, password)
       .then(() => props.history.push('/admin'))
       .catch(function (error) {
-        const errorCode = error.code;
-        if (authMainErrors[errorCode]) {
-          setErrorMsg(authMainErrors[errorCode])
+        if (authMainErrors[error.code]) {
+          setErrorMsg(authMainErrors[error.code])
         } else {
-          (setErrorMsg('Ocorreu um erro. Verifique os dados'))
+          (setErrorMsg('Ocorreu um erro. Tente novamente'))
         }
       })
   };
@@ -36,7 +34,7 @@ const Login = (props) => {
 
   return (
     <main className={css(styles.pageContainer)} >
-      <section>
+      <section className={css(styles.imgContainer)}>
         <HomeImages />
       </section>
 
@@ -65,12 +63,16 @@ const Login = (props) => {
         </form>
         <div className={css(styles.registerText)} >
           <p > Se não tem uma conta,
-          <Link to='/register' className={css(styles.registerLink)} >
-              registre - se!
-          </Link>
+          <br />
+            <Link to='/register'>registre - se!</Link>
           </p>
-          <p> {errorMsg} </p>
         </div>
+        {errorMsg ? (
+          <div className={css(styles.alertError)}>
+            {errorMsg}
+          </div>
+        ) : null
+        }
       </section>
     </main>
   );
