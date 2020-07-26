@@ -4,10 +4,10 @@ import Input from '../../Components/Input/Input';
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 import { db, auth } from '../../config/firebase';
+import authMainErrors from './firebase-error'
 import styles from '../Style/login-register'
 import { css } from 'aphrodite';
-import Logotype from '../../../src/assets/logotipo.png';
-import BurguerImg from '../../../src/assets/circle-burger.png';
+import HomeImages from '../../Components/HomeImages/HomeImages';
 
 
 const Form = (props) => {
@@ -49,33 +49,21 @@ const Form = (props) => {
       setError(null)
       props.history.push('/')
     } catch (error) {
-      console.log(error)
-      if (error.code === 'auth/email-already-in-use') {
-        setError('Usuario ja registrado...')
-        return
-      }
-      if (error.code === 'auth/invalid-email') {
-        setError('Email invalido')
-        return
+      if (authMainErrors[error.code]) {
+        setError(authMainErrors[error.code])
+      } else {
+        (setError('Ocorreu um erro. Tente novamente'))
       }
     }
   }, [email, pass, name, sector, props.history])
   return (
     <main className={css(styles.pageContainer)} >
-      <section className={css(styles.imagesContainer)} >
-        <img className={css(styles.logoImg)} src={Logotype} alt="Logotipo" />
-        <img className={css(styles.burguerImg)} src={BurguerImg} alt="Imagem de hamburguer" />
+      <section>
+        <HomeImages />
       </section>
       <section className={css(styles.formContainer)} >
         <form className={css(styles.form)} >
           <fieldset className={css(styles.fieldset)} >
-            {error ? (
-              <div className={css(styles.alertError)}>
-                {error}
-              </div>
-            ) : null
-            }
-
             <Input onChange={e => (setName(e.target.value))}
               value={name}
               type='text'
@@ -104,9 +92,15 @@ const Form = (props) => {
                 class={css(styles.red)} />
             </Link>
           </fieldset>
+          {error ? (
+            <div className={css(styles.alertError)}>
+              {error}
+            </div>
+          ) : null
+          }
         </form>
       </section>
-    </main>
+    </main >
   )
 }
 export default withRouter(Form);
