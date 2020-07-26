@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite'
 import Logotype from '../../../src/assets/logotipo.png';
 import BurguerImg from '../../../src/assets/circle-burger.png';
+import BurguerSmall from '../../../src/assets/burguer_small.png';
 
 const HomeImages = () => {
   return (
@@ -12,6 +13,9 @@ const HomeImages = () => {
           alt="Logotipo" />
         <img className={css(styles.burguerImg)}
           src={BurguerImg}
+          alt="Imagem de hamburguer" />
+        <img className={css(styles.burguerSmall)}
+          src={BurguerSmall}
           alt="Imagem de hamburguer" />
       </section>
     </main>
@@ -28,6 +32,11 @@ const styles = StyleSheet.create({
       display: 'none',
     },
   },
+  burguerSmall: {
+    '@media (min-width: 481px)': {
+      display: 'none'
+    }
+  },
   logoImg: {
     width: '60%',
     margin: '3%'
@@ -37,6 +46,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     '@media (max-width: 481px)': {
       alignItems: 'center'
-    },
+    }
   }
 });

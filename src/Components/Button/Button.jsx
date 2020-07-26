@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: '20px',
     background: '#E5B163',
     border: 'none',
-    fontSize: '1.3em',
+    fontSize: '1.1em',
     fontWeight: 'bold'
   },
 });

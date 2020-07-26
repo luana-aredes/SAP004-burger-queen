@@ -10,12 +10,14 @@ const styles = StyleSheet.create({
   formContainer: {
     margin: '25% 5%',
     maxWidth: '900px',
+    '@media (max-width: 481px)': {
+      marginTop: '5%'
+    }
   },
   grayFont: {
     color: '#E5E5E5',
   },
   pageContainer: {
-    border: '2px solid black',
     height: window.innerHeight,
     display: 'flex',
     flexDirection: 'row',
