@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 const Button = (props) => {
-  return (
-    <button className={props.class} className={css(styles.button)}
+return (
+    <button className={css(styles.button)}
       onClick={props.handleCLick} value={props.value} > {props.name}
     </button>
   );
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: '20px',
     background: '#E5B163',
     border: 'none',
-    fontSize: '18px',
+    fontSize: '1.1em',
     fontWeight: 'bold'
   },
 });

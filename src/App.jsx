@@ -4,6 +4,8 @@ import Register from './Pages/Register/index.jsx';
 import Login from './Pages/Login/index.jsx';
 import Menu from './Pages/Menu/Menu.jsx';
 import Kitchen from './Pages/ Kitchen/Kitchen';
+import Saloon from './Pages/Saloon/index.js';
+
 
 const App = () => {
 
@@ -11,7 +13,7 @@ const App = () => {
     <Router >
       <Switch >
         <Route path="/" exact >
-          < Login />
+         < Login />
         </Route>
         <Route path="/register" >
           < Register />
@@ -21,6 +23,9 @@ const App = () => {
         </Route>
         <Route path="/cozinha">
           <Kitchen />
+        </Route>
+        <Route path="/admin" >
+          <Saloon />
         </Route>
       </Switch>
     </Router>

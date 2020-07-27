@@ -1,10 +1,6 @@
 import { StyleSheet } from 'aphrodite'
 
 const styles = StyleSheet.create({
-  burguerImg: {
-    width: '70%',
-    marginTop: '80px',
-  },
   fieldset: {
     border: 'none',
   },
@@ -12,29 +8,41 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   formContainer: {
-    margin: '15% 5% 15% 0%',
-    width: '75%'
+    margin: 'auto',
+    '@media (max-width: 424px)': {
+      marginTop: '10%',
+      maxWidth: '90%'
+    },
+    '@media (min-width: 425px)': {
+      marginTop: '5%',
+      maxWidth: '80%'
+    },
+    '@media (min-width: 760px)': {
+      margin: 'auto 7%',
+      maxWidth: '45%'
+    },
+    '@media (min-width: 1024px)': {
+      maxWidth: '35%'
+    },
   },
   grayFont: {
     color: '#E5E5E5',
   },
-  logoImg: {
-    width: '60%',
-    marginTop: '3%',
-    marginLeft: '3%',
-  },
   pageContainer: {
+    height: window.innerHeight,
+    maxWidth: '2000px',
+    margin: 'auto',
     display: 'flex',
     flexDirection: 'row',
-    maxWidth: '768px',
-    maxHeight: '650px',
     backgroundColor: '#8E3712',
+    '@media (max-width: 481px)': {
+      flexDirection: 'column',
+    }
   },
-  registerLink: {
+  registerText: {
     textAlign: 'center',
     fontSize: '20px',
     color: '#E5E5E5',
-    textDecoration: 'none',
   },
   select: {
     width: '100%',
@@ -53,7 +61,8 @@ const styles = StyleSheet.create({
     borderRadius: '5px',
     backgroundColor: '#FFFFCC',
     padding: '5px',
-    marginBottom: '5px'
+    marginBottom: '5px',
+    textAlign: 'center'
   }
 })
 
