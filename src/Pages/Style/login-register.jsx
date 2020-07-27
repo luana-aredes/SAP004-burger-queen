@@ -8,23 +8,35 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   formContainer: {
-    margin: '25% 5%',
-    maxWidth: '900px',
-    '@media (max-width: 481px)': {
-      marginTop: '5%'
-    }
+    margin: 'auto',
+    '@media (max-width: 424px)': {
+      marginTop: '10%',
+      maxWidth: '90%'
+    },
+    '@media (min-width: 425px)': {
+      marginTop: '5%',
+      maxWidth: '80%'
+    },
+    '@media (min-width: 760px)': {
+      margin: 'auto 7%',
+      maxWidth: '45%'
+    },
+    '@media (min-width: 1024px)': {
+      maxWidth: '35%'
+    },
   },
   grayFont: {
     color: '#E5E5E5',
   },
   pageContainer: {
     height: window.innerHeight,
+    maxWidth: '2000px',
+    margin: 'auto',
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: '#8E3712',
     '@media (max-width: 481px)': {
       flexDirection: 'column',
-      justifyContent: 'space-between',
     }
   },
   registerText: {
