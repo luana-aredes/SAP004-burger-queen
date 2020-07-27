@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Register from './Pages/Register/index.jsx';
-import Login from './Pages/Login/index.jsx'
+import Login from './Pages/Login/index.jsx';
+import Menu from './Pages/Menu/Menu.jsx';
+import Kitchen from './Pages/ Kitchen/Kitchen';
 import Saloon from './Pages/Saloon/index.js';
 
+
 const App = () => {
+
   return (
     <Router >
       <Switch >
         <Route path="/" exact >
-          <Login />
+         < Login />
         </Route>
         <Route path="/register" >
-          <Register />
+          < Register />
+        </Route>
+        <Route path="/salao" >
+          <Menu />
+        </Route>
+        <Route path="/cozinha">
+          <Kitchen />
         </Route>
         <Route path="/admin" >
           <Saloon />

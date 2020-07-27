@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../Components/Button/Button'
 import Input from '../../Components/Input/Input'
-import { auth } from '../../config/firebase'
+import { db, auth } from '../../config/firebase'
 import authMainErrors from './firebase-error'
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
@@ -27,11 +27,27 @@ const Login = (props) => {
       })
   };
 
+ const usuarioLogado = React.useCallback(async (id) => {
+        try {
+            const sectorUser = await db.collection("users").doc(id).get().then((doc) => {
+                return doc.data().Sector;
+            })
+
+            if (sectorUser === 'Salão') {
+                props.history.push('/salao')
+            } else if (sectorUser === 'Cozinha') {
+                props.history.push('/cozinha')
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }, [props.history])
+
   const sendFormToAuth = (event) => {
     event.preventDefault();
     signIn(email, password);
   }
-
   return (
     <main className={css(styles.pageContainer)} >
       <section className={css(styles.imgContainer)}>
