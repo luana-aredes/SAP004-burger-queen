@@ -14,10 +14,29 @@ const Login = (props) => {
   const [password, setPassword] = useState();
   let [errorMsg, setErrorMsg] = useState();
 
+  const usuarioLogado = React.useCallback(async (id) => {
+    try {
+      const sectorUser = await db.collection("users").doc(id).get().then((doc) => {
+        return doc.data().Sector;
+      })
+
+      if (sectorUser === 'Salão') {
+        props.history.push('/saloon')
+      } else if (sectorUser === 'Cozinha') {
+        props.history.push('/kitchen')
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }, [props.history])
+
   const signIn = (email, password) => {
     auth
       .signInWithEmailAndPassword(email, password)
-      .then(() => props.history.push('/admin'))
+      .then((item) => {
+        usuarioLogado(item.user.uid)
+      })
       .catch(function (error) {
         if (authMainErrors[error.code]) {
           setErrorMsg(authMainErrors[error.code])
@@ -26,23 +45,6 @@ const Login = (props) => {
         }
       })
   };
-
- const usuarioLogado = React.useCallback(async (id) => {
-        try {
-            const sectorUser = await db.collection("users").doc(id).get().then((doc) => {
-                return doc.data().Sector;
-            })
-
-            if (sectorUser === 'Salão') {
-                props.history.push('/salao')
-            } else if (sectorUser === 'Cozinha') {
-                props.history.push('/cozinha')
-            }
-
-        } catch (error) {
-            console.log(error)
-        }
-    }, [props.history])
 
   const sendFormToAuth = (event) => {
     event.preventDefault();

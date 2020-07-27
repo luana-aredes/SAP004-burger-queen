@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Register from './Pages/Register/index.jsx';
 import Login from './Pages/Login/index.jsx';
-import Menu from './Pages/Menu/Menu.jsx';
+import Saloon from './Pages/Saloon/Saloon.jsx';
 import Kitchen from './Pages/ Kitchen/Kitchen';
-import Saloon from './Pages/Saloon/index.js';
-
 
 const App = () => {
 
@@ -13,19 +11,16 @@ const App = () => {
     <Router >
       <Switch >
         <Route path="/" exact >
-         < Login />
+          < Login />
         </Route>
         <Route path="/register" >
           < Register />
         </Route>
-        <Route path="/salao" >
-          <Menu />
-        </Route>
-        <Route path="/cozinha">
-          <Kitchen />
-        </Route>
-        <Route path="/admin" >
+        <Route path="/saloon" >
           <Saloon />
+        </Route>
+        <Route path="/kitchen">
+          <Kitchen />
         </Route>
       </Switch>
     </Router>
