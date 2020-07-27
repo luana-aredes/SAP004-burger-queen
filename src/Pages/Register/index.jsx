@@ -16,6 +16,7 @@ const Form = (props) => {
   const [name, setName] = React.useState('')
   const [sector, setSector] = React.useState('')
   const [error, setError] = React.useState(null)
+
   const createRegister = e => {
     e.preventDefault()
     if (!email.trim() || !pass.trim()) {
@@ -33,6 +34,7 @@ const Form = (props) => {
     setError(null)
     register();
   }
+
   const register = React.useCallback(async () => {
     try {
       const loginData = await auth.createUserWithEmailAndPassword(email, pass)
@@ -60,6 +62,7 @@ const Form = (props) => {
       }
     }
   }, [email, pass, name, sector, props.history])
+
   return (
     <main className={css(styles.pageContainer)} >
       <section className={css(styles.imagesContainer)} >

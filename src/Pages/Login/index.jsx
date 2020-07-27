@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../Components/Button/Button'
 import Input from '../../Components/Input/Input'
-import { auth } from '../../config/firebase'
+import { db, auth } from '../../config/firebase'
 import authMainErrors from './firebase-error'
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
@@ -16,10 +16,33 @@ const Login = (props) => {
     const [password, setPassword] = useState();
     let [errorMsg, setErrorMsg] = useState();
 
+    const usuarioLogado = React.useCallback(async (id) => {
+        try {
+            const sectorUser = await db.collection("users").doc(id).get().then((doc) => {
+                return doc.data().Sector;
+            })
+
+            if (sectorUser === 'Salão') {
+                props.history.push('/salao')
+            } else if (sectorUser === 'Cozinha') {
+                props.history.push('/cozinha')
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }, [props.history])
+
+
     const signIn = (email, password) => {
         auth
             .signInWithEmailAndPassword(email, password)
-            .then(() => props.history.push('/admin'))
+            .then((item) => {
+                const uid = item.user.uid;
+                console.log(uid)
+                usuarioLogado(uid)
+            }
+            )
             .catch(function (error) {
                 const errorCode = error.code;
                 if (authMainErrors[errorCode]) {
