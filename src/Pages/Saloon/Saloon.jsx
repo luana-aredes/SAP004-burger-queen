@@ -56,17 +56,13 @@ const Saloon = (props) => {
   }, [button, error, coffee, allDay])
 
 
-  return (<
-    main >
-    <
-    header >
-      <
-        Header />
-      <
-    /header> <
-    section >
-        <
-          Button name="Café da manhã"
+  return (
+    <main >
+      <header >
+        <Header />
+      </header>
+      <section >
+        <Button name="Café da manhã"
           value='coffee'
           handleCLick={
             () => {
@@ -74,89 +70,74 @@ const Saloon = (props) => {
             }
           }
 
-        /> <
-          Button name="Dia"
+        />
+        <Button name="Dia"
           value='day'
           handleCLick={
             () => {
               setButton((false))
             }
           }
-        /> < /
-    section > <
-    section > {
-            button ?
-              (
-                coffee.map(item => (<
-                  MenuBtn name={`${item.item} `}
-                  price={`R$${item.price}`}
-                  class={css(styles.btnMenu)}
-                  className={css(styles.name)}
-                  classPrice={css(styles.price)}
-                  value={item.id}
-                  handleCLick={
-                    e => {
-                      setRequest(e.target.value)
-                      console.log(e.target.value)
-                    }
+        />
+      </section>
+
+      <section> {
+        button ?
+          (
+            coffee.map(item => (
+              <MenuBtn name={`${item.item} `}
+                price={`R$${item.price}`}
+                class={css(styles.btnMenu)}
+                className={css(styles.name)}
+                classPrice={css(styles.price)}
+                value={item.id}
+                handleCLick={
+                  e => {
+                    setRequest(e.target.value)
+                    console.log(e.target.value)
                   }
-                />
-                ))
-              ) :
-              (
-                allDay.map(item => (<
-                  MenuBtn name={`${item.item} `}
-                  price={`R$${item.price}`}
-                  class={css(styles.btnMenu)}
-                  value={item.id}
-                  handleCLick={
-                    e => {
-                      setRequest(e.target.value)
-                      console.log(e.target.value)
-                    }
+                }
+              />
+            ))
+          ) :
+          (
+            allDay.map(item => (
+              <MenuBtn name={`${item.item} `}
+                price={`R$${item.price}`}
+                class={css(styles.btnMenu)}
+                value={item.id}
+                handleCLick={
+                  e => {
+                    setRequest(e.target.value)
+                    console.log(e.target.value)
                   }
-                />
-                ))
-              )
-          } <
-    /section>
+                }
+              />
+            ))
+          )
+      }
+      </section>
 
-    <
-    section >
-            <
-              Comanda />
-            <
-    table >
-              <
-    thead >
-                <
-    tr >
-                  <
-    th > Produtos < /th> <
-    th > Opções < /th> <
-    th > Adicional < /th> <
-    th > Quantidade < /th> < /
-    tr > <
-    /thead> <
-    tbody > {<
-      tr >
-                              <
-      td > < /td> <
-      td > < /td> <
-      td > < /td> <
-      td > < /td> < /
-      tr >
-
-    }
-
-    <
-    /tbody> < /
-    table > <
-    /section>
-
-    <
-    /main>
-
+      <section>
+        <Comanda />
+        <table >
+          <thead >
+            <tr>
+              <th> Produtos </th>
+              <th > Opções </th>
+              <th > Adicional </th>
+              <th > Quantidade </th>
+            </tr> </thead> <tbody>
+            {<tr>
+              <td> </td>
+              <td> </td>
+              <td > </td>
+              <td > </td>
+            </tr>}
+          </tbody>
+        </table>
+      </section>
+    </main>
   )
 }
 
