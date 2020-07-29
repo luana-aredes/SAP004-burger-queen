@@ -1,29 +1,64 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { db, auth } from '../../config/firebase';
-import Button from '../../Components/Button/Button';
 import MenuBtn from '../../Components/MenuBtn/MenuBtn';
 import Comanda from '../../Components/Comanda/Comanda';
 import Header from '../../Components/Header/Header';
+import OrderTable from '../../Components/Order_table/OrderTable'
+
 
 const styles = StyleSheet.create({
   btnMenu: {
     backgroundColor: '#F3E3CC',
-    margin: '6px',
-    padding: '6px',
-    display: 'block',
-    width: '300px',
-    height: '40px'
+    marginTop: '10px',
+    width: '100%',
+    height: '50px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    fontSize: '1.4em',
   },
-  name: {
-    color: 'red'
+  btnAllDay: {
+    width: '47.5%',
+    height: '30px',
+    backgroundColor: '#E5B163',
+    marginLeft: '2.3%',
+    marginBottom: '8px',
+    fontWeight: 'bold'
   },
-  price: {
-    color: 'blue'
+  btnCoffee: {
+    width: '47.5%',
+    height: '30px',
+    backgroundColor: '#C3846D',
+    marginRight: '2.3%',
+    marginBottom: '8px',
+    fontWeight: 'bold'
+  },
+  displayInline: {
+    display: 'inline',
+  },
+  sectionButtons: {
+    display: 'inline',
+    width: '100%',
+  },
+  containerMenu: {
+    width: '35%',
+    padding: '10px',
+    backgroundColor: '#f3f3f3',
+  },
+  containerCommands: {
+    width: '60%',
+    padding: '10px',
+    backgroundColor: '#f3f3f3',
+  },
+  inlineBlock: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 })
 
-const Saloon = (props) => {
+const Saloon = () => {
   const [coffee, setCoffee] = useState([])
   const [allDay, setAllDay] = useState([])
   const [button, setButton] = useState(true)
@@ -46,6 +81,7 @@ const Saloon = (props) => {
         const data = await db.collection('all-day-menu').get()
         const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         setAllDay(arrayData)
+
       } catch (error) {
         console.log(error)
       }
@@ -55,89 +91,93 @@ const Saloon = (props) => {
     coffeeMenu()
   }, [button, error, coffee, allDay])
 
+  const saveOrderItem = newItem => setRequest([...request, newItem]);
+
+  const addItemToOrder = e => {
+    const price = e.currentTarget.value;
+    const item = e.currentTarget.title;
+    saveOrderItem({
+      item: item,
+      quantity: 1,
+      price: price,
+    });
+  }
+
 
   return (
     <main >
       <header >
         <Header />
       </header>
-      <section >
-        <Button name="Café da manhã"
-          value='coffee'
-          handleCLick={
-            () => {
-              setButton((true))
-            }
-          }
-
-        />
-        <Button name="Dia"
-          value='day'
-          handleCLick={
-            () => {
-              setButton((false))
-            }
-          }
-        />
-      </section>
-
-      <section> {
-        button ?
-          (
-            coffee.map(item => (
-              <MenuBtn name={`${item.item} `}
-                price={`R$${item.price}`}
-                class={css(styles.btnMenu)}
-                className={css(styles.name)}
-                classPrice={css(styles.price)}
-                value={item.id}
-                handleCLick={
-                  e => {
-                    setRequest(e.target.value)
-                    console.log(e.target.value)
-                  }
+      <body className={css(styles.inlineBlock)} >
+        <section className={css(styles.containerMenu)}>
+          <section className={css(styles.sectionButtons)}>
+            < MenuBtn
+              class={css(styles.btnCoffee)}
+              name="CAFÉ DA MANHÃ"
+              value='coffee'
+              className={css(styles.MenuBtn)}
+              handleCLick={
+                () => {
+                  setButton((true))
                 }
-              />
-            ))
-          ) :
-          (
-            allDay.map(item => (
-              <MenuBtn name={`${item.item} `}
-                price={`R$${item.price}`}
-                class={css(styles.btnMenu)}
-                value={item.id}
-                handleCLick={
-                  e => {
-                    setRequest(e.target.value)
-                    console.log(e.target.value)
-                  }
+              }
+            />
+            <MenuBtn
+              class={css(styles.btnAllDay)}
+              name="DIA"
+              value='day'
+              handleCLick={
+                () => {
+                  setButton((false))
                 }
-              />
-            ))
-          )
-      }
-      </section>
+              }
+            />
+          </section >
+          <section > {
+            button ?
+              (
+                coffee.map(item => (
+                  <MenuBtn
+                    name={item.item}
+                    price={`R$${item.price}`}
+                    class={css(styles.btnMenu)}
+                    classPrice={css(styles.displayInline)}
+                    value={item.price}
+                    title={item.item}
+                    handleCLick={e => addItemToOrder(e)
+                    }
+                  />
+                ))
+              ) :
+              (
+                allDay.map(item => (
+                  <MenuBtn
+                    name={`${item.item} `}
+                    price={`R$${item.price}`}
+                    class={css(styles.btnMenu)}
+                    classPrice={css(styles.displayInline)}
+                    value={item.price}
+                    title={item.item}
+                    handleCLick={
+                      e => {
+                        addItemToOrder(e)
+                      }
+                    }
+                  />
+                ))
+              )
+          }
+          </section>
+        </section>
 
-      <section>
-        <Comanda />
-        <table >
-          <thead >
-            <tr>
-              <th> Produtos </th>
-              <th > Opções </th>
-              <th > Adicional </th>
-              <th > Quantidade </th>
-            </tr> </thead> <tbody>
-            {<tr>
-              <td> </td>
-              <td> </td>
-              <td > </td>
-              <td > </td>
-            </tr>}
-          </tbody>
-        </table>
-      </section>
-    </main>
+        <section className={css(styles.containerCommands)}>
+          <Comanda />
+          <OrderTable request={request} />
+        </section>
+      </body>
+    </main >
+
   )
 }
 
