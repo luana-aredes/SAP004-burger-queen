@@ -98,7 +98,6 @@ const Saloon = () => {
     const item = e.currentTarget.title;
     saveOrderItem({
       item: item,
-      quantity: 1,
       price: price,
     });
   }
@@ -112,7 +111,7 @@ const Saloon = () => {
       <body className={css(styles.inlineBlock)} >
         <section className={css(styles.containerMenu)}>
           <section className={css(styles.sectionButtons)}>
-            < MenuBtn
+            <MenuBtn
               class={css(styles.btnCoffee)}
               name="CAFÉ DA MANHÃ"
               value='coffee'
