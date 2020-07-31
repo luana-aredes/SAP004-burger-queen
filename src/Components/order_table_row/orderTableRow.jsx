@@ -8,12 +8,15 @@ const OrderTableRow = (props) => {
   const decreaseQuantity = () => setQuantity(quantity - 1);
 
 
+  const deleteItem = () => {
+    props.handleClick(props.id)
+  }
+
   return (
     <tr id={props.id} className={props.class}>
       <td> {props.item}</td>
       <td>
         <div>{'Opções'}</div>
-
       </td>
       <td>
         <div>{'Adicionais'}</div>
@@ -35,6 +38,7 @@ const OrderTableRow = (props) => {
       <td>{props.price}</td>
       <td>
         <img className={css(styles.deleteImg)}
+          onClick={deleteItem}
           src={DeleteImg}
           alt="Delete" />
       </td>

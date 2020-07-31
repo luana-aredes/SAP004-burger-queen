@@ -102,6 +102,7 @@ const Saloon = () => {
     });
   }
 
+  const deleteItemOnOrder = (productId) => request.splice(productId, 1);
 
   return (
     <main >
@@ -172,7 +173,9 @@ const Saloon = () => {
 
         <section className={css(styles.containerCommands)}>
           <Comanda />
-          <OrderTable request={request} />
+          <OrderTable
+            request={request}
+            handleClickOnRowTable={deleteItemOnOrder} />
         </section>
       </body>
     </main >

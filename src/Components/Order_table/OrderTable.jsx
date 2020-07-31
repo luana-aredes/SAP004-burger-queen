@@ -21,6 +21,7 @@ const OrderTable = (props) => {
             item={orderItem.item}
             price={orderItem.price}
             id={index}
+            handleClick={props.handleClickOnRowTable}
           />
         ))}
       </tbody>
