@@ -2,7 +2,24 @@ import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import ClientInfosInput from '../ClientInfosInput/ClientInfosInput.jsx';
 
-const Comanda = () => {
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#f3f3f3',
+    padding: '5px',
+  },
+  clientInfos: {
+    textAlign: 'center',
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: '1.3em'
+  },
+  tableNumber: {
+    backgroundColor: 'red'
+  },
+});
+
+const OrderSheet = () => {
   const [clientName, setClientName] = useState();
   const [tableNumber, setTableNumber] = useState();
 
@@ -26,22 +43,6 @@ const Comanda = () => {
   )
 
 }
-export default Comanda;
+export default OrderSheet;
 
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f3f3f3',
-    padding: '5px',
-  },
-  clientInfos: {
-    textAlign: 'center',
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: '1.3em'
-  },
-  tableNumber: {
-    backgroundColor: 'red'
-  },
-});

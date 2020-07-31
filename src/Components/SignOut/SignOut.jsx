@@ -5,6 +5,13 @@ import { auth } from '../../config/firebase';
 import { StyleSheet, css } from 'aphrodite';
 
 
+const styles = StyleSheet.create({
+  logoutBtn: {
+    width: '32px',
+    height: '32px'
+  },
+});
+
 const SignOut = (props) => {
   const signOut = () => {
     auth.signOut().then(() => {
@@ -14,23 +21,15 @@ const SignOut = (props) => {
     });
   }
 
-  return ( <
-    figure >
-    <
-    img className = { css(styles.logoutBtn) }
-    src = { LogOut }
-    alt = "Sair"
-    onClick = { signOut }
-    /> < /
-    figure >
+  return (
+    <figure >
+      <img className={css(styles.logoutBtn)}
+        src={LogOut}
+        alt="Sair"
+        onClick={signOut}
+      />
+    </figure >
   )
 }
 
 export default withRouter(SignOut);
-
-const styles = StyleSheet.create({
-  logoutBtn: {
-    width: '32px',
-    height: '32px'
-  },
-});

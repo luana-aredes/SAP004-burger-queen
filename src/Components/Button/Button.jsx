@@ -1,16 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-const Button = (props) => {
-  return (
-    <button className={css(styles.button)}
-      onClick={props.handleCLick} value={props.value} > {props.name}
-    </button>
-  );
-}
-
-export default Button;
-
 const styles = StyleSheet.create({
   button: {
     width: '100%',
@@ -22,3 +12,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+const Button = (props) => {
+  return (
+    <button className={css(styles.button)}
+      onClick={props.handleCLick} value={props.value} > {props.name}
+    </button>
+  );
+}
+
+export default Button;
+

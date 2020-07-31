@@ -1,18 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-const Input = (props) => {
-  return ( <
-    input type = { props.type }
-    className = { css(styles.input) }
-    placeholder = { props.placeholder }
-    value = { props.value }
-    onChange = { props.onChange }
-    />
-  );
-}
-export default Input;
-
 const styles = StyleSheet.create({
   input: {
     width: '100%',
@@ -27,3 +15,17 @@ const styles = StyleSheet.create({
     fontSize: '1rem',
   },
 });
+
+const Input = (props) => {
+  return (<
+    input type={props.type}
+    className={css(styles.input)}
+    placeholder={props.placeholder}
+    value={props.value}
+    onChange={props.onChange}
+    checked={props.checked}
+  />
+  );
+}
+
+export default Input;
