@@ -98,11 +98,20 @@ const Saloon = () => {
     const item = e.currentTarget.title;
     saveOrderItem({
       item: item,
-      quantity: 1,
       price: price,
+      quantity: 1,
     });
   }
 
+  const deleteItemOnOrder = (productId) => request.splice(productId, 1);
+
+  const increaseQuantityOfItem = (productId) => request[productId].quantity += 1;
+
+  const decreaseQuantityOfItem = (productId) => {
+    request[productId].quantity !== 0 ?
+      request[productId].quantity = request[productId].quantity - 1 :
+      request[productId].quantity = 0
+  }
 
   return (
     <main >
@@ -112,7 +121,7 @@ const Saloon = () => {
       <body className={css(styles.inlineBlock)} >
         <section className={css(styles.containerMenu)}>
           <section className={css(styles.sectionButtons)}>
-            < MenuBtn
+            <MenuBtn
               class={css(styles.btnCoffee)}
               name="CAFÉ DA MANHÃ"
               value='coffee'
@@ -173,7 +182,11 @@ const Saloon = () => {
 
         <section className={css(styles.containerCommands)}>
           <Comanda />
-          <OrderTable request={request} />
+          <OrderTable
+            request={request}
+            handleClickDelItemBtn={deleteItemOnOrder}
+            handleClickIncreaseBtn={increaseQuantityOfItem}
+            handleClickDecreaseBtn={decreaseQuantityOfItem} />
         </section>
       </body>
     </main >
