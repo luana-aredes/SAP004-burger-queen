@@ -2,31 +2,36 @@ import React from 'react';
 import OrderTableRow from '../order_table_row/orderTableRow';
 
 const OrderTable = (props) => {
-    return (
+  return (
 
-        <table >
-            <thead >
-                <tr >
-                    <th > Produtos </th>
-                    <th > Opções </th>
-                    <th > Adicional </th>
-                    <th > Quantidade </th>
-                    <th> Preço </th>
-                    <th> Deletar </th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.request.map((orderItem) => (
-                    <OrderTableRow
-                        item={orderItem.item}
-                        price={orderItem.price}
-                        quantity={orderItem.quantity}
-                    />
-                ))}
-
-            </tbody>
-        </table >
-    )
+    <table >
+      <thead >
+        <tr >
+          <th > Produtos </th>
+          <th > Opções </th>
+          <th > Adicional </th>
+          <th > Quantidade </th>
+          <th> Preço </th>
+          <th> Deletar </th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.request.map((orderItem, index) => (
+          <OrderTableRow
+            item={orderItem.item}
+            price={orderItem.price}
+            quantity={orderItem.quantity}
+            id={index}
+            handleClickDelBtn={props.handleClickDelItemBtn}
+            handleClickIncreaseBtn={props.handleClickIncreaseBtn}
+            handleClickDecreaseBtn={
+              props.handleClickDecreaseBtn
+            }
+          />
+        ))}
+      </tbody>
+    </table>
+  )
 }
 
 export default OrderTable;
