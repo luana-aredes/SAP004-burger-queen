@@ -3,14 +3,11 @@ import { StyleSheet, css } from 'aphrodite';
 import DeleteImg from '../../assets/trash.png'
 
 const OrderTableRow = (props) => {
-  const [quantity, setQuantity] = useState(1)
-  const increaseQuantity = () => setQuantity(quantity + 1)
-  const decreaseQuantity = () => setQuantity(quantity - 1);
 
 
-  const deleteItem = () => {
-    props.handleClick(props.id)
-  }
+  const deleteItem = () => props.handleClickDelBtn(props.id);
+  const increaseQuantityOfItem = () => props.handleClickIncreaseBtn(props.id);
+  const decreaseQuantityOfItem = () => props.handleClickDecreaseBtn(props.id);
 
   return (
     <tr id={props.id} className={props.class}>
@@ -23,13 +20,13 @@ const OrderTableRow = (props) => {
 
       </td>
       <td>
-        <button className={css(styles.decreaseBtn)} onClick={decreaseQuantity}>
+        <button className={css(styles.decreaseBtn)} onClick={decreaseQuantityOfItem}>
           -
         </button>
         <button className={css(styles.quantifier)}>
-          {quantity}
+          {props.quantity}
         </button>
-        <button className={css(styles.increaseBtn)} onClick={increaseQuantity}>
+        <button className={css(styles.increaseBtn)} onClick={increaseQuantityOfItem}>
           +
         </button>
 

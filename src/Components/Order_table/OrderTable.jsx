@@ -20,8 +20,13 @@ const OrderTable = (props) => {
           <OrderTableRow
             item={orderItem.item}
             price={orderItem.price}
+            quantity={orderItem.quantity}
             id={index}
-            handleClick={props.handleClickOnRowTable}
+            handleClickDelBtn={props.handleClickDelItemBtn}
+            handleClickIncreaseBtn={props.handleClickIncreaseBtn}
+            handleClickDecreaseBtn={
+              props.handleClickDecreaseBtn
+            }
           />
         ))}
       </tbody>
