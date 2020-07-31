@@ -1,12 +1,40 @@
 import React, { useState } from 'react'
 import Button from '../Button/Button'
-import Options from '../input_options/options'
-import Additional from '../Input_additional/additional'
+import Options from '../InputOptions/Options'
+import Additional from '../InputAdditional/Additional'
 import { StyleSheet, css } from 'aphrodite';
 import DeleteImg from '../../assets/trash.png'
 
-const OrderTableRow = (props) => {
 
+const styles = StyleSheet.create({
+    decreaseBtn: {
+        backgroundColor: 'tomato',
+        border: 'none',
+        color: 'white',
+        fontWeight: 'bold',
+        width: '25px',
+        height: '25px'
+    },
+    deleteImg: {
+        width: '25px',
+        height: '25px'
+    },
+    increaseBtn: {
+        backgroundColor: '#37AE60',
+        border: 'none',
+        color: 'white',
+        fontWeight: 'bold',
+        width: '25px',
+        height: '25px'
+    },
+    quantifier: {
+        border: 'none',
+        width: '25px',
+        height: '25px'
+    }
+})
+
+const OrderTableRow = (props) => {
     const deleteItem = () => props.handleClickDelBtn(props.id);
     const increaseQuantityOfItem = () => props.handleClickIncreaseBtn(props.id);
     const decreaseQuantityOfItem = () => props.handleClickDecreaseBtn(props.id);
@@ -50,31 +78,3 @@ const OrderTableRow = (props) => {
 }
 export default OrderTableRow
 
-
-const styles = StyleSheet.create({
-    decreaseBtn: {
-        backgroundColor: 'tomato',
-        border: 'none',
-        color: 'white',
-        fontWeight: 'bold',
-        width: '25px',
-        height: '25px'
-    },
-    deleteImg: {
-        width: '25px',
-        height: '25px'
-    },
-    increaseBtn: {
-        backgroundColor: '#37AE60',
-        border: 'none',
-        color: 'white',
-        fontWeight: 'bold',
-        width: '25px',
-        height: '25px'
-    },
-    quantifier: {
-        border: 'none',
-        width: '25px',
-        height: '25px'
-    }
-})

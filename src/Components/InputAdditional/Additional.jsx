@@ -6,7 +6,7 @@ const Additional = (props) => {
         <form action="">
 
             <div>
-                <label><Input type={'checkbox'} value={'queijo'} checked={true} /> Queijo </label>
+                <label><Input type={'checkbox'} value={'queijo'} checked={false} /> Queijo </label>
             </div>
             <div>
                 <label><Input type={'checkbox'} value={'ovo'} checked={false} /> Ovo </label>

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { db, auth } from '../../config/firebase';
 import MenuBtn from '../../Components/MenuBtn/MenuBtn';
-import Comanda from '../../Components/Comanda/Comanda';
+import OrderSheet from '../../Components/OrderSheet/OrderSheet';
 import Header from '../../Components/Header/Header';
-import OrderTable from '../../Components/Order_table/OrderTable'
+import OrderTable from '../../Components/OrderTable/OrderTable'
 
 
 const styles = StyleSheet.create({
@@ -181,7 +181,7 @@ const Saloon = () => {
         </section>
 
         <section className={css(styles.containerCommands)}>
-          <Comanda />
+          <OrderSheet />
           <OrderTable
             request={request}
             handleClickDelItemBtn={deleteItemOnOrder}

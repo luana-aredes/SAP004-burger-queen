@@ -8,13 +8,15 @@ onChange={handleOptionChange} /> Option 1 </label>
 
 const Options = (props) => {
   return (
+
     <form action="">
       <div><label><Input type={"radio"} value={'boi'} onChange={''} checked={true} /> Boi </label></div>
-      <div><label><Input type={"radio"} value={'frango'} onChange={''} checked={true} /> Frango </label></div>
-      <div><label><Input type={"radio"} value={'vegetariano'} onChange={''} checked={true} /> Vegetariano </label></div>
+      <div><label><Input type={"radio"} value={'frango'} onChange={''} /> Frango </label></div>
+      <div><label><Input type={"radio"} value={'vegetariano'} onChange={''} /> Vegetariano </label></div>
     </form>
 
   )
 }
 
 export default Options
+
