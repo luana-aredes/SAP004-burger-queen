@@ -16,19 +16,11 @@ const OrderTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {props.request.map((orderItem, index) => (
-                    <OrderTableRow
-                        item={orderItem.item}
-                        price={orderItem.price}
-                        quantity={orderItem.quantity}
-                        id={index}
-                        handleClickDelBtn={props.handleClickDelItemBtn}
-                        handleClickIncreaseBtn={props.handleClickIncreaseBtn}
-                        handleClickDecreaseBtn={
-                            props.handleClickDecreaseBtn
-                        }
-                    />
-                ))}
+
+                <OrderTableRow
+                    requestList={props.request}
+                />
+
             </tbody>
         </table>
     )
