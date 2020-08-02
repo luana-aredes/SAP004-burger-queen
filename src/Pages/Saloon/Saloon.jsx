@@ -100,17 +100,8 @@ const Saloon = () => {
       item: item,
       price: price,
       quantity: 1,
+      totalPrice: price,
     });
-  }
-
-  const deleteItemOnOrder = (productId) => request.splice(productId, 1);
-
-  const increaseQuantityOfItem = (productId) => request[productId].quantity += 1;
-
-  const decreaseQuantityOfItem = (productId) => {
-    request[productId].quantity !== 0 ?
-      request[productId].quantity = request[productId].quantity - 1 :
-      request[productId].quantity = 0
   }
 
   return (
@@ -184,9 +175,7 @@ const Saloon = () => {
           <OrderSheet />
           <OrderTable
             request={request}
-            handleClickDelItemBtn={deleteItemOnOrder}
-            handleClickIncreaseBtn={increaseQuantityOfItem}
-            handleClickDecreaseBtn={decreaseQuantityOfItem} />
+          />
         </section>
       </body>
     </main >

@@ -3,7 +3,6 @@ import OrderTableRow from '../OrderTableRow/OrderTableRow';
 
 const OrderTable = (props) => {
     return (
-
         <table >
             <thead >
                 <tr >

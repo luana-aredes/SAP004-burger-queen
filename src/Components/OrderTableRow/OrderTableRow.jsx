@@ -37,9 +37,23 @@ const OrderTableRow = (props) => {
 
 	const list = props.requestList;
 
-	const deleteItem = () => props.handleClickDelBtn(props.id);
-	const increaseQuantityOfItem = () => props.handleClickIncreaseBtn(props.id);
-	const decreaseQuantityOfItem = () => props.handleClickDecreaseBtn(props.id);
+	const deleteItemOnOrder = (productIndex) => list.splice(productIndex, 1);
+
+	const increaseQuantityOfItem = (index) => {
+		list[index].quantity += 1;
+		totalPrice(index)
+	};
+
+	const decreaseQuantityOfItem = (index) => {
+		list[index].quantity > 0 ? list[index].quantity -= 1 : list[index].quantity = 0
+		totalPrice(index)
+	};
+
+	const totalPrice = (index) => {
+		const product = list[index]
+		product.totalPrice = (parseFloat(product.price) * product.quantity).toFixed(2)
+		console.log(list[index])
+	}
 
 	const temHamburguer = (parm) => {
 		if (props.item === 'Hamburguer simples' || props.item === 'Hamburguer duplo') {
@@ -49,32 +63,34 @@ const OrderTableRow = (props) => {
 		}
 	}
 
-	return list.map(doc => {
+	return list.map((doc, index) => {
 		return (
-			<tr className={props.class}>
+			<tr className={props.class} id={index}>
 				<td> {doc.item}</td>
 				<td> {temHamburguer('option')}</td>
 				<td> {temHamburguer('additional')}</td>
 				<td>
-					<button className={css(styles.decreaseBtn)}>
+					<button className={css(styles.decreaseBtn)} onClick={() => decreaseQuantityOfItem(index)}>
 						-
-        </button>
+     		  </button>
 					<button className={css(styles.quantifier)}>
 						{doc.quantity}
 					</button>
-					<button className={css(styles.increaseBtn)} >
+					<button className={css(styles.increaseBtn)} onClick={() => increaseQuantityOfItem(index)}>
 						+
-        </button>
-
+       		 </button>
+				</td>
+				<td>
+					R${doc.totalPrice}
 				</td>
 
-				<td>{doc.price}</td>
 				<td>
 					<img className={css(styles.deleteImg)}
+						onClick={() => deleteItemOnOrder(index)}
 						src={DeleteImg}
 						alt="Delete" />
 				</td>
-			</tr >
+			</tr>
 		)
 
 	})
