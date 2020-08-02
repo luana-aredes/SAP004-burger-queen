@@ -100,20 +100,19 @@ const Saloon = () => {
       item: item,
       price: price,
       quantity: 1,
-      totalPrice: price,
+      totalPriceItem: price,
     });
   }
 
   return (
-    <main >
-      <header >
+    <main>
+      <header>
         <Header />
       </header>
       <body className={css(styles.inlineBlock)} >
-        <section className={css(styles.containerMenu)}>
-          <section className={css(styles.sectionButtons)}>
-            <MenuBtn
-              class={css(styles.btnCoffee)}
+        <section className={css(styles.containerMenu)} >
+          <section className={css(styles.sectionButtons)} >
+            <MenuBtn class={css(styles.btnCoffee)}
               name="CAFÉ DA MANHÃ"
               value='coffee'
               className={css(styles.MenuBtn)}
@@ -123,8 +122,7 @@ const Saloon = () => {
                 }
               }
             />
-            <MenuBtn
-              class={css(styles.btnAllDay)}
+            <MenuBtn class={css(styles.btnAllDay)}
               name="DIA"
               value='day'
               handleCLick={
@@ -133,53 +131,48 @@ const Saloon = () => {
                 }
               }
             />
-          </section >
-          <section > {
-            button ?
+          </section>
+          <section>
+            {button ?
               (
-                coffee.map(item => (
-                  <MenuBtn
-                    name={item.item}
-                    price={`R$${item.price}`}
-                    class={css(styles.btnMenu)}
-                    classPrice={css(styles.displayInline)}
-                    value={item.price}
-                    title={item.item}
-                    handleCLick={e => addItemToOrder(e)
-                    }
-                  />
+                coffee.map(item => (<
+                  MenuBtn name={item.item}
+                  price={`R$${item.price}`}
+                  class={css(styles.btnMenu)}
+                  classPrice={css(styles.displayInline)}
+                  value={item.price}
+                  title={item.item}
+                  handleCLick={
+                    e => addItemToOrder(e)
+                  }
+                />
                 ))
               ) :
               (
-                allDay.map(item => (
-                  <MenuBtn
-                    name={`${item.item} `}
-                    price={`R$${item.price}`}
-                    class={css(styles.btnMenu)}
-                    classPrice={css(styles.displayInline)}
-                    value={item.price}
-                    title={item.item}
-                    handleCLick={
-                      e => {
-                        addItemToOrder(e)
-                      }
+                allDay.map(item => (<
+                  MenuBtn name={`${item.item} `}
+                  price={`R$${item.price}`}
+                  class={css(styles.btnMenu)}
+                  classPrice={css(styles.displayInline)}
+                  value={item.price}
+                  title={item.item}
+                  handleCLick={
+                    e => {
+                      addItemToOrder(e)
                     }
-                  />
+                  }
+                />
                 ))
               )
-          }
+            }
           </section>
         </section>
-
-        <section className={css(styles.containerCommands)}>
+        <section className={css(styles.containerCommands)} >
           <OrderSheet />
-          <OrderTable
-            request={request}
-          />
+          <OrderTable request={request} />
         </section>
       </body>
-    </main >
-
+    </main>
   )
 }
 
