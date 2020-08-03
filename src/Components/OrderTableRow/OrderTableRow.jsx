@@ -44,9 +44,10 @@ const styles = StyleSheet.create({
 		backgroundColor: 'green',
 		color: 'white',
 		border: 'none',
-		padding: '5px 10px',
+		padding: '7px 10px',
 		marginLeft: '30px',
 		fontWeight: 'bold',
+		fontSize: '1.1em',
 	}
 })
 
@@ -54,21 +55,27 @@ const OrderTableRow = (props) => {
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [sendStatus, setSendStatus] = useState('');
 
-	const deleteItemOnOrder = (data, productIndex) => data.splice(productIndex, 1);
+	useEffect(() => {
+		sumPriceOfItems(props.requestList)
+	}, [props.requestList.length])
 
-	const increaseQuantityOfItem = (data, productIndex) => {
-		data[productIndex].quantity += 1;
-		totalPriceOfItem(data, productIndex);
+	const deleteItemOnOrder = (itemsList, productIndex) => itemsList.splice(productIndex, 1);
+
+	const increaseQuantityOfItem = (itemsList, productIndex) => {
+		itemsList[productIndex].quantity += 1;
+		totalPriceOfItem(itemsList, productIndex);
+		sumPriceOfItems(itemsList)
 	};
 
-	const decreaseQuantityOfItem = (data, productIndex) => {
-		const product = data[productIndex]
+	const decreaseQuantityOfItem = (itemsList, productIndex) => {
+		const product = itemsList[productIndex]
 		product.quantity > 0 ? product.quantity -= 1 : product.quantity = 0;
-		totalPriceOfItem(data, productIndex);
+		totalPriceOfItem(itemsList, productIndex);
+		sumPriceOfItems(itemsList)
 	};
 
-	const totalPriceOfItem = (data, productIndex) => {
-		const product = data[productIndex];
+	const totalPriceOfItem = (itemsList, productIndex) => {
+		const product = itemsList[productIndex];
 		product.totalPriceItem = (parseFloat(product.price) * product.quantity).toFixed(2);
 	}
 
@@ -76,30 +83,34 @@ const OrderTableRow = (props) => {
 		let summedPrice = 0
 		itemsList.map(item => summedPrice += parseFloat(item.totalPriceItem));
 		setTotalPrice(summedPrice)
-		console.log('O preço total do pedido é', summedPrice)
 	};
 
-	const addTimeStamp = () => new Date().toLocaleTimeString();
+	const addTimeStampToRequest = itemsList => itemsList.map(item => item.time = new Date().toLocaleTimeString());
 
-	const validateData = (data) => {
-		data.map(item => {
-			console.log(data.clientName)
-		})
-	}
+	const validateAndSendRequest = itemsList => {
+		sumPriceOfItems(itemsList);
+		addTimeStampToRequest(itemsList);
+		addInfosClientAndSendRequest(itemsList)
+	};
 
 	const sendRequestToDataBase = (itemsList) => {
-		sumPriceOfItems(itemsList);
-		validateData(itemsList);
-		console.log(itemsList);
-		// setSendStatus('Registrando pedido. Aguarde...');
-		// db.collection('requests').add({
-		// 	time: addTimeStamp(), ...itemsList
-		// })
-		// 	.then(() => setSendStatus('Pedido enviado para a cozinha!'))
-		// 	.catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
+		setSendStatus('Registrando pedido. Aguarde...');
+		db.collection('requests').add({ itemsList })
+			.then(() => setSendStatus('Pedido enviado para a cozinha!'))
+			.catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
 	};
 
-
+	const addInfosClientAndSendRequest = (itemsList) => {
+		if (props.clientName !== undefined || props.clientTable !== undefined) {
+			itemsList.map(item => {
+				item.clientName = props.clientName;
+				item.tableNumber = props.clientTable;
+			})
+			sendRequestToDataBase(itemsList)
+		} else {
+			alert('Preencha os dados do cliente');
+		}
+	};
 
 	const temHamburguer = (parm) => {
 		if (props.item === 'Hamburguer simples' || props.item === 'Hamburguer duplo') {
@@ -121,7 +132,7 @@ const OrderTableRow = (props) => {
 							<td>
 								<button className={css(styles.decreaseBtn)} onClick={() => decreaseQuantityOfItem(props.requestList, index)}>
 									-
-     		  </button>
+     				 		 </button>
 								<button className={css(styles.quantifier)}>
 									{doc.quantity}
 								</button>
@@ -132,7 +143,6 @@ const OrderTableRow = (props) => {
 							<td>
 								R${doc.totalPriceItem}
 							</td>
-
 							<td>
 								<img className={css(styles.deleteImg)}
 									onClick={() => deleteItemOnOrder(props.requestList, index)}
@@ -152,7 +162,7 @@ const OrderTableRow = (props) => {
 					<td>
 						<button
 							className={css(styles.sendDataBtn)}
-							onClick={() => sendRequestToDataBase(props.requestList)}>
+							onClick={() => validateAndSendRequest(props.requestList)}>
 							Enviar
        		</button>
 					</td>

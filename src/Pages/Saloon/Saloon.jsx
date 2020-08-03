@@ -104,8 +104,6 @@ const Saloon = () => {
       price: price,
       quantity: 1,
       totalPriceItem: price,
-      clientName: clientName,
-      clientTable: clientTable
     });
   };
 
@@ -179,7 +177,11 @@ const Saloon = () => {
           <OrderSheet
             handleInputClientName={getClientName}
             handleInputClientTable={getClientTable} />
-          <OrderTable request={request} />
+          <OrderTable
+            request={request}
+            clientName={clientName}
+            clientTable={clientTable}
+          />
         </section>
       </body>
     </main>

@@ -17,6 +17,8 @@ const OrderTable = (props) => {
       <tbody >
         <OrderTableRow
           requestList={props.request}
+          clientName={props.clientName}
+          clientTable={props.clientTable}
         />
       </tbody>
     </table>
