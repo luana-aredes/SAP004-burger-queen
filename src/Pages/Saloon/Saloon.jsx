@@ -100,29 +100,19 @@ const Saloon = () => {
       item: item,
       price: price,
       quantity: 1,
+      totalPriceItem: price,
     });
   }
 
-  const deleteItemOnOrder = (productId) => request.splice(productId, 1);
-
-  const increaseQuantityOfItem = (productId) => request[productId].quantity += 1;
-
-  const decreaseQuantityOfItem = (productId) => {
-    request[productId].quantity !== 0 ?
-      request[productId].quantity = request[productId].quantity - 1 :
-      request[productId].quantity = 0
-  }
-
   return (
-    <main >
-      <header >
+    <main>
+      <header>
         <Header />
       </header>
       <body className={css(styles.inlineBlock)} >
-        <section className={css(styles.containerMenu)}>
-          <section className={css(styles.sectionButtons)}>
-            <MenuBtn
-              class={css(styles.btnCoffee)}
+        <section className={css(styles.containerMenu)} >
+          <section className={css(styles.sectionButtons)} >
+            <MenuBtn class={css(styles.btnCoffee)}
               name="CAFÉ DA MANHÃ"
               value='coffee'
               className={css(styles.MenuBtn)}
@@ -132,8 +122,7 @@ const Saloon = () => {
                 }
               }
             />
-            <MenuBtn
-              class={css(styles.btnAllDay)}
+            <MenuBtn class={css(styles.btnAllDay)}
               name="DIA"
               value='day'
               handleCLick={
@@ -142,55 +131,48 @@ const Saloon = () => {
                 }
               }
             />
-          </section >
-          <section > {
-            button ?
+          </section>
+          <section>
+            {button ?
               (
-                coffee.map(item => (
-                  <MenuBtn
-                    name={item.item}
-                    price={`R$${item.price}`}
-                    class={css(styles.btnMenu)}
-                    classPrice={css(styles.displayInline)}
-                    value={item.price}
-                    title={item.item}
-                    handleCLick={e => addItemToOrder(e)
-                    }
-                  />
+                coffee.map(item => (<
+                  MenuBtn name={item.item}
+                  price={`R$${item.price}`}
+                  class={css(styles.btnMenu)}
+                  classPrice={css(styles.displayInline)}
+                  value={item.price}
+                  title={item.item}
+                  handleCLick={
+                    e => addItemToOrder(e)
+                  }
+                />
                 ))
               ) :
               (
-                allDay.map(item => (
-                  <MenuBtn
-                    name={`${item.item} `}
-                    price={`R$${item.price}`}
-                    class={css(styles.btnMenu)}
-                    classPrice={css(styles.displayInline)}
-                    value={item.price}
-                    title={item.item}
-                    handleCLick={
-                      e => {
-                        addItemToOrder(e)
-                      }
+                allDay.map(item => (<
+                  MenuBtn name={`${item.item} `}
+                  price={`R$${item.price}`}
+                  class={css(styles.btnMenu)}
+                  classPrice={css(styles.displayInline)}
+                  value={item.price}
+                  title={item.item}
+                  handleCLick={
+                    e => {
+                      addItemToOrder(e)
                     }
-                  />
+                  }
+                />
                 ))
               )
-          }
+            }
           </section>
         </section>
-
-        <section className={css(styles.containerCommands)}>
+        <section className={css(styles.containerCommands)} >
           <OrderSheet />
-          <OrderTable
-            request={request}
-            handleClickDelItemBtn={deleteItemOnOrder}
-            handleClickIncreaseBtn={increaseQuantityOfItem}
-            handleClickDecreaseBtn={decreaseQuantityOfItem} />
+          <OrderTable request={request} />
         </section>
       </body>
-    </main >
-
+    </main>
   )
 }
 
