@@ -64,6 +64,9 @@ const Saloon = () => {
   const [button, setButton] = useState(true)
   const [request, setRequest] = useState([])
   const [error, setError] = useState(null)
+  const [clientName, setClientName] = useState('')
+  const [clientTable, setclientTable] = useState('')
+
 
   React.useEffect(() => {
     const coffeeMenu = async () => {
@@ -101,8 +104,13 @@ const Saloon = () => {
       price: price,
       quantity: 1,
       totalPriceItem: price,
+      clientName: clientName,
+      clientTable: clientTable
     });
-  }
+  };
+
+  const getClientName = inputedName => setClientName(inputedName);
+  const getClientTable = inputedTable => setclientTable(inputedTable);
 
   return (
     <main>
@@ -168,7 +176,9 @@ const Saloon = () => {
           </section>
         </section>
         <section className={css(styles.containerCommands)} >
-          <OrderSheet />
+          <OrderSheet
+            handleInputClientName={getClientName}
+            handleInputClientTable={getClientTable} />
           <OrderTable request={request} />
         </section>
       </body>

@@ -34,6 +34,19 @@ const styles = StyleSheet.create({
 	},
 	statusRequestMessage: {
 		color: 'blue',
+	},
+	totalPrice: {
+		fontWeight: 'bold',
+		marginTop: '20px',
+		fontSize: '1.2em',
+	},
+	sendDataBtn: {
+		backgroundColor: 'green',
+		color: 'white',
+		border: 'none',
+		padding: '5px 10px',
+		marginLeft: '30px',
+		fontWeight: 'bold',
 	}
 })
 
@@ -68,18 +81,25 @@ const OrderTableRow = (props) => {
 
 	const addTimeStamp = () => new Date().toLocaleTimeString();
 
-	const sendRequestToDataBase = (itemsList) => {
-		//verificar onde vai essa função para mostrar preço total desde a renderização da pagina
-		sumPriceOfItems(itemsList);
-
-		//Enviar para firebase com horário do pedido
-		setSendStatus('Registrando pedido. Aguarde...');
-		db.collection('requests').add({
-			time: addTimeStamp(), ...itemsList
+	const validateData = (data) => {
+		data.map(item => {
+			console.log(data.clientName)
 		})
-			.then(() => setSendStatus('Pedido enviado para a cozinha!'))
-			.catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
+	}
+
+	const sendRequestToDataBase = (itemsList) => {
+		sumPriceOfItems(itemsList);
+		validateData(itemsList);
+		console.log(itemsList);
+		// setSendStatus('Registrando pedido. Aguarde...');
+		// db.collection('requests').add({
+		// 	time: addTimeStamp(), ...itemsList
+		// })
+		// 	.then(() => setSendStatus('Pedido enviado para a cozinha!'))
+		// 	.catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
 	};
+
+
 
 	const temHamburguer = (parm) => {
 		if (props.item === 'Hamburguer simples' || props.item === 'Hamburguer duplo') {
@@ -89,53 +109,58 @@ const OrderTableRow = (props) => {
 		}
 	}
 
-
 	return (
 		<section>
-			{props.requestList.map((doc, index) => {
-				return (
-					<tr className={props.class} id={index}>
-						<td> {doc.item}</td>
-						<td> {temHamburguer('option')}</td>
-						<td> {temHamburguer('additional')}</td>
-						<td>
-							<button className={css(styles.decreaseBtn)} onClick={() => decreaseQuantityOfItem(props.requestList, index)}>
-								-
+			<div>
+				{props.requestList.map((doc, index) => {
+					return (
+						<tr className={props.class} id={index}>
+							<td> {doc.item}</td>
+							<td> {temHamburguer('option')}</td>
+							<td> {temHamburguer('additional')}</td>
+							<td>
+								<button className={css(styles.decreaseBtn)} onClick={() => decreaseQuantityOfItem(props.requestList, index)}>
+									-
      		  </button>
-							<button className={css(styles.quantifier)}>
-								{doc.quantity}
-							</button>
-							<button className={css(styles.increaseBtn)} onClick={() => increaseQuantityOfItem(props.requestList, index)}>
-								+
+								<button className={css(styles.quantifier)}>
+									{doc.quantity}
+								</button>
+								<button className={css(styles.increaseBtn)} onClick={() => increaseQuantityOfItem(props.requestList, index)}>
+									+
        		 </button>
-						</td>
-						<td>
-							R${doc.totalPriceItem}
-						</td>
+							</td>
+							<td>
+								R${doc.totalPriceItem}
+							</td>
 
-						<td>
-							<img className={css(styles.deleteImg)}
-								onClick={() => deleteItemOnOrder(props.requestList, index)}
-								src={DeleteImg}
-								alt="Delete" />
-						</td>
-					</tr>
-				)
-			})}
+							<td>
+								<img className={css(styles.deleteImg)}
+									onClick={() => deleteItemOnOrder(props.requestList, index)}
+									src={DeleteImg}
+									alt="Delete" />
+							</td>
+						</tr>
+					)
+				})}
+			</div>
 
-			<tfoot>
-				<td>
-					TOTAL R${totalPrice.toFixed(2)}
-				</td>
-				<td>
-					<button onClick={() => sendRequestToDataBase(props.requestList)}>
-						Enviar
-       		 </button>
-				</td>
-			</tfoot>
-			<p className={css(styles.statusRequestMessage)}>
-				{sendStatus}
-			</p>
+			<div className={css(styles.totalPrice)}>
+				<tfoot>
+					<td>
+						TOTAL R${totalPrice.toFixed(2)}
+					</td>
+					<td>
+						<button
+							className={css(styles.sendDataBtn)}
+							onClick={() => sendRequestToDataBase(props.requestList)}>
+							Enviar
+       		</button>
+					</td>
+				</tfoot>
+				<p className={css(styles.statusRequestMessage)}>
+					{sendStatus}
+				</p>
+			</div>
 		</section>
 	)
 }
