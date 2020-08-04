@@ -92,6 +92,9 @@ const Saloon = () => {
   const [button, setButton] = useState(true)
   const [request, setRequest] = useState([])
   const [error, setError] = useState(null)
+  const [clientName, setClientName] = useState('')
+  const [clientTable, setclientTable] = useState('')
+
 
   React.useEffect(() => {
     const coffeeMenu = async () => {
@@ -130,23 +133,17 @@ const Saloon = () => {
       quantity: 1,
       meatOption: doc.options,
       opt: '',
-      additional: doc.additional
+      additional: doc.additional,
+      totalPriceItem: price,
     });
-  }
+  };
 
-  const deleteItemOnOrder = (productId) => request.splice(productId, 1);
-
-  const increaseQuantityOfItem = (productId) => request[productId].quantity += 1;
-
-  const decreaseQuantityOfItem = (productId) => {
-    request[productId].quantity !== 0 ?
-      request[productId].quantity = request[productId].quantity - 1 :
-      request[productId].quantity = 0
-  }
+  const getClientName = inputedName => setClientName(inputedName);
+  const getClientTable = inputedTable => setclientTable(inputedTable);
 
   return (
-    <main >
-      <header >
+    <main>
+      <header>
         <Header />
       </header>
       <body className={css(styles.inlineBlock)} >
@@ -154,7 +151,8 @@ const Saloon = () => {
           <section className={css(styles.sectionButtons)}>
             <MenuBtn
               class={css(styles.btnAllDayAndCoffee, styles.btnCoffeeBackground)}
-              name="CAFÉ DA MANHÃ"
+   
+             name="CAFÉ DA MANHÃ"
               value='coffee'
               className={css(styles.MenuBtn)}
               handleCLick={
@@ -173,9 +171,9 @@ const Saloon = () => {
                 }
               }
             />
-          </section >
-          <section > {
-            button ?
+          </section>
+          <section>
+            {button ?
               (
                 coffee.map(item => (
                   <MenuBtn
@@ -204,25 +202,25 @@ const Saloon = () => {
                         addItemToOrder(e, item)
                       }
                     }
-                  />
+                  }
+                />
                 ))
               )
-          }
+            }
           </section>
         </section>
-
-        <section className={css(styles.containerCommands)}>
-          <OrderSheet />
+        <section className={css(styles.containerCommands)} >
+          <OrderSheet
+            handleInputClientName={getClientName}
+            handleInputClientTable={getClientTable} />
           <OrderTable
             request={request}
-            allDay={allDay}
-            handleClickDelItemBtn={deleteItemOnOrder}
-            handleClickIncreaseBtn={increaseQuantityOfItem}
-            handleClickDecreaseBtn={decreaseQuantityOfItem} />
+            clientName={clientName}
+            clientTable={clientTable}
+          />
         </section>
       </body>
-    </main >
-
+    </main>
   )
 }
 
