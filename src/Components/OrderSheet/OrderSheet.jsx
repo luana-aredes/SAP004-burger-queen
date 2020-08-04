@@ -4,7 +4,6 @@ import ClientInfosInput from '../ClientInfosInput/ClientInfosInput.jsx';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f3f3f3',
     padding: '5px',
   },
   clientInfos: {
@@ -17,6 +16,9 @@ const styles = StyleSheet.create({
   tableNumber: {
     backgroundColor: 'red'
   },
+  displayFlex: {
+    display: 'flex'
+  }
 });
 
 const OrderSheet = (props) => {
@@ -37,8 +39,11 @@ const OrderSheet = (props) => {
         <p className={css(styles.title)}>
           PEDIDO
          </p>
-        <form>
-          <ClientInfosInput type='text' placeholder='Nome do cliente' value={clientName} onChange={(e) => setClientName(e.target.value)} />
+        <form className={css(styles.displayFlex)}>
+          <ClientInfosInput type='text'
+            placeholder='Nome do cliente'
+            value={clientName}
+            onChange={(e) => setClientName(e.target.value)} />
 
           <ClientInfosInput
             class={css(styles.tableNumber)}
