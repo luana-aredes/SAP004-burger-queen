@@ -129,8 +129,9 @@ const Saloon = () => {
       price: price,
       quantity: 1,
       meatOption: doc.options,
-      opt: '',
-      additional: doc.additional
+      optionMeat: '',
+      additional: doc.additional,
+      add: '',
     });
   }
 

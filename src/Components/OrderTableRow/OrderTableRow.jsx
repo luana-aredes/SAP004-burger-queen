@@ -50,7 +50,7 @@ const OrderTableRow = (props) => {
 
   const [option, setOption] = React.useState('')
   const [additional, setAdditional] = React.useState([])
-  const [add, setAdd] = React.useState([])
+
 
   const Options = (doc) => {
     if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
@@ -58,9 +58,10 @@ const OrderTableRow = (props) => {
         doc.meatOption.map((opt, index) => {
           return (
             <span key={index} className={css(styles.block)}>
-              <label><input type="radio" value={opt} name={opt} onChange={() => {
+              <label><input type="radio" value={opt} name={opt} onClick={() => {
                 setOption(opt)
-                console.log(opt)
+                doc.optionMeat = option
+                console.log(option)
               }} checked={opt === option}
               />{opt}</label>
             </span>
@@ -73,15 +74,17 @@ const OrderTableRow = (props) => {
   }
 
 
-  const saveAdc = (e, adc) => {
+  const saveAdc = (e, adc, doc) => {
     const newAdc = e.currentTarget.value
     console.log(e.currentTarget.value)
     if (!additional.includes(newAdc) && additional !== []) {
       setAdditional([...additional, newAdc])
+      doc.add = additional
       console.log(additional)
     } else if (additional.includes(newAdc)) {
       console.log(additional)
       additional.splice(additional.indexOf(adc), 1)
+      doc.add = additional
       console.log(additional)
     }
 
@@ -92,7 +95,7 @@ const OrderTableRow = (props) => {
         doc.additional.map((adc, index) => {
           return (
             <span key={index} className={css(styles.block)}>
-              <label><input type="checkbox" value={adc} name={adc} onClick={e => saveAdc(e, adc)} checked={null}
+              <label><input type="checkbox" value={adc} name={adc} onClick={e => saveAdc(e, adc, doc)} checked={null}
               />{adc}</label>
             </span>
 
