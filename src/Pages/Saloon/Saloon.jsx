@@ -147,12 +147,10 @@ const Saloon = () => {
         <Header />
       </header>
       <body className={css(styles.inlineBlock)} >
-        <section className={css(styles.containerMenu)}>
-          <section className={css(styles.sectionButtons)}>
-            <MenuBtn
-              class={css(styles.btnAllDayAndCoffee, styles.btnCoffeeBackground)}
-   
-             name="CAFÉ DA MANHÃ"
+        <section className={css(styles.containerMenu)} >
+          <section className={css(styles.sectionButtons)} >
+            <MenuBtn class={css(styles.btnAllDayAndCoffee, styles.btnCoffeeBackground)}
+              name="CAFÉ DA MANHÃ"
               value='coffee'
               className={css(styles.MenuBtn)}
               handleCLick={
@@ -161,8 +159,7 @@ const Saloon = () => {
                 }
               }
             />
-            <MenuBtn
-              class={css(styles.btnAllDayAndCoffee, styles.btnDayBackground)}
+            <MenuBtn class={css(styles.btnAllDayAndCoffee, styles.btnDayBackground)}
               name="DIA"
               value='day'
               handleCLick={
@@ -172,26 +169,25 @@ const Saloon = () => {
               }
             />
           </section>
-          <section>
-            {button ?
+          <section> {
+            button ?
               (
                 coffee.map(item => (
-                  <MenuBtn
-                    name={item.item}
+                  <MenuBtn name={item.item}
                     price={`R$${item.price}`}
                     class={css(styles.btnMenu, styles.btnMenuBackground)}
                     classPrice={css(styles.displayInline)}
                     value={item.price}
                     title={item.item}
-                    handleCLick={e => addItemToOrder(e)
+                    handleCLick={
+                      e => addItemToOrder(e, item)
                     }
                   />
                 ))
               ) :
               (
                 allDay.map(item => (
-                  <MenuBtn
-                    name={`${item.item} `}
+                  <MenuBtn name={`${item.item} `}
                     price={`R$${item.price}`}
                     class={css(styles.btnMenu)}
                     classPrice={css(styles.displayInline)}
@@ -202,19 +198,18 @@ const Saloon = () => {
                         addItemToOrder(e, item)
                       }
                     }
-                  }
-                />
+                  />
                 ))
               )
-            }
+          }
           </section>
+
         </section>
         <section className={css(styles.containerCommands)} >
-          <OrderSheet
-            handleInputClientName={getClientName}
-            handleInputClientTable={getClientTable} />
-          <OrderTable
-            request={request}
+          <OrderSheet handleInputClientName={getClientName}
+            handleInputClientTable={getClientTable}
+          />
+          <OrderTable request={request}
             clientName={clientName}
             clientTable={clientTable}
           />

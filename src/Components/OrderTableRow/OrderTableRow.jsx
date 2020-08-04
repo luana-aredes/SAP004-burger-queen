@@ -4,40 +4,40 @@ import DeleteImg from '../../assets/trash.png'
 import { db } from '../../config/firebase'
 
 const styles = StyleSheet.create({
-  decreaseBtn: {
-    backgroundColor: 'tomato',
-    border: 'none',
-    color: 'white',
-    fontWeight: 'bold',
-    width: '25px',
-    height: '25px'
-  },
-  deleteImg: {
-    width: '25px',
-    height: '25px'
-  },
-  increaseBtn: {
-    backgroundColor: '#37AE60',
-    border: 'none',
-    color: 'white',
-    fontWeight: 'bold',
-    width: '25px',
-    height: '25px'
-  },
-  quantifier: {
-    border: 'none',
-    width: '25px',
-    height: '25px'
-  },
-  fontRow: {
-    fontSize: '80%'
-  },
-  columnWidth: {
-    width: '16%'
-  },
-  block: {
-    display: 'block'
-  },
+	decreaseBtn: {
+		backgroundColor: 'tomato',
+		border: 'none',
+		color: 'white',
+		fontWeight: 'bold',
+		width: '25px',
+		height: '25px'
+	},
+	deleteImg: {
+		width: '25px',
+		height: '25px'
+	},
+	increaseBtn: {
+		backgroundColor: '#37AE60',
+		border: 'none',
+		color: 'white',
+		fontWeight: 'bold',
+		width: '25px',
+		height: '25px'
+	},
+	quantifier: {
+		border: 'none',
+		width: '25px',
+		height: '25px'
+	},
+	fontRow: {
+		fontSize: '80%'
+	},
+	columnWidth: {
+		width: '16%'
+	},
+	block: {
+		display: 'block'
+	},
 	statusRequestMessage: {
 		color: 'blue',
 	},
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: '1.1em',
 
+	}
 })
 const OrderTableRow = (props) => {
 	const [totalPrice, setTotalPrice] = useState(0);
@@ -66,59 +67,74 @@ const OrderTableRow = (props) => {
 
 	const deleteItemOnOrder = (itemsList, productIndex) => itemsList.splice(productIndex, 1);
 
-  const [option, setOption] = React.useState('')
-  const [additional, setAdditional] = React.useState([])
+	const [option, setOption] = React.useState('')
+	const [additional, setAdditional] = React.useState([])
 
-  const Options = (doc) => {
-    if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
-      return (
-        doc.meatOption.map((opt, index) => {
-          return (
-            <span key={index} className={css(styles.block)}>
-              <label><input type="radio" value={opt} name={opt} onChange={() => {
-                setOption(opt)
-                console.log(opt)
-              }} checked={opt === option}
-              />{opt}</label>
-            </span>
+	const Options = (doc) => {
+		if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
+			return (
+				doc.meatOption.map((opt, index) => {
+					return (
+						<span key={index}
+							className={css(styles.block)} >
+							<label > < input type="radio"
+								value={opt}
+								name={opt}
+								onChange={
+									() => {
+										setOption(opt)
+										console.log(opt)
+									}
+								}
+								checked={opt === option}
+							/>{opt}</label >
+						</span>
 
-          )
-        })
-      )
+					)
+				})
+			)
 
-    }
-  }
+		}
+	}
 
- const saveAdc = (e, adc) => {
-    const newAdc = e.currentTarget.value
-    console.log(e.currentTarget.value)
-    if (!additional.includes(newAdc) && additional !== []) {
-      setAdditional([...additional, newAdc])
-      console.log(additional)
-    } else if (additional.includes(newAdc)) {
-      console.log(additional)
-      additional.splice(additional.indexOf(adc), 1)
-      console.log(additional)
-    }
+	const saveAdc = (e, adc) => {
+		const newAdc = e.currentTarget.value
+		console.log(e.currentTarget.value)
+		if (!additional.includes(newAdc) && additional !== []) {
+			setAdditional([...additional, newAdc])
+			console.log(additional)
+		} else if (additional.includes(newAdc)) {
+			console.log(additional)
+			additional.splice(additional.indexOf(adc), 1)
+			console.log(additional)
+		}
 
-  }
-  const AdditionalBurguer = (doc) => {
-    if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
-      return (
-        doc.additional.map((adc, index) => {
-          return (
-            <span key={index} className={css(styles.block)}>
-              <label><input type="checkbox" value={adc} name={adc} onClick={e => saveAdc(e, adc)} checked={null}
-              />{adc}</label>
-            </span>
+	}
+	const AdditionalBurguer = (doc) => {
+		if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
+			return (
+				doc.additional.map((adc, index) => {
+					return (
+						<span key={index}
+							className={css(styles.block)} >
+							<label >
+								<input type="checkbox"
+									value={adc}
+									name={adc}
+									onClick={e => saveAdc(e, adc)}
+									checked={null}
+								/>
+								{adc}
+							</label>
+						</span>
 
-          )
-        })
-      )
-    }
-  }
-  
-  	const increaseQuantityOfItem = (itemsList, productIndex) => {
+					)
+				})
+			)
+		}
+	}
+
+	const increaseQuantityOfItem = (itemsList, productIndex) => {
 		itemsList[productIndex].quantity += 1;
 		totalPriceOfItem(itemsList, productIndex);
 		sumPriceOfItems(itemsList)
@@ -168,56 +184,62 @@ const OrderTableRow = (props) => {
 			alert('Preencha os dados do cliente');
 		}
 	};
- 
-  return (
-		<section>
-			<div>
-				{props.requestList.map((doc, index) => {
+
+	return (
+		<section >
+			<div> {
+				props.requestList.map((doc, index) => {
 					return (
-						  <tr className={css(styles.fontRow)}>
-          <td className={css(styles.columnWidth)}> {doc.item}</td>
-          <td className={css(styles.columnWidth)}>{Options(doc, index)} </td>
-          <td className={css(styles.columnWidth)}>{AdditionalBurguer(doc, index)}</td>
-          <td className={css(styles.columnWidth)}>
-								<button className={css(styles.decreaseBtn)} onClick={() => decreaseQuantityOfItem(props.requestList, index)}>
+						<tr className={css(styles.fontRow)} >
+							<td className={css(styles.columnWidth)} > {doc.item} </td>
+							<td className={css(styles.columnWidth)} > {Options(doc, index)} </td>
+							<td className={css(styles.columnWidth)} > {AdditionalBurguer(doc, index)} </td>
+							<td className={css(styles.columnWidth)} >
+								<button className={css(styles.decreaseBtn)}
+									onClick={
+										() => decreaseQuantityOfItem(props.requestList, index)
+									} >
 									-
-     				 		 </button>
-								<button className={css(styles.quantifier)}>
-									{doc.quantity}
+          </button>
+								<button className={css(styles.quantifier)} > {doc.quantity}
 								</button>
-								<button className={css(styles.increaseBtn)} onClick={() => increaseQuantityOfItem(props.requestList, index)}>
+								<button className={css(styles.increaseBtn)}
+									onClick={
+										() => increaseQuantityOfItem(props.requestList, index)
+									} >
 									+
-       		 </button>
-            
+          </button>
 							</td>
-							<td className={css(styles.columnWidth)}>
-								R${doc.totalPriceItem}
+							<td className={css(styles.columnWidth)} >
+								R$ {doc.totalPriceItem}
 							</td>
-							<td className={css(styles.columnWidth)}>
+							<td className={css(styles.columnWidth)} >
 								<img className={css(styles.deleteImg)}
-									onClick={() => deleteItemOnOrder(props.requestList, index)}
+									onClick={
+										() => deleteItemOnOrder(props.requestList, index)
+									}
 									src={DeleteImg}
 									alt="Delete" />
-							</td>
-						</tr>
+							</td> </tr>
 					)
-				})}
-			</div>
+				})
+			} </div>
 
-			<div className={css(styles.totalPrice)}>
+			<div className={css(styles.totalPrice)} >
 				<tfoot>
 					<td>
-						TOTAL R${totalPrice.toFixed(2)}
+						TOTAL R$ {totalPrice.toFixed(2)}
 					</td>
 					<td>
-						<button
-							className={css(styles.sendDataBtn)}
-							onClick={() => validateAndSendRequest(props.requestList)}>
+						<button className={css(styles.sendDataBtn)}
+							onClick={
+								() => validateAndSendRequest(props.requestList)
+							} >
 							Enviar
-       		</button>
+						</button>
 					</td>
 				</tfoot>
-				<p className={css(styles.statusRequestMessage)}>
+				<p className={css(styles.statusRequestMessage)} >
 					{sendStatus}
 				</p>
 			</div>
