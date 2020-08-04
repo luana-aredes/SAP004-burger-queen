@@ -18,22 +18,36 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     fontSize: '1.4em',
+    '@media (max-width: 424px)': {
+      fontSize: '1.2em'
+    },
+    '@media (min-width: 760px)': {
+      fontSize: '1.0em'
+    },
+
   },
-  btnAllDay: {
+  btnMenuBackground: {
+    backgroundColor: '#EFDFDF'
+  },
+  btnAllDayAndCoffee: {
     width: '47.5%',
-    height: '30px',
-    backgroundColor: '#E5B163',
+    height: '35px',
     marginLeft: '2.3%',
     marginBottom: '8px',
+    fontSize: '0.9em',
+    '@media (min-width: 760px)': {
+      fontSize: '0.7em'
+    },
+    '@media (min-width: 1024px)': {
+      fontSize: '1.0em'
+    },
     fontWeight: 'bold'
   },
-  btnCoffee: {
-    width: '47.5%',
-    height: '30px',
+  btnDayBackground: {
+    backgroundColor: '#E5B163',
+  },
+  btnCoffeeBackground: {
     backgroundColor: '#C3846D',
-    marginRight: '2.3%',
-    marginBottom: '8px',
-    fontWeight: 'bold'
   },
   displayInline: {
     display: 'inline',
@@ -43,18 +57,32 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   containerMenu: {
-    width: '35%',
+    '@media (min-width: 425px)': {
+      width: '80%',
+    },
+    '@media (min-width: 760px)': {
+      width: '35%',
+    },
     padding: '10px',
     backgroundColor: '#f3f3f3',
   },
   containerCommands: {
-    width: '60%',
+    '@media (min-width: 425px)': {
+      width: '80%',
+    },
+    '@media (min-width: 760px)': {
+      width: '60%',
+    },
     padding: '10px',
-    backgroundColor: '#f3f3f3',
   },
   inlineBlock: {
-    display: 'flex',
-    justifyContent: 'space-between'
+    '@media (min-width: 425px)': {
+      display: 'block',
+    },
+    '@media (min-width: 760px)': {
+      display: 'flex',
+      justifyContent: 'space-between'
+    },
   }
 })
 
@@ -93,13 +121,16 @@ const Saloon = () => {
 
   const saveOrderItem = newItem => setRequest([...request, newItem]);
 
-  const addItemToOrder = e => {
+  const addItemToOrder = (e, doc) => {
     const price = e.currentTarget.value;
     const item = e.currentTarget.title;
     saveOrderItem({
       item: item,
       price: price,
       quantity: 1,
+      meatOption: doc.options,
+      opt: '',
+      additional: doc.additional
     });
   }
 
@@ -122,7 +153,7 @@ const Saloon = () => {
         <section className={css(styles.containerMenu)}>
           <section className={css(styles.sectionButtons)}>
             <MenuBtn
-              class={css(styles.btnCoffee)}
+              class={css(styles.btnAllDayAndCoffee, styles.btnCoffeeBackground)}
               name="CAFÉ DA MANHÃ"
               value='coffee'
               className={css(styles.MenuBtn)}
@@ -133,7 +164,7 @@ const Saloon = () => {
               }
             />
             <MenuBtn
-              class={css(styles.btnAllDay)}
+              class={css(styles.btnAllDayAndCoffee, styles.btnDayBackground)}
               name="DIA"
               value='day'
               handleCLick={
@@ -150,7 +181,7 @@ const Saloon = () => {
                   <MenuBtn
                     name={item.item}
                     price={`R$${item.price}`}
-                    class={css(styles.btnMenu)}
+                    class={css(styles.btnMenu, styles.btnMenuBackground)}
                     classPrice={css(styles.displayInline)}
                     value={item.price}
                     title={item.item}
@@ -170,7 +201,7 @@ const Saloon = () => {
                     title={item.item}
                     handleCLick={
                       e => {
-                        addItemToOrder(e)
+                        addItemToOrder(e, item)
                       }
                     }
                   />
@@ -184,6 +215,7 @@ const Saloon = () => {
           <OrderSheet />
           <OrderTable
             request={request}
+            allDay={allDay}
             handleClickDelItemBtn={deleteItemOnOrder}
             handleClickIncreaseBtn={increaseQuantityOfItem}
             handleClickDecreaseBtn={decreaseQuantityOfItem} />
