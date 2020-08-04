@@ -5,6 +5,7 @@ import MenuBtn from '../../Components/MenuBtn/MenuBtn';
 import OrderSheet from '../../Components/OrderSheet/OrderSheet';
 import Header from '../../Components/Header/Header';
 import OrderTable from '../../Components/OrderTable/OrderTable'
+import OrderTableRow from '../../Components/OrderTableRow/OrderTableRow';
 
 
 const styles = StyleSheet.create({
@@ -123,7 +124,6 @@ const Saloon = () => {
   }, [button, error, coffee, allDay])
 
   const saveOrderItem = newItem => setRequest([...request, newItem]);
-
   const addItemToOrder = (e, doc) => {
     const price = e.currentTarget.value;
     const item = e.currentTarget.title;
@@ -132,11 +132,11 @@ const Saloon = () => {
       price: price,
       quantity: 1,
       meatOption: doc.options,
-      opt: '',
+      optionMeat: [],
       additional: doc.additional,
-      totalPriceItem: price,
+      add: [],
     });
-  };
+  }
 
   const getClientName = inputedName => setClientName(inputedName);
   const getClientTable = inputedTable => setclientTable(inputedTable);
@@ -209,7 +209,7 @@ const Saloon = () => {
           <OrderSheet handleInputClientName={getClientName}
             handleInputClientTable={getClientTable}
           />
-          <OrderTable request={request}
+          <OrderTableRow request={request}
             clientName={clientName}
             clientTable={clientTable}
           />

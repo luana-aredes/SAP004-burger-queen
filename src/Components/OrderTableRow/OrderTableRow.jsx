@@ -3,6 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 import DeleteImg from '../../assets/trash.png'
 import { db } from '../../config/firebase'
 
+
 const styles = StyleSheet.create({
 	decreaseBtn: {
 		backgroundColor: 'tomato',
@@ -55,15 +56,22 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: '1.1em',
 
-	}
+	},
+	scroll: {
+		height: '200px',
+		overflow: 'scroll',
+	},
+	tableColumn: {
+		width: '16%'
+	},
 })
 const OrderTableRow = (props) => {
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [sendStatus, setSendStatus] = useState('');
 
 	useEffect(() => {
-		sumPriceOfItems(props.requestList)
-	}, [props.requestList.length])
+		sumPriceOfItems(props.request)
+	}, [props.request.length])
 
 	const deleteItemOnOrder = (itemsList, productIndex) => itemsList.splice(productIndex, 1);
 
@@ -75,64 +83,52 @@ const OrderTableRow = (props) => {
 			return (
 				doc.meatOption.map((opt, index) => {
 					return (
-						<span key={index}
-							className={css(styles.block)} >
-							<label > < input type="radio"
-								value={opt}
-								name={opt}
-								onChange={
-									() => {
-										setOption(opt)
-										console.log(opt)
-									}
-								}
-								checked={opt === option}
-							/>{opt}</label >
+						<span key={index} className={css(styles.block)}>
+							<label><input type="radio" value={opt} name={opt} onClick={() => {
+								setOption(opt)
+								doc.optionMeat = option
+								console.log(option)
+							}} checked={opt === option}
+							/>{opt}</label>
 						</span>
-
 					)
 				})
 			)
-
 		}
-	}
+	};
 
-	const saveAdc = (e, adc) => {
+
+	const saveAdc = (e, adc, doc) => {
 		const newAdc = e.currentTarget.value
 		console.log(e.currentTarget.value)
 		if (!additional.includes(newAdc) && additional !== []) {
 			setAdditional([...additional, newAdc])
+			doc.add = additional
 			console.log(additional)
 		} else if (additional.includes(newAdc)) {
 			console.log(additional)
 			additional.splice(additional.indexOf(adc), 1)
+			doc.add = additional
 			console.log(additional)
 		}
-
 	}
+
+
 	const AdditionalBurguer = (doc) => {
 		if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
 			return (
 				doc.additional.map((adc, index) => {
 					return (
-						<span key={index}
-							className={css(styles.block)} >
-							<label >
-								<input type="checkbox"
-									value={adc}
-									name={adc}
-									onClick={e => saveAdc(e, adc)}
-									checked={null}
-								/>
-								{adc}
-							</label>
+						<span key={index} className={css(styles.block)}>
+							<label><input type="checkbox" value={adc} name={adc} onClick={e => saveAdc(e, adc, doc)} checked={null}
+							/>{adc}</label>
 						</span>
-
 					)
 				})
 			)
 		}
 	}
+
 
 	const increaseQuantityOfItem = (itemsList, productIndex) => {
 		itemsList[productIndex].quantity += 1;
@@ -163,7 +159,8 @@ const OrderTableRow = (props) => {
 	const validateAndSendRequest = itemsList => {
 		sumPriceOfItems(itemsList);
 		addTimeStampToRequest(itemsList);
-		addInfosClientAndSendRequest(itemsList)
+		addInfosClientAndSendRequest(itemsList);
+		console.log(itemsList);
 	};
 
 	const sendRequestToDataBase = (itemsList) => {
@@ -185,65 +182,84 @@ const OrderTableRow = (props) => {
 		}
 	};
 
-	return (
-		<section >
-			<div> {
-				props.requestList.map((doc, index) => {
-					return (
-						<tr className={css(styles.fontRow)} >
-							<td className={css(styles.columnWidth)} > {doc.item} </td>
-							<td className={css(styles.columnWidth)} > {Options(doc, index)} </td>
-							<td className={css(styles.columnWidth)} > {AdditionalBurguer(doc, index)} </td>
-							<td className={css(styles.columnWidth)} >
-								<button className={css(styles.decreaseBtn)}
-									onClick={
-										() => decreaseQuantityOfItem(props.requestList, index)
-									} >
-									-
-          </button>
-								<button className={css(styles.quantifier)} > {doc.quantity}
-								</button>
-								<button className={css(styles.increaseBtn)}
-									onClick={
-										() => increaseQuantityOfItem(props.requestList, index)
-									} >
-									+
-          </button>
-							</td>
-							<td className={css(styles.columnWidth)} >
-								R$ {doc.totalPriceItem}
-							</td>
-							<td className={css(styles.columnWidth)} >
-								<img className={css(styles.deleteImg)}
-									onClick={
-										() => deleteItemOnOrder(props.requestList, index)
-									}
-									src={DeleteImg}
-									alt="Delete" />
-							</td> </tr>
-					)
-				})
-			} </div>
+	const list = props.request
 
-			<div className={css(styles.totalPrice)} >
-				<tfoot>
-					<td>
-						TOTAL R$ {totalPrice.toFixed(2)}
-					</td>
-					<td>
-						<button className={css(styles.sendDataBtn)}
-							onClick={
-								() => validateAndSendRequest(props.requestList)
-							} >
-							Enviar
-						</button>
-					</td>
-				</tfoot>
-				<p className={css(styles.statusRequestMessage)} >
-					{sendStatus}
-				</p>
+	return (
+		<table >
+			<div className={css(styles.scroll)}>
+				<thead >
+					<tr >
+						<th className={css(styles.tableColumn)}>Produtos</th>
+						<th className={css(styles.tableColumn)}>Opções</th>
+						<th className={css(styles.tableColumn)}>Adicional</th>
+						<th className={css(styles.tableColumn)}>Quantidade</th>
+						<th className={css(styles.tableColumn)}>Preço</th>
+						<th className={css(styles.tableColumn)}>Delet.</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						list.map((doc, index) => {
+							return (
+								<tr className={css(styles.fontRow)} >
+									<td className={css(styles.columnWidth)} > {doc.item} </td>
+									<td className={css(styles.columnWidth)} > {Options(doc, index)} </td>
+									<td className={css(styles.columnWidth)} > {AdditionalBurguer(doc, index)} </td>
+									<td className={css(styles.columnWidth)} >
+										<button className={css(styles.decreaseBtn)}
+											onClick={
+												() => decreaseQuantityOfItem(props.request, index)
+											} >
+											-
+          </button>
+										<button className={css(styles.quantifier)} > {doc.quantity}
+										</button>
+										<button className={css(styles.increaseBtn)}
+											onClick={
+												() => increaseQuantityOfItem(props.request, index)
+											} >
+											+
+          </button>
+									</td>
+									<td className={css(styles.columnWidth)} >
+										R$ {doc.totalPriceItem}
+									</td>
+									<td className={css(styles.columnWidth)} >
+										<img className={css(styles.deleteImg)}
+											onClick={
+												() => deleteItemOnOrder(props.request, index)
+											}
+											src={DeleteImg}
+											alt="Delete" />
+									</td> </tr>
+							)
+						})
+					}
+
+
+
+
+				</tbody>
 			</div>
-		</section>
+
+
+			<tfoot className={css(styles.totalPrice)} >
+				<td>
+					TOTAL R$ {totalPrice.toFixed(2)}
+				</td>
+				<td>
+					<button className={css(styles.sendDataBtn)}
+						onClick={
+							() => validateAndSendRequest(props.request)
+						} >
+						Enviar
+						</button>
+				</td>
+			</tfoot>
+			<p className={css(styles.statusRequestMessage)} >
+				{sendStatus}
+			</p>
+		</table>
 	)
 };
 
