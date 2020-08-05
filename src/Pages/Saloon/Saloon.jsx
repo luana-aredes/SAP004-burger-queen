@@ -5,6 +5,7 @@ import MenuBtn from '../../Components/MenuBtn/MenuBtn';
 import OrderSheet from '../../Components/OrderSheet/OrderSheet';
 import Header from '../../Components/Header/Header';
 import OrderTable from '../../Components/OrderTable/OrderTable'
+import OrderTableRow from '../../Components/OrderTableRow/OrderTableRow';
 
 
 const styles = StyleSheet.create({
@@ -92,6 +93,9 @@ const Saloon = () => {
   const [button, setButton] = useState(true)
   const [request, setRequest] = useState([])
   const [error, setError] = useState(null)
+  const [clientName, setClientName] = useState('')
+  const [clientTable, setclientTable] = useState('')
+
 
   React.useEffect(() => {
     const coffeeMenu = async () => {
@@ -120,7 +124,6 @@ const Saloon = () => {
   }, [button, error, coffee, allDay])
 
   const saveOrderItem = newItem => setRequest([...request, newItem]);
-
   const addItemToOrder = (e, doc) => {
     const price = e.currentTarget.value;
     const item = e.currentTarget.title;
@@ -129,32 +132,24 @@ const Saloon = () => {
       price: price,
       quantity: 1,
       meatOption: doc.options,
-      optionMeat: '',
+      optionMeat: [],
       additional: doc.additional,
-      add: '',
+      add: [],
     });
   }
 
-  const deleteItemOnOrder = (productId) => request.splice(productId, 1);
-
-  const increaseQuantityOfItem = (productId) => request[productId].quantity += 1;
-
-  const decreaseQuantityOfItem = (productId) => {
-    request[productId].quantity !== 0 ?
-      request[productId].quantity = request[productId].quantity - 1 :
-      request[productId].quantity = 0
-  }
+  const getClientName = inputedName => setClientName(inputedName);
+  const getClientTable = inputedTable => setclientTable(inputedTable);
 
   return (
-    <main >
-      <header >
+    <main>
+      <header>
         <Header />
       </header>
       <body className={css(styles.inlineBlock)} >
-        <section className={css(styles.containerMenu)}>
-          <section className={css(styles.sectionButtons)}>
-            <MenuBtn
-              class={css(styles.btnAllDayAndCoffee, styles.btnCoffeeBackground)}
+        <section className={css(styles.containerMenu)} >
+          <section className={css(styles.sectionButtons)} >
+            <MenuBtn class={css(styles.btnAllDayAndCoffee, styles.btnCoffeeBackground)}
               name="CAFÉ DA MANHÃ"
               value='coffee'
               className={css(styles.MenuBtn)}
@@ -164,8 +159,7 @@ const Saloon = () => {
                 }
               }
             />
-            <MenuBtn
-              class={css(styles.btnAllDayAndCoffee, styles.btnDayBackground)}
+            <MenuBtn class={css(styles.btnAllDayAndCoffee, styles.btnDayBackground)}
               name="DIA"
               value='day'
               handleCLick={
@@ -174,27 +168,26 @@ const Saloon = () => {
                 }
               }
             />
-          </section >
-          <section > {
+          </section>
+          <section> {
             button ?
               (
                 coffee.map(item => (
-                  <MenuBtn
-                    name={item.item}
+                  <MenuBtn name={item.item}
                     price={`R$${item.price}`}
                     class={css(styles.btnMenu, styles.btnMenuBackground)}
                     classPrice={css(styles.displayInline)}
                     value={item.price}
                     title={item.item}
-                    handleCLick={e => addItemToOrder(e)
+                    handleCLick={
+                      e => addItemToOrder(e, item)
                     }
                   />
                 ))
               ) :
               (
                 allDay.map(item => (
-                  <MenuBtn
-                    name={`${item.item} `}
+                  <MenuBtn name={`${item.item} `}
                     price={`R$${item.price}`}
                     class={css(styles.btnMenu)}
                     classPrice={css(styles.displayInline)}
@@ -210,20 +203,19 @@ const Saloon = () => {
               )
           }
           </section>
-        </section>
 
-        <section className={css(styles.containerCommands)}>
-          <OrderSheet />
-          <OrderTable
-            request={request}
-            allDay={allDay}
-            handleClickDelItemBtn={deleteItemOnOrder}
-            handleClickIncreaseBtn={increaseQuantityOfItem}
-            handleClickDecreaseBtn={decreaseQuantityOfItem} />
+        </section>
+        <section className={css(styles.containerCommands)} >
+          <OrderSheet handleInputClientName={getClientName}
+            handleInputClientTable={getClientTable}
+          />
+          <OrderTableRow request={request}
+            clientName={clientName}
+            clientTable={clientTable}
+          />
         </section>
       </body>
-    </main >
-
+    </main>
   )
 }
 
