@@ -130,11 +130,10 @@ const Saloon = () => {
     saveOrderItem({
       item: item,
       price: price,
+      totalPriceItem: price,
       quantity: 1,
       meatOption: doc.options,
-      optionMeat: [],
       additional: doc.additional,
-      add: [],
     });
   }
 

@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
 const OrderTableRow = (props) => {
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [sendStatus, setSendStatus] = useState('');
+	const [meatChoice, setMeatChoice] = useState('');
+
 
 	useEffect(() => {
 		sumPriceOfItems(props.request)
@@ -75,8 +77,6 @@ const OrderTableRow = (props) => {
 
 	const deleteItemOnOrder = (itemsList, productIndex) => itemsList.splice(productIndex, 1);
 
-	const [option, setOption] = React.useState('')
-	const [additional, setAdditional] = React.useState([])
 
 	const Options = (doc) => {
 		if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
@@ -84,11 +84,11 @@ const OrderTableRow = (props) => {
 				doc.meatOption.map((opt, index) => {
 					return (
 						<span key={index} className={css(styles.block)}>
-							<label><input type="radio" value={opt} name={opt} onClick={() => {
-								setOption(opt)
-								doc.optionMeat = option
-								console.log(option)
-							}} checked={opt === option}
+							<label><input type="radio" value={opt} name={opt}
+								onClick={(e) => {
+									setMeatChoice(opt)
+									doc.clientMeatChoice = e.target.value
+								}} checked={opt === meatChoice}
 							/>{opt}</label>
 						</span>
 					)
@@ -96,23 +96,16 @@ const OrderTableRow = (props) => {
 			)
 		}
 	};
-
-
 	const saveAdc = (e, adc, doc) => {
-		const newAdc = e.currentTarget.value
-		console.log(e.currentTarget.value)
-		if (!additional.includes(newAdc) && additional !== []) {
-			setAdditional([...additional, newAdc])
-			doc.add = additional
-			console.log(additional)
-		} else if (additional.includes(newAdc)) {
-			console.log(additional)
-			additional.splice(additional.indexOf(adc), 1)
-			doc.add = additional
-			console.log(additional)
+		const newAdc = e.currentTarget.value;
+		if (doc.clientAddChoice) {
+			doc.clientAddChoice.includes(newAdc) ?
+				doc.clientAddChoice.splice(doc.clientAddChoice.indexOf(adc), 1) :
+				doc.clientAddChoice.push(newAdc)
+		} else {
+			doc.clientAddChoice = [newAdc]
 		}
 	}
-
 
 	const AdditionalBurguer = (doc) => {
 		if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
@@ -146,6 +139,7 @@ const OrderTableRow = (props) => {
 	const totalPriceOfItem = (itemsList, productIndex) => {
 		const product = itemsList[productIndex];
 		product.totalPriceItem = (parseFloat(product.price) * product.quantity).toFixed(2);
+		console.log(itemsList)
 	}
 
 	const sumPriceOfItems = (itemsList) => {
@@ -182,8 +176,8 @@ const OrderTableRow = (props) => {
 		}
 	};
 
-	const list = props.request
 
+	const list = props.request
 	return (
 		<table >
 			<div className={css(styles.scroll)}>
@@ -208,16 +202,14 @@ const OrderTableRow = (props) => {
 									<td className={css(styles.columnWidth)} >
 										<button className={css(styles.decreaseBtn)}
 											onClick={
-												() => decreaseQuantityOfItem(props.request, index)
+												() => decreaseQuantityOfItem(list, index)
 											} >
 											-
           </button>
 										<button className={css(styles.quantifier)} > {doc.quantity}
 										</button>
 										<button className={css(styles.increaseBtn)}
-											onClick={
-												() => increaseQuantityOfItem(props.request, index)
-											} >
+											onClick={() => increaseQuantityOfItem(list, index)} >
 											+
           </button>
 									</td>
@@ -226,19 +218,13 @@ const OrderTableRow = (props) => {
 									</td>
 									<td className={css(styles.columnWidth)} >
 										<img className={css(styles.deleteImg)}
-											onClick={
-												() => deleteItemOnOrder(props.request, index)
-											}
+											onClick={() => deleteItemOnOrder(list, index)}
 											src={DeleteImg}
 											alt="Delete" />
 									</td> </tr>
 							)
 						})
 					}
-
-
-
-
 				</tbody>
 			</div>
 
@@ -250,7 +236,7 @@ const OrderTableRow = (props) => {
 				<td>
 					<button className={css(styles.sendDataBtn)}
 						onClick={
-							() => validateAndSendRequest(props.request)
+							() => validateAndSendRequest(list)
 						} >
 						Enviar
 						</button>
