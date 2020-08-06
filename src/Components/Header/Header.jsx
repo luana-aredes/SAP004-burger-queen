@@ -9,11 +9,16 @@ const styles = StyleSheet.create({
     fontSize: '1.3em',
     color: '#E5E5E5',
     fontWeight: 'bold',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    marginLeft: '10px',
+
   },
   logotypeBtn: {
     width: '80px',
     height: '40px',
+    '@media (max-width: 600px)': {
+      width: '50px'
+    }
   },
   navbar: {
     display: 'flex',
@@ -22,6 +27,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#8E3712',
     paddingTop: '5px',
+    '@media (max-width: 600px)': {
+      justifyContent: 'center',
+    }
+  },
+  navbarLinks: {
+    display: 'flex',
+    alignItems: 'center',
+    '@media (max-width: 600px)': {
+      fontSize: '0.8em'
+    }
   }
 });
 
@@ -34,10 +49,20 @@ const Header = (props) => {
             src={Logotype}
             alt="Logotipo" />
         </figure>
-        <Link className={css(styles.deliveryList)}
-          to='/'>Fila de espera
-        </Link>
-        <SignOut />
+        <div className={css(styles.navbarLinks)}>
+          {props.place === 'kitchen' ?
+            <Link className={css(styles.deliveryList)}
+              to='/kitchen'>Cozinha
+            </Link> :
+            <Link className={css(styles.deliveryList)}
+              to='/saloon'>Salão
+            </Link>
+          }
+          <Link className={css(styles.deliveryList)}
+            to='/'>Pedidos Prontos
+          </Link>
+          <SignOut />
+        </div>
       </nav>
     </header>
   );
