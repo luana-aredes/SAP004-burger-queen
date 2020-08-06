@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import Header from '../../Components/Header/Header';
 
 const Kitchen = (props) => {
   const [user, setUser] = useState(null)
 
   return (
-    <p> Cozinha </p>
+    <>
+      <Header place={'kitchen'} />
+    </>
   )
 }
 
