@@ -59,7 +59,7 @@ const Header = (props) => {
             </Link>
           }
           <Link className={css(styles.deliveryList)}
-            to='/'>Pedidos Prontos
+            to='/requestHistory'>Pedidos Prontos
           </Link>
           <SignOut />
         </div>
