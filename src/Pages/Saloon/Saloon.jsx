@@ -5,7 +5,7 @@ import MenuBtn from '../../Components/MenuBtn/MenuBtn';
 import OrderSheet from '../../Components/OrderSheet/OrderSheet';
 import Header from '../../Components/Header/Header';
 import OrderTable from '../../Components/OrderTable/OrderTable'
-import OrderTableRow from '../../Components/OrderTableRow/OrderTableRow';
+
 
 
 const styles = StyleSheet.create({
@@ -209,7 +209,7 @@ const Saloon = () => {
           <OrderSheet handleInputClientName={getClientName}
             handleInputClientTable={getClientTable}
           />
-          <OrderTableRow request={request}
+          <OrderTable request={request}
             clientName={clientName}
             clientTable={clientTable}
           />

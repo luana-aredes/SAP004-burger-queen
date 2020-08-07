@@ -27,13 +27,17 @@ const styles = StyleSheet.create({
   footerCard: {
     display: 'flex',
     justifyContent: 'center'
+  },
+  inuptCheck: {
+    width: '25px',
+    height: '25px',
   }
 
 })
 
 const Card = (props) => {
-  const [request, setRequest] = useState()
-  {/*
+  {/* const [request, setRequest] = useState()
+
      useEffect(() => {
         const req = () => {
             setRequest(props.request)
@@ -45,16 +49,17 @@ const Card = (props) => {
  */}
 
   const checkMeatChoice = (item) => {
-    if (!item.clientMeatChoice.includes('false')) {
+    if (item.clientMeatChoice) {
       return `| ${item.clientMeatChoice}`
     }
   }
 
   const CheckAdditionalChoice = (item) => {
-    if (!item.clientAddChoice.includes('false')) {
+    if (item.clientAddChoice) {
       return `| ${item.clientAddChoice}`
     }
   }
+
 
   const req = props.request
 
@@ -62,6 +67,7 @@ const Card = (props) => {
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
+          <input type="checkbox" className={css(styles.inuptCheck)} />
           <div> {`Cliente: ${doc.itemsList[0].clientName}`}</div>
           <div>{`Mesa: ${doc.itemsList[0].tableNumber}`}</div>
           <div>{`Horário: ${doc.itemsList[0].time}`}</div>
