@@ -113,7 +113,9 @@ const OrderTableRow = (props) => {
         doc.additional.map((adc, index) => {
           return (
             <span key={index} className={css(styles.block)}>
-              <label><input type="checkbox" value={adc} name={adc} onClick={e => saveAdc(e, adc, doc)} checked={null}
+              <label><input type="checkbox" value={adc} name={adc}
+                onClick={e => { saveAdc(e, adc, doc) }}
+                checked={null}
               />{adc}</label>
             </span>
           )
@@ -138,8 +140,12 @@ const OrderTableRow = (props) => {
 
   const totalPriceOfItem = (itemsList, productIndex) => {
     const product = itemsList[productIndex];
-    product.totalPriceItem = (parseFloat(product.price) * product.quantity).toFixed(2);
-    console.log(itemsList)
+    if (product.clientAddChoice) {
+      product.additionalPrice = parseInt(product.clientAddChoice.length)
+      product.totalPriceItem = ((product.additionalPrice + parseFloat(product.price)) * product.quantity);
+    } else {
+      product.totalPriceItem = (parseFloat(product.price) * product.quantity).toFixed(2);
+    }
   }
 
   const sumPriceOfItems = (itemsList) => {

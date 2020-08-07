@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
 import request from './mock';
+import Header from '../../Components/Header/Header';
 
 const Kitchen = () => {
   {/*
@@ -25,6 +26,9 @@ const Kitchen = () => {
 
   return (
     <main>
+      <>
+        <Header place={'kitchen'} />
+      </>
       <div>Pedidos Pendentes</div>
       <section>
         {
@@ -36,7 +40,6 @@ const Kitchen = () => {
       </section>
     </main >
   )
-
 }
 
 export default Kitchen

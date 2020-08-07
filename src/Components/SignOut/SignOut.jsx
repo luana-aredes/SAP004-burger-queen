@@ -8,7 +8,11 @@ import { StyleSheet, css } from 'aphrodite';
 const styles = StyleSheet.create({
   logoutBtn: {
     width: '32px',
-    height: '32px'
+    height: '32px',
+    '@media (max-width: 600px)': {
+      width: '25px',
+      height: '25px'
+    }
   },
 });
 
@@ -21,14 +25,15 @@ const SignOut = (props) => {
     });
   }
 
-  return (
-    <figure >
-      <img className={css(styles.logoutBtn)}
-        src={LogOut}
-        alt="Sair"
-        onClick={signOut}
-      />
-    </figure >
+  return ( <
+    figure >
+    <
+    img className = { css(styles.logoutBtn) }
+    src = { LogOut }
+    alt = "Sair"
+    onClick = { signOut }
+    /> < /
+    figure >
   )
 }
 
