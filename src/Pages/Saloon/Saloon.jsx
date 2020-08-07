@@ -123,6 +123,7 @@ const Saloon = () => {
     coffeeMenu()
   }, [button, error, coffee, allDay])
 
+
   const saveOrderItem = newItem => setRequest([...request, newItem]);
   const addItemToOrder = (e, doc) => {
     const price = e.currentTarget.value;
