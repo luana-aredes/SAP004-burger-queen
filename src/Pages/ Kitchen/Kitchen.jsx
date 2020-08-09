@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
-import request from './mock';
 import Header from '../../Components/Header/Header';
 
+{/* import request from './mock';*/ }
+
 const Kitchen = () => {
-  {/*
+
   const [user, setUser] = useState(null)
   const [request, setRequest] = useState([])
 
@@ -22,7 +23,6 @@ const Kitchen = () => {
     request()
   }, [request])
 
-*/}
 
   return (
     <main>
