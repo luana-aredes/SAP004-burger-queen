@@ -46,67 +46,78 @@ const Kitchen = () => {
   const [request, setRequest] = useState([])
   const [requestID, setRequestID] = useState([])
 
-  //   React.useEffect(() => {
-  //     const request = async () => {
-  //       try {
-  //         const data = await db.collection('requests').get();
-  //         const arrayData = data.docs.map(doc => (doc.data()));
-  //         setRequest(arrayData)
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
-  //     }
-  //     request()
-  //   }, [request])
+  React.useEffect(() => {
+    const request = async () => {
+      try {
+        const data = await db.collection('requests').get();
+        const arrayData = data.docs.map(doc => doc.data());
+        const arrayDocId = data.docs.map(doc => doc.id);
+        setRequest(arrayData)
+        setRequestID(arrayDocId)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    request()
+  }, [request])
 
   //---------------
 
   //mock doc.id
 
   //mock
+  const idList = ['ABC123', 'ERT587', 'POI87'];
+
   useEffect(() => {
     getRequest()
-    getRequestID()
-  }, [])
+  }, [request]);
 
-  const getRequestID = () => {
-    const idList = ['ABC123', 'ERT587', 'POI87'];
+  useEffect(() => {
+    getReqID()
+  }, []);
+
+  const getReqID = () => {
     setRequestID(idList)
-    console.log('Lista de ids', requestID)
   }
 
   const getRequest = () => {
     setRequest(mock)
-    console.log('Lista de pedidos', request)
   }
 
 
 
   //---------------
 
-  const sendToReadyRequestList = (readyRequest) => {
+  const sendToReadyRequestList = readyRequest => {
     //tratamento de then e catch
     db.collection('ready-requests').add(readyRequest)
   };
 
-  const sendToHistoryOfRequests = (readyRequest) => {
+  const sendToHistoryOfRequests = readyRequest => {
     //tratamento de then e catch
     db.collection('history-request').add(readyRequest)
   };
 
-  const deleteReadyRequest = id => {
-    db.collection('requests').doc(id).delete();
+  const deleteReadyRequest = requestID => {
+    db.collection('requests').doc(requestID).delete();
+  }
+  const getRequestID = indexRequest => {
+    console.log(requestID[indexRequest])
+    return requestID[indexRequest]
   }
 
-  const handleReadyRequest = (indexRequest, id) => {
-    const readyRequest = request[indexRequest];
-    sendToReadyRequestList(readyRequest)
-    sendToHistoryOfRequests(readyRequest)
-    // deleteReadyRequest(id)
+  const handleReadyRequest = indexRequest => {
+    // const readyRequest = request[indexRequest];
+    // sendToReadyRequestList(readyRequest)
+    // sendToHistoryOfRequests(readyRequest)
+    // deleteReadyRequest(getRequestID(indexRequest))
+    getRequestID(indexRequest)
 
     //Excluir da tela (precisa?)
     // setRequest(request.splice(indexRequest, 1))
-  }
+    console.log(requestID)
+    console.log(request)
+  };
 
   return (
     <>

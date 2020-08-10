@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
 
 const Card = (props) => {
 
-  const handleClick = (index, id) => {
-    props.handleReadyRequest(index, id)
+  const handleClick = (index) => {
+    props.handleReadyRequest(index)
   }
 
 
