@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { db, auth } from '../../config/firebase';
 import MenuBtn from '../../Components/MenuBtn/MenuBtn';
-import OrderSheet from '../../Components/OrderSheet/OrderSheet';
+import OrderHeader from '../../Components/OrderHeader/OrderHeader';
 import Header from '../../Components/Header/Header';
 import OrderTable from '../../Components/OrderTable/OrderTable'
 
@@ -206,7 +206,7 @@ const Saloon = () => {
 
         </section>
         <section className={css(styles.containerCommands)} >
-          <OrderSheet handleInputClientName={getClientName}
+          <OrderHeader handleInputClientName={getClientName}
             handleInputClientTable={getClientTable}
           />
           <OrderTable request={request}
