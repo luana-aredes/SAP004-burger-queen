@@ -96,7 +96,6 @@ const Saloon = () => {
   const [clientName, setClientName] = useState('')
   const [clientTable, setclientTable] = useState('')
 
-
   React.useEffect(() => {
     const coffeeMenu = async () => {
       try {

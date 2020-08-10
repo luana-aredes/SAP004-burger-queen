@@ -157,6 +157,15 @@ const OrderTable = (props) => {
 
   const addTimeStampToRequest = itemsList => itemsList.map(item => item.time = new Date().toLocaleTimeString());
 
+  const clearTable = {
+    item: "",
+    price: "",
+    totalPriceItem: "",
+    quantity: "",
+    meatOption: "",
+    additional: "",
+  }
+
   const validateAndSendRequest = itemsList => {
     sumPriceOfItems(itemsList);
     addTimeStampToRequest(itemsList);
@@ -185,6 +194,7 @@ const OrderTable = (props) => {
 
 
   const list = props.request
+
   return (
     <table >
       <div className={css(styles.scroll)}>
@@ -243,7 +253,8 @@ const OrderTable = (props) => {
         <td>
           <button className={css(styles.sendDataBtn)}
             onClick={
-              () => validateAndSendRequest(list)
+              () =>
+                validateAndSendRequest(list)
             } >
             Enviar
 						</button>
@@ -257,3 +268,6 @@ const OrderTable = (props) => {
 };
 
 export default OrderTable;
+
+
+
