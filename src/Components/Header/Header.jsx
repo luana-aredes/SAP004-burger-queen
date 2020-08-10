@@ -51,16 +51,23 @@ const Header = (props) => {
         </figure>
         <div className={css(styles.navbarLinks)}>
           {props.place === 'kitchen' ?
-            <Link className={css(styles.deliveryList)}
-              to='/kitchen'>Cozinha
-            </Link> :
-            <Link className={css(styles.deliveryList)}
-              to='/saloon'>Salão
+            <>
+              <Link className={css(styles.deliveryList)}
+                to='/kitchen'>Cozinha
             </Link>
-          }
-          <Link className={css(styles.deliveryList)}
-            to='/requestHistory'>Pedidos Prontos
+              <Link className={css(styles.deliveryList)}
+                to='/requestHistory'>Histórico
           </Link>
+            </> :
+            <>
+              <Link className={css(styles.deliveryList)}
+                to='/saloon'>Salão
+              </Link>
+              <Link className={css(styles.deliveryList)}
+                to='/delivery'>Pedidos prontos
+              </Link>
+            </>
+          }
           <SignOut />
         </div>
       </nav>

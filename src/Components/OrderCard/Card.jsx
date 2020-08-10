@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, css } from 'aphrodite';
 
+
 const styles = StyleSheet.create({
   orderCard: {
     border: '2px solid #C3846D',
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center'
   },
-  inuptCheck: {
+  inputCheck: {
     width: '25px',
     height: '25px',
   }
@@ -36,17 +37,23 @@ const styles = StyleSheet.create({
 })
 
 const Card = (props) => {
-  {/* const [request, setRequest] = useState()
 
-     useEffect(() => {
-        const req = () => {
-            setRequest(props.request)
-            console.log(request)
-        }
-        req()
-    }, [request])
+  //   {/* const [request, setRequest] = useState()
 
- */}
+  //      useEffect(() => {
+  //         const req = () => {
+  //             setRequest(props.request)
+  //             console.log(request)
+  //         }
+  //         req()
+  //     }, [request])
+
+  //  */}
+
+  const handleClick = (index, id) => {
+    props.handleReadyRequest(index, id)
+  }
+
 
   const checkMeatChoice = (item) => {
     if (item.clientMeatChoice) {
@@ -61,13 +68,12 @@ const Card = (props) => {
   }
 
 
-  const req = props.request
-
-  return req.map(doc => {
+  const requestList = props.request
+  return requestList.map((doc, index) => {
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
-          <input type="checkbox" className={css(styles.inuptCheck)} />
+          <input type="checkbox" className={css(styles.inputCheck)} />
           <div> {`Cliente: ${doc.itemsList[0].clientName}`}</div>
           <div>{`Mesa: ${doc.itemsList[0].tableNumber}`}</div>
           <div>{`Horário: ${doc.itemsList[0].time}`}</div>
@@ -84,7 +90,9 @@ const Card = (props) => {
         })
         }
         <footer className={css(styles.footerCard)}>
-          <button onClick={props.handleCLick} className={css(styles.styleBtn)}>{props.name}</button>
+          <button onClick={() => handleClick(index, doc.id)} className={css(styles.styleBtn)}>
+            {props.name}
+          </button>
         </footer>
       </section >
     )
