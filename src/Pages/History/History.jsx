@@ -25,23 +25,19 @@ const styles = StyleSheet.create({
 })
 
 
-
 const RequestHistory = (props) => {
 
   const [readyOrders, setReadyOrders] = useState([])
 
-  {/*
-
-      //mock usado quando esgota a cota do firebase
+  //mock usado quando esgota a cota do firebase
 
   React.useEffect(() => {
     setReadyOrders(ReadyOrders)
   }, [readyOrders])
-*/}
 
-
+  {/*
   //Função que estava presente quando o firebase esgotou a cota
-  React.useEffect(() => {
+React.useEffect(() => {
     const readyOrders = async () => {
       try {
         const data = await db.collection('history-request').get()
@@ -53,6 +49,9 @@ const RequestHistory = (props) => {
     }
     readyOrders()
   }, [readyOrders])
+
+
+*/}
 
 
 
