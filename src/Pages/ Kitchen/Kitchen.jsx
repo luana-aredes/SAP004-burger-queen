@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    '@media (max-width: 600px)': {
+    '@media (max-width: 550px)': {
       flexDirection: 'column'
     },
   },
@@ -46,24 +46,22 @@ const Kitchen = () => {
   const [request, setRequest] = useState([])
   const [requestID, setRequestID] = useState([])
 
-  React.useEffect(() => {
-    const request = async () => {
-      try {
-        const data = await db.collection('requests').get();
-        const arrayData = data.docs.map(doc => doc.data());
-        const arrayDocId = data.docs.map(doc => doc.id);
-        setRequest(arrayData)
-        setRequestID(arrayDocId)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    request()
-  }, [request])
+  //   React.useEffect(() => {
+  //     const request = async () => {
+  //       try {
+  //         const data = await db.collection('requests').get();
+  //         const arrayData = data.docs.map(doc => doc.data());
+  //         const arrayDocId = data.docs.map(doc => doc.id);
+  //         setRequest(arrayData)
+  //         setRequestID(arrayDocId)
+  //       } catch (error) {
+  //         console.log(error)
+  //       }
+  //     }
+  //     request()
+  //   }, [request])
 
   //---------------
-
-  //mock doc.id
 
   //mock
   const idList = ['ABC123', 'ERT587', 'POI87'];
@@ -83,8 +81,6 @@ const Kitchen = () => {
   const getRequest = () => {
     setRequest(mock)
   }
-
-
 
   //---------------
 
