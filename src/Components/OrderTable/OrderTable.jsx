@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     height: '200px',
-    overflow: 'scroll',
+    overflowY: 'scroll',
   },
   tableColumn: {
     width: '16%'
@@ -169,7 +169,8 @@ const OrderTable = (props) => {
   const validateAndSendRequest = itemsList => {
     sumPriceOfItems(itemsList);
     addTimeStampToRequest(itemsList);
-    addInfosClientAndSendRequest(itemsList);
+    addInfosClient(itemsList);
+    props.setRequest([])
     console.log(itemsList);
   };
 
@@ -180,7 +181,7 @@ const OrderTable = (props) => {
       .catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
   };
 
-  const addInfosClientAndSendRequest = (itemsList) => {
+  const addInfosClient = (itemsList) => {
     if (props.clientName !== undefined || props.clientTable !== undefined) {
       itemsList.map(item => {
         item.clientName = props.clientName;
@@ -217,18 +218,18 @@ const OrderTable = (props) => {
                   <td className={css(styles.columnWidth)} > {Options(doc, index)} </td>
                   <td className={css(styles.columnWidth)} > {AdditionalBurguer(doc, index)} </td>
                   <td className={css(styles.columnWidth)} >
-                    <button className={css(styles.decreaseBtn)}
-                      onClick={
-                        () => decreaseQuantityOfItem(list, index)
-                      } >
+                    <button
+                      className={css(styles.decreaseBtn)}
+                      onClick={() => decreaseQuantityOfItem(list, index)} >
                       -
-          </button>
-                    <button className={css(styles.quantifier)} > {doc.quantity}
+                    </button>
+                    <button className={css(styles.quantifier)} >
+                      {doc.quantity}
                     </button>
                     <button className={css(styles.increaseBtn)}
                       onClick={() => increaseQuantityOfItem(list, index)} >
                       +
-          </button>
+                    </button>
                   </td>
                   <td className={css(styles.columnWidth)} >
                     R$ {doc.totalPriceItem}
@@ -238,7 +239,8 @@ const OrderTable = (props) => {
                       onClick={() => deleteItemOnOrder(list, index)}
                       src={DeleteImg}
                       alt="Delete" />
-                  </td> </tr>
+                  </td>
+                </tr>
               )
             })
           }
@@ -251,13 +253,11 @@ const OrderTable = (props) => {
           TOTAL R$ {totalPrice.toFixed(2)}
         </td>
         <td>
-          <button className={css(styles.sendDataBtn)}
-            onClick={
-              () =>
-                validateAndSendRequest(list)
-            } >
+          <button
+            className={css(styles.sendDataBtn)}
+            onClick={() => validateAndSendRequest(list)} >
             Enviar
-						</button>
+					</button>
         </td>
       </tfoot>
       <p className={css(styles.statusRequestMessage)} >
