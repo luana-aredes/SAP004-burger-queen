@@ -28,6 +28,19 @@ const styles = StyleSheet.create({
   grayFont: {
     color: '#E5E5E5',
   },
+  yellowFont: {
+    color: 'lightgray',
+    ":hover": {
+      color: 'gray'
+    }
+
+  },
+  linkLogin: {
+    fontSize: '1.2em',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: '0px',
+  },
   pageContainer: {
     height: window.innerHeight,
     maxWidth: '2000px',
@@ -63,6 +76,12 @@ const styles = StyleSheet.create({
     padding: '5px',
     marginBottom: '5px',
     textAlign: 'center'
+  },
+  linkRegister: {
+    color: 'lightgray',
+    ":hover": {
+      color: 'gray'
+    }
   }
 })
 

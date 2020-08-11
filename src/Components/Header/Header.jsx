@@ -64,7 +64,7 @@ const Header = (props) => {
                 to='/saloon'>Salão
               </Link>
               <Link className={css(styles.deliveryList)}
-                to='/delivery'>Pedidos prontos
+                to='/requestToDeliver'>Pedidos prontos
               </Link>
             </>
           }

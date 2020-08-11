@@ -17,11 +17,19 @@ const styles = StyleSheet.create({
   main: {
     display: 'flex',
     flexWrap: 'wrap',
+    overflowY: 'scroll',
+    width: '95%',
+    margin: 'auto',
   },
   title: {
     display: 'flex',
     justifyContent: 'center'
-  }
+  },
+  imgCheck: {
+    width: '40px',
+    height: '40px',
+    marginTop: '12px'
+  },
 })
 
 
@@ -64,11 +72,9 @@ React.useEffect(() => {
           <Card
             request={readyOrders}
             classBtn={css(styles.none)}
-            classInputCheck={css(styles.none)}
-            classInputCheckItem={css(styles.none)}
+            classImgCheck={css(styles.imgCheck)}
           />
         </div>
-
       </main>
     </>
   )

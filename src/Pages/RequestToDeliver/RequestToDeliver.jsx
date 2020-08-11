@@ -54,107 +54,53 @@ const styles = StyleSheet.create({
   },
 });
 
-const Kitchen = () => {
-  const [user, setUser] = useState(null)
-  const [request, setRequest] = useState([])
-  const [requestID, setRequestID] = useState([])
+const RequestToDeliver = () => {
+  const [readyRequest, setReadyRequest] = useState([])
 
   //Função que estava presente quando o firebase esgotou a cota
 
   //   React.useEffect(() => {
   //     const request = async () => {
   //       try {
-  //         const data = await db.collection('requests').get();
+  //         const data = await db.collection('ready-requests').get();
   //         const arrayData = data.docs.map(doc => doc.data());
-  //         const arrayDocId = data.docs.map(doc => doc.id);
-  //         setRequest(arrayData)
-  //         setRequestID(arrayDocId)
+  //         setReadyRequest(arrayData)
   //       } catch (error) {
   //         console.log(error)
   //       }
   //     }
   //     request()
-  //   }, [request])
+  //   }, [setReadyRequest])
 
-
-  //mock
-  const idList = ['ABC123', 'ERT587', 'POI87'];
-
-
-  //---------------
-  //usando Mock como bd
 
   useEffect(() => {
     getRequest()
-  }, [request]);
-
-  useEffect(() => {
-    getReqID()
-  }, []);
-
-  const getReqID = () => {
-    setRequestID(idList)
-  }
+  }, [readyRequest]);
 
   const getRequest = () => {
-    setRequest(mock)
+    setReadyRequest(mock)
   }
-
-  //---------------
-
-  const sendToReadyRequestList = readyRequest => {
-    //tratamento de then e catch
-    db.collection('ready-requests').add(readyRequest)
-  };
-
-  const sendToHistoryOfRequests = readyRequest => {
-    //tratamento de then e catch
-    db.collection('history-request').add(readyRequest)
-  };
-
-  const deleteReadyRequest = requestID => {
-    db.collection('requests').doc(requestID).delete();
-  }
-  const getRequestID = indexRequest => {
-    console.log(requestID[indexRequest])
-    return requestID[indexRequest]
-  }
-
-  const handleReadyRequest = indexRequest => {
-    // const readyRequest = request[indexRequest];
-    // sendToReadyRequestList(readyRequest)
-    // sendToHistoryOfRequests(readyRequest)
-    // deleteReadyRequest(getRequestID(indexRequest))
-    getRequestID(indexRequest)
-
-    //Excluir da tela (precisa?)
-    // setRequest(request.splice(indexRequest, 1))
-    console.log(requestID)
-    console.log(request)
-  };
 
   return (
     <>
-      <Header place={'kitchen'} />
+      <Header />
       <main>
         <div className={css(styles.titleBox)} >
           <img
-            src={require('../../assets/clock.png')}
+            src={require('../../assets/tick.png')}
             alt='Timer'
             className={css(styles.clock)} />
           <h1>
-            Pedidos Pendentes
+            Pedidos Prontos
           </h1>
         </div>
         <div className={css(styles.cardsBox)}>
-          <Card request={request}
-            name={"Pedido Pronto"}
-            handleReadyRequest={handleReadyRequest}
+          <Card request={readyRequest}
+            name={"Pedido Entregue"}
             classBtn={css(styles.styleBtn)}
             classInputCheck={css(styles.inputCheck)}
             classImgCheck={css(styles.none)}
             classInputCheckItem={css(styles.checkItem)}
-            place='kitchen'
           />
         </div>
       </main>
@@ -162,5 +108,9 @@ const Kitchen = () => {
   )
 }
 
-export default Kitchen
+export default RequestToDeliver;
+
+
+
+
 

@@ -177,7 +177,10 @@ const OrderTable = (props) => {
   const sendRequestToDataBase = (itemsList) => {
     setSendStatus('Registrando pedido. Aguarde...');
     db.collection('requests').add({ itemsList })
-      .then(() => setSendStatus('Pedido enviado para a cozinha!'))
+      .then((doc) => {
+        console.log(doc.id)
+        setSendStatus('Pedido enviado para a cozinha!')
+      })
       .catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
   };
 
