@@ -28,6 +28,15 @@ const styles = StyleSheet.create({
   grayFont: {
     color: '#E5E5E5',
   },
+  yellowFont: {
+    color: '#E5B163'
+  },
+  linkLogin: {
+    fontSize: '1.2em',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: '0px',
+  },
   pageContainer: {
     height: window.innerHeight,
     maxWidth: '2000px',

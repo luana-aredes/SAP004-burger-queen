@@ -2,82 +2,139 @@ import React, { useState } from 'react';
 import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
 import Header from '../../Components/Header/Header';
+import { StyleSheet, css } from 'aphrodite';
 import mock from './mock'
 import { useEffect } from 'react';
+
+const styles = StyleSheet.create({
+  cardsBox: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    '@media (max-width: 550px)': {
+      flexDirection: 'column'
+    },
+  },
+  clock: {
+    width: '35px',
+    height: '35px',
+    marginRight: '15px'
+  },
+  titleBox: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  inputCheck: {
+    width: '35px',
+    height: '35px',
+  },
+  styleBtn: {
+    backgroundColor: '#37AE60',
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '8px',
+    border: 'none',
+    padding: '7px',
+    marginTop: '15px',
+  },
+});
 
 const Kitchen = () => {
   const [user, setUser] = useState(null)
   const [request, setRequest] = useState([])
+  const [requestID, setRequestID] = useState([])
 
-  React.useEffect(() => {
-    const request = async () => {
-      try {
-        const data = await db.collection('requests').get()
-        const arrayData = data.docs.map(doc => (doc.data()))
-        setRequest(arrayData)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    request()
-  }, [request])
-
-
-  //---------------
-  //usando Mock como bd
-
-  // useEffect(() => {
-  //   getRequest()
-  // }, [request])
-
-  // const getRequest = () => {
-  //   setRequest(mock)
-  //   console.log("Setando lista de pedidos: ", request)
-  // }
+  //   React.useEffect(() => {
+  //     const request = async () => {
+  //       try {
+  //         const data = await db.collection('requests').get();
+  //         const arrayData = data.docs.map(doc => doc.data());
+  //         const arrayDocId = data.docs.map(doc => doc.id);
+  //         setRequest(arrayData)
+  //         setRequestID(arrayDocId)
+  //       } catch (error) {
+  //         console.log(error)
+  //       }
+  //     }
+  //     request()
+  //   }, [request])
 
   //---------------
 
-  const sendToReadyRequestList = (readyRequest) => {
+  //mock
+  const idList = ['ABC123', 'ERT587', 'POI87'];
+
+  useEffect(() => {
+    getRequest()
+  }, [request]);
+
+  useEffect(() => {
+    getReqID()
+  }, []);
+
+  const getReqID = () => {
+    setRequestID(idList)
+  }
+
+  const getRequest = () => {
+    setRequest(mock)
+  }
+
+  //---------------
+
+  const sendToReadyRequestList = readyRequest => {
+    //tratamento de then e catch
     db.collection('ready-requests').add(readyRequest)
-      .then(() => {
-        console.log('Pedido enviado para fila de espera', readyRequest)
-      })
-      .catch((error) => console.log(error))
   };
 
-  const sendToHistoryOfRequests = (readyRequest) => {
+  const sendToHistoryOfRequests = readyRequest => {
+    //tratamento de then e catch
     db.collection('history-request').add(readyRequest)
-      .then(() => {
-        console.log('Pedido enviado para histórico:', readyRequest)
-      })
-      .catch((error) => console.log(error))
   };
 
+  const deleteReadyRequest = requestID => {
+    db.collection('requests').doc(requestID).delete();
+  }
+  const getRequestID = indexRequest => {
+    console.log(requestID[indexRequest])
+    return requestID[indexRequest]
+  }
 
-  const handleReadyRequest = (indexRequest, id) => {
-    const readyRequest = request[indexRequest];
-    sendToReadyRequestList(readyRequest)
-    sendToHistoryOfRequests(readyRequest)
-
-    //Função para excluir do banco de dados
-    //Precisa do id do pedido
-    //   db.collection('requests').doc(id).delete()
-    //.then(function() {
-    //     console.log("Document successfully deleted!");
-    // }).catch(function(error) {
-    //     console.error("Error removing document: ", error);
-    // });
+  const handleReadyRequest = indexRequest => {
+    // const readyRequest = request[indexRequest];
+    // sendToReadyRequestList(readyRequest)
+    // sendToHistoryOfRequests(readyRequest)
+    // deleteReadyRequest(getRequestID(indexRequest))
+    getRequestID(indexRequest)
 
     //Excluir da tela (precisa?)
-    setRequest(request.splice(indexRequest, 1))
-  }
+    // setRequest(request.splice(indexRequest, 1))
+    console.log(requestID)
+    console.log(request)
+  };
 
   return (
     <>
       <Header place={'kitchen'} />
       <main>
-        <div>Pedidos Pendentes</div>
-        <Card request={request} name={"Pedido Pronto"} handleReadyRequest={handleReadyRequest} />
+        <div className={css(styles.titleBox)} >
+          <img
+            src={require('../../assets/clock.png')}
+            alt='Timer'
+            className={css(styles.clock)} />
+          <h2>
+            Pedidos Pendentes
+          </h2>
+        </div>
+        <div className={css(styles.cardsBox)}>
+          <Card request={request}
+            name={"Pedido Pronto"}
+            handleReadyRequest={handleReadyRequest}
+            classBtn={css(styles.styleBtn)}
+          />
+        </div>
       </main>
     </>
   )

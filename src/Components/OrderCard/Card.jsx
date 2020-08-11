@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   orderCard: {
     border: '2px solid #C3846D',
     borderRadius: '10px',
-    width: '50%',
+    width: '35%',
     margin: '10px',
     padding: '10px',
     backgroundColor: '#F3E3CC',
@@ -33,25 +33,12 @@ const styles = StyleSheet.create({
     width: '25px',
     height: '25px',
   }
-
 })
 
 const Card = (props) => {
 
-  //   {/* const [request, setRequest] = useState()
-
-  //      useEffect(() => {
-  //         const req = () => {
-  //             setRequest(props.request)
-  //             console.log(request)
-  //         }
-  //         req()
-  //     }, [request])
-
-  //  */}
-
-  const handleClick = (index, id) => {
-    props.handleReadyRequest(index, id)
+  const handleClick = (index) => {
+    props.handleReadyRequest(index)
   }
 
 
@@ -73,7 +60,7 @@ const Card = (props) => {
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
-          <input type="checkbox" className={css(styles.inputCheck)} />
+          <input type="checkbox" />
           <div> {`Cliente: ${doc.itemsList[0].clientName}`}</div>
           <div>{`Mesa: ${doc.itemsList[0].tableNumber}`}</div>
           <div>{`Horário: ${doc.itemsList[0].time}`}</div>
@@ -90,7 +77,9 @@ const Card = (props) => {
         })
         }
         <footer className={css(styles.footerCard)}>
-          <button onClick={() => handleClick(index, doc.id)} className={css(styles.styleBtn)}>
+          <button
+            onClick={() => handleClick(index)}
+            className={props.classBtn}>
             {props.name}
           </button>
         </footer>
