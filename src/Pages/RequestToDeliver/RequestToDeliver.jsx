@@ -52,6 +52,11 @@ const styles = StyleSheet.create({
     width: '23px',
     height: '23px',
   },
+  title: {
+    '@media (max-width: 500px)': {
+      fontSize: '1.4em'
+    }
+  }
 });
 
 const RequestToDeliver = () => {
@@ -90,7 +95,7 @@ const RequestToDeliver = () => {
             src={require('../../assets/tick.png')}
             alt='Timer'
             className={css(styles.clock)} />
-          <h1>
+          <h1 className={css(styles.title)}>
             Pedidos Prontos
           </h1>
         </div>

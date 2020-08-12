@@ -23,7 +23,11 @@ const styles = StyleSheet.create({
   },
   title: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    '@media (max-width: 500px)': {
+      fontSize: '1.4em'
+    }
   },
   imgCheck: {
     width: '40px',
