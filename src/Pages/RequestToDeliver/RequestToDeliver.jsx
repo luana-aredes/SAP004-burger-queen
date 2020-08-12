@@ -3,7 +3,6 @@ import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
 import Header from '../../Components/Header/Header';
 import { StyleSheet, css } from 'aphrodite';
-import mock from './mock'
 
 const styles = StyleSheet.create({
   cardsBox: {
@@ -61,30 +60,27 @@ const styles = StyleSheet.create({
 
 const RequestToDeliver = () => {
   const [readyRequest, setReadyRequest] = useState([])
-
-  //Função que estava presente quando o firebase esgotou a cota
-
-  //   React.useEffect(() => {
-  //     const request = async () => {
-  //       try {
-  //         const data = await db.collection('ready-requests').get();
-  //         const arrayData = data.docs.map(doc => doc.data());
-  //         setReadyRequest(arrayData)
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
-  //     }
-  //     request()
-  //   }, [setReadyRequest])
-
-
   useEffect(() => {
-    getRequest()
-  }, [readyRequest]);
+    const request = async () => {
+      try {
+        const data = await db.collection('ready-requests').get();
+        const arrayData = data.docs.map(doc => ({ id2: doc.id, ...doc.data() }))
+        setReadyRequest(arrayData)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    request()
+  }, [])
 
-  const getRequest = () => {
-    setReadyRequest(mock)
-  }
+  const deleteDeliveredRequest = id => db.collection('ready-requests').doc(id).delete();
+
+  const handleDeliveredRequest = (id) => {
+    deleteDeliveredRequest(id)
+    setReadyRequest(readyRequest.filter((item) => {
+      return item.id2 !== id
+    }))
+  };
 
   return (
     <>
@@ -101,6 +97,8 @@ const RequestToDeliver = () => {
         </div>
         <div className={css(styles.cardsBox)}>
           <Card request={readyRequest}
+            place='saloon'
+            handleDeliveredRequest={handleDeliveredRequest}
             name={"Pedido Entregue"}
             classBtn={css(styles.styleBtn)}
             classInputCheck={css(styles.inputCheck)}

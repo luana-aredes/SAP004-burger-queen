@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, css } from 'aphrodite';
 
 
@@ -56,9 +56,10 @@ const styles = StyleSheet.create({
 })
 
 const Card = (props) => {
-
-  const handleClick = (index, id) => {
-    props.handleReadyRequest(index, id)
+  const handleClick = (id, id2, index) => {
+    props.place === 'saloon' ?
+      props.handleDeliveredRequest(id2) :
+      props.handleReadyRequest(id, index)
   }
 
   const checkMeatChoice = (item) => {
@@ -128,7 +129,7 @@ const Card = (props) => {
         <footer className={css(styles.footerCard)}>
           <img src={require('../../assets/tick.png')} className={props.classImgCheck} alt='Checkbox' />
           <button
-            onClick={() => handleClick(index, doc.id)}
+            onClick={() => handleClick(doc.id, doc.id2, index)}
             className={props.classBtn}>
             {props.name}
           </button>
