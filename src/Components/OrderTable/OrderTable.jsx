@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     height: '200px',
-    overflow: 'scroll',
+    overflowY: 'scroll',
   },
   tableColumn: {
     width: '16%'
@@ -157,10 +157,20 @@ const OrderTable = (props) => {
 
   const addTimeStampToRequest = itemsList => itemsList.map(item => item.time = new Date().toLocaleTimeString());
 
+  const clearTable = {
+    item: "",
+    price: "",
+    totalPriceItem: "",
+    quantity: "",
+    meatOption: "",
+    additional: "",
+  }
+
   const validateAndSendRequest = itemsList => {
     sumPriceOfItems(itemsList);
     addTimeStampToRequest(itemsList);
     addInfosClient(itemsList);
+    props.setRequest([])
     console.log(itemsList);
   };
 
@@ -188,6 +198,7 @@ const OrderTable = (props) => {
 
 
   const list = props.request
+
   return (
     <table >
       <div className={css(styles.scroll)}>
@@ -260,3 +271,6 @@ const OrderTable = (props) => {
 };
 
 export default OrderTable;
+
+
+

@@ -29,7 +29,11 @@ const styles = StyleSheet.create({
     color: '#E5E5E5',
   },
   yellowFont: {
-    color: '#E5B163'
+    color: 'lightgray',
+    ":hover": {
+      color: 'gray'
+    }
+
   },
   linkLogin: {
     fontSize: '1.2em',
@@ -72,6 +76,12 @@ const styles = StyleSheet.create({
     padding: '5px',
     marginBottom: '5px',
     textAlign: 'center'
+  },
+  linkRegister: {
+    color: 'lightgray',
+    ":hover": {
+      color: 'gray'
+    }
   }
 })
 

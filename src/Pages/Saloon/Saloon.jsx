@@ -96,7 +96,6 @@ const Saloon = () => {
   const [clientName, setClientName] = useState('')
   const [clientTable, setclientTable] = useState('')
 
-
   React.useEffect(() => {
     const coffeeMenu = async () => {
       try {
@@ -210,6 +209,7 @@ const Saloon = () => {
             handleInputClientTable={getClientTable}
           />
           <OrderTable request={request}
+            setRequest={setRequest}
             clientName={clientName}
             clientTable={clientTable}
           />

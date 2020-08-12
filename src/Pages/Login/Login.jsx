@@ -82,7 +82,7 @@ const Login = (props) => {
         <div className={css(styles.registerText)} >
           <p > Se não tem uma conta,
           <br />
-            <Link to='/register'>registre - se!</Link>
+            <Link to='/register' className={css(styles.linkRegister)}>registre - se!</Link>
           </p>
         </div>
         {errorMsg ? (
