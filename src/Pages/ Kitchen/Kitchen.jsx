@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     borderRadius: '8px',
-    border: 'none',
-    padding: '10px',
     marginTop: '12px',
     marginBottom: '12px',
     fontSize: '1.2em',
@@ -60,39 +58,42 @@ const styles = StyleSheet.create({
   }
 });
 
+//---------------
 const Kitchen = () => {
   const [request, setRequest] = useState([])
 
   //Função que estava presente quando o firebase esgotou a cota
+  React.useEffect(() => {
+    const request = async () => {
+      try {
+        const data = await db.collection('requests').get();
+        const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        setRequest(arrayData)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    request()
+  }, [])
 
-  //   React.useEffect(() => {
-  //     const request = async () => {
-  //       try {
-  //         const data = await db.collection('requests').get();
-  //          const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-  //         setRequest(arrayData)
-  //         setRequestID(arrayDocId)
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
-  //     }
-  //     request()
-  //   }, [request])
-
+  // useEffect(() => {
+  //   db.collection('requests').get()
+  //     .then((snapshot) => {
+  //       snapshot.forEach(doc => setRequest(current => [...current, doc.data()]))
+  //     })
+  // })
 
   //usando Mock como bd
-  useEffect(() => {
-    getRequest()
-    console.log('estou dentro do useEffect', request)
-  }, [request]);
+  // useEffect(() => {
+  //   getRequest()
+  //   console.log('estou dentro do useEffect', request)
+  // }, [request]);
 
   //Função para pegar banco de dados
-  const getRequest = () => {
-    setRequest(mock)
-    console.log('estou fora do useEffect', request)
-  }
-
-  //---------------
+  // const getRequest = () => {
+  //   setRequest(mock)
+  //   console.log('estou fora do useEffect', request)
+  // }
 
   const sendToReadyRequestList = readyRequest => {
     //tratamento de then e catch
@@ -108,15 +109,19 @@ const Kitchen = () => {
     db.collection('requests').doc(requestID).delete();
   }
 
-  const handleReadyRequest = (indexRequest, idRequest) => {
-    console.log(indexRequest, idRequest)
-    // const readyRequest = request[indexRequest];
-    // sendToReadyRequestList(readyRequest)
-    // sendToHistoryOfRequests(readyRequest)
-    // deleteReadyRequest(idRequest)
 
-    //Excluir da tela (precisa?)
-    setRequest(request.splice(indexRequest, 1))
+  const handleReadyRequest = (indexRequest, id) => {
+    const readyRequest = request[indexRequest];
+    sendToReadyRequestList(readyRequest)
+    sendToHistoryOfRequests(readyRequest)
+    console.log(indexRequest, id)
+    deleteReadyRequest(id)
+
+
+    // request.splice(indexRequest, 1)
+    setRequest(request.filter((item) => {
+      return item.id !== id
+    }))
   };
 
   return (

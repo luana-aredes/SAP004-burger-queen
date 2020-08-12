@@ -102,6 +102,7 @@ const Saloon = () => {
         const data = await db.collection('coffee-menu').get()
         const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         setCoffee(arrayData)
+        console.log(coffee)
       } catch (error) {
         console.log(error)
       }
@@ -112,6 +113,7 @@ const Saloon = () => {
         const data = await db.collection('all-day-menu').get()
         const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         setAllDay(arrayData)
+        console.log(allDay)
 
       } catch (error) {
         console.log(error)
@@ -120,7 +122,7 @@ const Saloon = () => {
 
     allDayMenu()
     coffeeMenu()
-  }, [button, error, coffee, allDay])
+  }, [])
 
 
   const saveOrderItem = newItem => setRequest([...request, newItem]);
