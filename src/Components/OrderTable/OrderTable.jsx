@@ -178,7 +178,6 @@ const OrderTable = (props) => {
     setSendStatus('Registrando pedido. Aguarde...');
     db.collection('requests').add({ itemsList })
       .then((doc) => {
-        console.log(doc.id)
         setSendStatus('Pedido enviado para a cozinha!')
       })
       .catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))

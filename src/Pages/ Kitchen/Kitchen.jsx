@@ -51,13 +51,17 @@ const styles = StyleSheet.create({
   checkItem: {
     width: '23px',
     height: '23px',
+    marginRight: '10px'
   },
+  title: {
+    '@media (max-width: 500px)': {
+      fontSize: '1.4em'
+    }
+  }
 });
 
 const Kitchen = () => {
-  const [user, setUser] = useState(null)
   const [request, setRequest] = useState([])
-  const [requestID, setRequestID] = useState([])
 
   //Função que estava presente quando o firebase esgotou a cota
 
@@ -65,8 +69,7 @@ const Kitchen = () => {
   //     const request = async () => {
   //       try {
   //         const data = await db.collection('requests').get();
-  //         const arrayData = data.docs.map(doc => doc.data());
-  //         const arrayDocId = data.docs.map(doc => doc.id);
+  //          const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
   //         setRequest(arrayData)
   //         setRequestID(arrayDocId)
   //       } catch (error) {
@@ -77,27 +80,16 @@ const Kitchen = () => {
   //   }, [request])
 
 
-  //mock
-  const idList = ['ABC123', 'ERT587', 'POI87'];
-
-
-  //---------------
   //usando Mock como bd
-
   useEffect(() => {
     getRequest()
+    console.log('estou dentro do useEffect', request)
   }, [request]);
 
-  useEffect(() => {
-    getReqID()
-  }, []);
-
-  const getReqID = () => {
-    setRequestID(idList)
-  }
-
+  //Função para pegar banco de dados
   const getRequest = () => {
     setRequest(mock)
+    console.log('estou fora do useEffect', request)
   }
 
   //---------------
@@ -115,22 +107,16 @@ const Kitchen = () => {
   const deleteReadyRequest = requestID => {
     db.collection('requests').doc(requestID).delete();
   }
-  const getRequestID = indexRequest => {
-    console.log(requestID[indexRequest])
-    return requestID[indexRequest]
-  }
 
-  const handleReadyRequest = indexRequest => {
+  const handleReadyRequest = (indexRequest, idRequest) => {
+    console.log(indexRequest, idRequest)
     // const readyRequest = request[indexRequest];
     // sendToReadyRequestList(readyRequest)
     // sendToHistoryOfRequests(readyRequest)
-    // deleteReadyRequest(getRequestID(indexRequest))
-    getRequestID(indexRequest)
+    // deleteReadyRequest(idRequest)
 
     //Excluir da tela (precisa?)
-    // setRequest(request.splice(indexRequest, 1))
-    console.log(requestID)
-    console.log(request)
+    setRequest(request.splice(indexRequest, 1))
   };
 
   return (
@@ -142,7 +128,7 @@ const Kitchen = () => {
             src={require('../../assets/clock.png')}
             alt='Timer'
             className={css(styles.clock)} />
-          <h1>
+          <h1 className={css(styles.title)}>
             Pedidos Pendentes
           </h1>
         </div>

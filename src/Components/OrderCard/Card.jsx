@@ -11,6 +11,13 @@ const styles = StyleSheet.create({
     margin: '0.5%',
     padding: '15px',
     backgroundColor: '#C3846D',
+    '@media (max-width: 770px)': {
+      width: '90%',
+      margin: '5px auto'
+    },
+    '@media (max-width: 425px)': {
+      fontSize: '0.8em'
+    }
   },
   headerCard: {
     display: 'flex',
@@ -31,7 +38,8 @@ const styles = StyleSheet.create({
     height: '50%',
     display: 'flex',
     flexDirection: 'column',
-    fontSize: '1.4em'
+    fontSize: '1.4em',
+    paddingLeft: '10px'
   },
   footerCard: {
     display: 'flex',
@@ -117,14 +125,14 @@ const Card = (props) => {
           }
         </main>
         <footer className={css(styles.footerCard)}>
-          <img src={require('../../assets/tick.png')} className={props.classImgCheck} />
+          <img src={require('../../assets/tick.png')} className={props.classImgCheck} alt='Checkbox' />
           <button
-            onClick={() => handleClick(index)}
+            onClick={() => handleClick(index, doc.id)}
             className={props.classBtn}>
             {props.name}
           </button>
         </footer>
-      </section >
+      </section>
     )
   })
 }
