@@ -71,7 +71,8 @@ const Card = (props) => {
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
-          {props.place === 'kitchen' ? <input type="checkbox" className={props.classInputCheck} />
+          {props.place === 'kitchen' ?
+            <input type="checkbox" className={props.classInputCheck} />
             : false}
 
           <div>
@@ -119,7 +120,7 @@ const Card = (props) => {
         <footer className={css(styles.footerCard)}>
           <img src={require('../../assets/tick.png')} className={props.classImgCheck} />
           <button
-            onClick={() => handleClick(index)}
+            onClick={() => handleClick(index, 'doc.id')}
             className={props.classBtn}>
             {props.name}
           </button>

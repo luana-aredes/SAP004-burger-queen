@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
 import Header from '../../Components/Header/Header';
@@ -57,48 +57,57 @@ const styles = StyleSheet.create({
 const Kitchen = () => {
   const [user, setUser] = useState(null)
   const [request, setRequest] = useState([])
-  const [requestID, setRequestID] = useState([])
+  const [id, setId] = useState()
 
   //Função que estava presente quando o firebase esgotou a cota
 
-  //   React.useEffect(() => {
-  //     const request = async () => {
-  //       try {
-  //         const data = await db.collection('requests').get();
-  //         const arrayData = data.docs.map(doc => doc.data());
-  //         const arrayDocId = data.docs.map(doc => doc.id);
-  //         setRequest(arrayData)
-  //         setRequestID(arrayDocId)
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
-  //     }
-  //     request()
-  //   }, [request])
+  React.useEffect(() => {
+    const getDataBase = async () => {
+      try {
+        const data = await db.collection('requests').get();
+        const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setRequest(arrayData)
+        console.log(request)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getDataBase()
+  }, [id])
 
+  useEffect(() => {
+    setRequest(getDataBase())
+  }, [])
 
-  //mock
-  const idList = ['ABC123', 'ERT587', 'POI87'];
+  const getDataBase = async () => {
+    try {
+      const data = await db.collection('requests').get();
+      const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      return arrayData
+    } catch (error) {
+      return console.log(error)
+    }
+  }
 
+  //-----------------
+  //Tentando de outra forma:
 
-  //---------------
+  // useEffect(() => {
+  //   db.collection('requests').get()
+  //     .then((snapshot) => {
+  //       snapshot.forEach((doc) => setRequest((current) => [...current, id: doc, doc.data()]));
+  //     });
+  // }, []);
+  //------------------------
   //usando Mock como bd
 
-  useEffect(() => {
-    getRequest()
-  }, [request]);
+  // useEffect(() => {
+  //   getRequest()
+  // }, [request]);
 
-  useEffect(() => {
-    getReqID()
-  }, []);
-
-  const getReqID = () => {
-    setRequestID(idList)
-  }
-
-  const getRequest = () => {
-    setRequest(mock)
-  }
+  // const getRequest = () => {
+  //   setRequest(mock)
+  // }
 
   //---------------
 
@@ -115,22 +124,16 @@ const Kitchen = () => {
   const deleteReadyRequest = requestID => {
     db.collection('requests').doc(requestID).delete();
   }
-  const getRequestID = indexRequest => {
-    console.log(requestID[indexRequest])
-    return requestID[indexRequest]
-  }
 
-  const handleReadyRequest = indexRequest => {
+  const handleReadyRequest = (indexRequest, id) => {
     // const readyRequest = request[indexRequest];
     // sendToReadyRequestList(readyRequest)
     // sendToHistoryOfRequests(readyRequest)
-    // deleteReadyRequest(getRequestID(indexRequest))
-    getRequestID(indexRequest)
-
+    // deleteReadyRequest(id)
     //Excluir da tela (precisa?)
     // setRequest(request.splice(indexRequest, 1))
-    console.log(requestID)
     console.log(request)
+    // setRequest(request.splice(indexRequest, 1))
   };
 
   return (

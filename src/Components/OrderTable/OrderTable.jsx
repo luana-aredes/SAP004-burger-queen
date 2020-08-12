@@ -157,15 +157,6 @@ const OrderTable = (props) => {
 
   const addTimeStampToRequest = itemsList => itemsList.map(item => item.time = new Date().toLocaleTimeString());
 
-  const clearTable = {
-    item: "",
-    price: "",
-    totalPriceItem: "",
-    quantity: "",
-    meatOption: "",
-    additional: "",
-  }
-
   const validateAndSendRequest = itemsList => {
     sumPriceOfItems(itemsList);
     addTimeStampToRequest(itemsList);
