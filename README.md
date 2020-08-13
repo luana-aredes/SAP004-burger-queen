@@ -44,12 +44,15 @@ Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a te
 ![Tela de registro e login](src/assets/reg-login.jpeg)
 
 **Histórias de Usuário 2:** Eu como garçom/garçonete quero poder anotar o pedido dos clientes e enviar para o preparo na cozinha. 
+
 **Solução:** página "Salão" dá acesso à comanda de pedidos, onde o funcionário deve adicionar as informações do cliente (nome e mesa), dos itens e da dquantidade dos itens escolhidos pelos clientes. Também pode visualizar o preço do pedido. O pedido pronto é enviado para a cozinha quando solicitado por ele. 
 
 **Histórias de Usuário 3:** Eu como chefe de cozinha quero ver os pedidos dos clientes, marcar os pedidos prontos e notificar o salão para a entrega.
+
 **Solução**:  página "Cozinha" recebe de forma síncrona os novos pedidos realizados no salão, com o horário do pedido registrado. É possível ter maior controle sobre quais itens de cada pedido já foram preparados checando cada um deles. É possível também sinalizar quais pedidos da lista já estão em preparação, a fim de evitar a execução do mesmo pedido por cozinheiros diferentes, caso haja. Após a finalização do preparo, o cozinheiro pode marcar o pedido como __"Pedido Pronto"__, e ele será excluído da lista visível na tela. Já a página "Histórico" dá acesso ao cozinheiro a todos os pedidos finalizados, incluindo o tempo de preparo de cada um deles.
 
 **Histórias de Usuário 4:** Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá-los rapidamente aos clientes.
+
 **Solução**:  página "Pedidos Prontos" recebe de forma síncrona os novos pedidos já preparados na cozinha. O funcionário pode marcar cada pedido como __"Pedido Entregue"__, e ele será excluído da lista visível na tela. 
 
 
