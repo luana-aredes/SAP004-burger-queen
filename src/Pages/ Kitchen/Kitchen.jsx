@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     borderRadius: '8px',
+    border: 'none',
+    padding: '10px',
     marginTop: '12px',
     marginBottom: '12px',
     fontSize: '1.2em',
@@ -63,7 +65,7 @@ const Kitchen = () => {
 
   //Função que estava presente quando o firebase esgotou a cota
   useEffect(() => {
-    const request = async () => {
+    const request = async() => {
       try {
         const data = await db.collection('requests').get();
         const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
@@ -91,34 +93,38 @@ const Kitchen = () => {
     }))
   };
 
-  return (
-    <>
-      <Header place={'kitchen'} />
-      <main>
-        <div className={css(styles.titleBox)} >
-          <img
-            src={require('../../assets/clock.png')}
-            alt='Timer'
-            className={css(styles.clock)} />
-          <h1 className={css(styles.title)}>
-            Pedidos Pendentes
-          </h1>
-        </div>
-        <div className={css(styles.cardsBox)}>
-          <Card request={request}
-            name={"Pedido Pronto"}
-            place='kitchen'
-            handleReadyRequest={handleReadyRequest}
-            classBtn={css(styles.styleBtn)}
-            classInputCheck={css(styles.inputCheck)}
-            classImgCheck={css(styles.none)}
-            classInputCheckItem={css(styles.checkItem)}
-          />
-        </div>
-      </main>
-    </>
+  return ( <
+    >
+    <
+    Header place = { 'kitchen' }
+    /> <
+    main >
+    <
+    div className = { css(styles.titleBox) } >
+    <
+    img src = { require('../../assets/clock.png') }
+    alt = 'Timer'
+    className = { css(styles.clock) }
+    /> <
+    h1 className = { css(styles.title) } >
+    Pedidos Pendentes <
+    /h1> < /
+    div > <
+    div className = { css(styles.cardsBox) } >
+    <
+    Card request = { request }
+    name = { "Pedido Pronto" }
+    place = 'kitchen'
+    handleReadyRequest = { handleReadyRequest }
+    classBtn = { css(styles.styleBtn) }
+    classInputCheck = { css(styles.inputCheck) }
+    classImgCheck = { css(styles.none) }
+    classInputCheckItem = { css(styles.checkItem) }
+    /> < /
+    div > <
+    /main> < /
+    >
   )
 }
 
 export default Kitchen
-
