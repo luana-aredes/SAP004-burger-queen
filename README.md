@@ -52,11 +52,7 @@ A partir do login, cada ambiente fornece acesso a páginas diferentes:
 
 ### 3.2 Prototipação
 
-Durante o planejamento do projeto nós realizamos protótipos de baixa e alta fidelidade. Ajustes em relação à concepção inicial da interface foram implementados a partir de consultas a potenciais usuários e de acordo com a nossa própria percepção, sempre com o objetivo de melhorar a usabilidade e a experiência do usuário.
-
-
-![Protótipo de baixa fidelidade](src/assets/prototipo-low-quality.png)
-
+Durante o planejamento do projeto nós realizamos protótipos de baixa e alta fidelidade (imagem abaixo). Ajustes em relação à concepção inicial da interface foram implementados a partir de consultas a potenciais usuários e de acordo com a nossa própria percepção, sempre com o objetivo de melhorar a usabilidade e a experiência do usuário.
 
 ![Protótipo de alta fidelidade](src/assets/prototipo-high-quality.png)
 
@@ -74,5 +70,5 @@ Trabalho desenvolvido durante o bootcamp de programação front-end da Laborató
 * Luana Arêdes
 * Nathalia Monalisa Francisco
 
-## 6. Créditos:
+## 6. Créditos
 * Ícones: [FlatIcon](https://www.flaticon.com/)
