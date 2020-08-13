@@ -35,12 +35,15 @@ A aplicação foi desenvolvida orientada pelas seguintes histórias de usuário:
 
 **Histórias de Usuário 1:** 
 Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.</br>
-**Solução:** o usuário deve se registrar no aplicativo usando e-mail e senha e especificar qual é seu local de trabalho (salão ou cozinha). A partir daí cada vez que o usuário loga ele é direcionado para o seu ambiente de trabalho. Cada ambiente fornece acesso à páginas diferentes:
+**Solução:** o usuário deve se registrar no aplicativo usando e-mail e senha e especificar qual é seu local de trabalho (salão ou cozinha). A partir daí cada vez que o usuário loga ele é direcionado para o seu ambiente de trabalho. Abaixo segue uma imagem da tela de registro (esquerda) e login (direita) da versão tablet:
+
+![Tela de registro e login](src/assets/reg-login.jpeg)
+
+
+A partir do login, cada ambiente fornece acesso à páginas diferentes:
 * ___Salão:___ acesso às páginas _"Salão"_ (registro dos pedidos dos clientes na comanda e envio para a cozinha) e _"Pedidos Prontos"_ (lista de pedidos já preparadas e na fila de espera para entrega). 
 
 * ___Cozinha___ : acesso às páginas _"Cozinha"_ (lista de pedidos a serem preparados) e _"Histórico"_ (lista para consulta de todos os pedidos preparados)
-
-![Tela de registro e login](src/assets/reg-login.jpeg)
 
 
 
