@@ -19,14 +19,14 @@ A lógica do projeto foi implementada em Javascript usando a biblioteca React. T
 
 Abaixo segue algumas informações importantes sobre o restaurante e que foram levadas em consideração durante o planejamento e execução do projeto:
 
-### Ambientes do estabelecimento:
-São dois ambientes que têm funcionários com funções diferentes:
+### Ambientes do estabelecimento: 
+Dois ambientes com funções diferentes:
 
 1.Salão: funcionários recebem os clientes, anotam e entregam os seus pedidos.</br>
 2.Cozinha: funcionários preparam os pedidos e sinalizam quando eles estão prontos. Os cozinheiros também desejam ter acesso a um histórico de todos os pedidos para eventuais consultas. 
 
 ### Menu do restaurante
-O restaurante possui dois menus: um com itens de café-da-manhã e outro com itens para o restante do dia. 
+O restaurante possui dois menus: um com itens de ___café-da-manhã___ e outro com itens para o ___restante do dia___. 
 Apesar de serem categorias diferentes, o cliente pode escolher itens das duas categorias em um mesmo pedido. Uma informação importante repassada pelo restaurante é que os clientes são bastante indecisos, sendo comum mudarem o pedido várias vezes antes de finalizar. Isso foi levado em consideração durante o desenvolvimento. 
 
 
@@ -36,10 +36,10 @@ A aplicação foi desenvolvida orientada pelas seguintes histórias de usuário:
 **Histórias de Usuário 1:** 
 Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.
 
-**Solução:** o usuário deve se registrar no aplicativo usando e-mail e senha e especificar qual é seu local de trabalho (salão ou cozinha). A partir daí cada vez que o usuário loga ele é direcionado para o seu ambiente de trabalho. Cada ambiente fornece acesso a páginas diferentes:
-* _Salão:_ acesso às páginas "Salão" (registro dos pedidos dos clientes na comanda e envio para a cozinha) e "Pedidos Prontos" (lista de pedidos já preparadas e na fila de espera para entrega). 
+**Solução:** o usuário deve se registrar no aplicativo usando e-mail e senha e especificar qual é seu local de trabalho (salão ou cozinha). A partir daí cada vez que o usuário loga ele é direcionado para o seu ambiente de trabalho. Cada ambiente fornece acesso à páginas diferentes:
+* ___Salão:___ acesso às páginas _"Salão"_ (registro dos pedidos dos clientes na comanda e envio para a cozinha) e _"Pedidos Prontos"_ (lista de pedidos já preparadas e na fila de espera para entrega). 
 
-* _Cozinha_ : acesso às páginas "Cozinha" (lista de pedidos a serem preparados) e "Histórico" (lista de todos os pedidos para consulta)
+* ___Cozinha___ : acesso às páginas _"Cozinha"_ (lista de pedidos a serem preparados) e _"Histórico"_ (lista para consulta de todos os pedidos preparados)
 
 ![Tela de registro e login](src/assets/reg-login.jpeg)
 
