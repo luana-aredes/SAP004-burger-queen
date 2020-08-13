@@ -41,19 +41,31 @@ const RequestHistory = (props) => {
 
   const [readyOrders, setReadyOrders] = useState([])
 
-  //mock usado quando esgota a cota do firebase
-
+  //Função que estava presente quando o firebase esgotou a cota
   // React.useEffect(() => {
-  //   setReadyOrders(ReadyOrders)
+  //   const readyOrders = async () => {
+  //     try {
+  //       const data = await db.collection('history-request').get()
+  //       const arrayData = data.docs.map(doc => (doc.data()))
+  //       setReadyOrders(arrayData)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   readyOrders()
   // }, [])
+
 
   //Função que estava presente quando o firebase esgotou a cota
   useEffect(() => {
     const readyOrders = async () => {
       try {
-        const data = await db.collection('history-request').get()
-        const arrayData = data.docs.map(doc => (doc.data()))
-        setReadyOrders(arrayData)
+        db.collection('history-request').onSnapshot((snapshot) => {
+          console.log(snapshot)
+          const arrayData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+          setReadyOrders(arrayData)
+          console.log(readyOrders)
+        })
       } catch (error) {
         console.log(error)
       }

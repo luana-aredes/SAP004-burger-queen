@@ -60,12 +60,31 @@ const styles = StyleSheet.create({
 
 const RequestToDeliver = () => {
   const [readyRequest, setReadyRequest] = useState([])
-  useEffect(() => {
+
+  // Função que estava presente quando o firebase esgotou a cota
+
+  // React.useEffect(() => {
+  //   const request = async () => {
+  //     try {
+  //       const data = await db.collection('ready-requests').get();
+  //       const arrayData = data.docs.map(doc => doc.data());
+  //       setReadyRequest(arrayData)
+  //       console.log(readyRequest)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   request()
+  // }, [])
+  React.useEffect(() => {
     const request = async () => {
       try {
-        const data = await db.collection('ready-requests').get();
-        const arrayData = data.docs.map(doc => ({ id2: doc.id, ...doc.data() }))
-        setReadyRequest(arrayData)
+        db.collection('ready-requests').onSnapshot((snapshot) => {
+          console.log(snapshot)
+          const arrayData = snapshot.docs.map(doc => ({ id2: doc.id, ...doc.data() }))
+          setReadyRequest(arrayData)
+          console.log(readyRequest)
+        })
       } catch (error) {
         console.log(error)
       }

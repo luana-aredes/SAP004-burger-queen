@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, css } from 'aphrodite';
-
+import { db } from '../../config/firebase';
 
 const styles = StyleSheet.create({
   orderCard: {
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     marginBottom: '5px',
     fontWeight: '600',
     fontSize: '1.2em',
-
   },
   main: {
     borderRadius: '5px',
@@ -74,14 +73,44 @@ const Card = (props) => {
     }
   }
 
+  const checked = (e, doc) => {
+    const id = e.currentTarget.value
+    if (doc.checked === undefined || doc.checked === false) {
+      db.collection("requests").doc(id).update({
+        checked: true
+      })
+        .then(function () {
+          console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+          console.error("Error updating document: ", error);
+        });
+    } else {
+      db.collection("requests").doc(id).update({
+        checked: false
+      })
+        .then(function () {
+          console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+          console.error("Error updating document: ", error);
+        });
+    }
+
+  }
 
   const requestList = props.request
   return requestList.map((doc, index) => {
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
-          {props.place === 'kitchen' ? <input type="checkbox" className={props.classInputCheck} />
-            : false}
+
+          {props.place === 'kitchen' ?
+            <input type="checkbox" value={doc.id} checked={doc.checked} onClick={(e) => {
+              checked(e, doc)
+            }} className={props.classInputCheck} />
+            : (false)
+          }
 
           <div>
             <p className={css(styles.paragraph)}>Cliente/Mesa</p>
@@ -89,7 +118,7 @@ const Card = (props) => {
           </div>
           <div>
             <p className={css(styles.paragraph)}>Atendente</p>
-            <p className={css(styles.paragraph)}>XXXXXX</p>
+            <p className={css(styles.paragraph)}>{doc.itemsList[0].attendantName}</p>
           </div>
           <div >
             {props.place === 'kitchen' ?
@@ -101,7 +130,6 @@ const Card = (props) => {
                 <p className={css(styles.paragraph)}>Preparo</p>
                 <p className={css(styles.paragraph)}>{doc.itemsList[0].time}</p>
               </>
-
             }
           </div>
         </header>
@@ -120,7 +148,6 @@ const Card = (props) => {
                   </div>
                 }
               </>
-
             )
           })
           }
