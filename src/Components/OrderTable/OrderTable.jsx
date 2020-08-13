@@ -89,10 +89,9 @@ const OrderTable = (props) => {
     if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
       return (
         doc.meatOption.map((opt, index) => {
-          const id = new Date().getTime()
           return (
             <span key={index} className={css(styles.block)}>
-              <label><input type="radio" value={opt} name={id}
+              <label><input type="radio" value={opt}
                 onClick={(e) => {
                   setMeatChoice(opt)
                   doc.clientMeatChoice = e.target.value

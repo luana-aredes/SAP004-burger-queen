@@ -16,16 +16,18 @@ Dois ambientes com funções diferentes:
 1.Salão: funcionários recebem os clientes, anotam e entregam os seus pedidos.</br>
 2.Cozinha: funcionários preparam os pedidos e sinalizam quando eles estão prontos. Os cozinheiros também desejam ter acesso a um histórico de todos os pedidos para eventuais consultas. 
 
-### Menu do restaurante
+### Menu do restaurante:
 O restaurante possui dois menus: um com itens de ___café-da-manhã___ e outro com itens para o ___restante do dia___. 
 Apesar de serem categorias diferentes, o cliente pode escolher itens das duas categorias em um mesmo pedido. Uma informação importante repassada pelo restaurante é que os clientes são bastante indecisos, sendo comum mudarem o pedido várias vezes antes de finalizar. Isso foi levado em consideração durante o desenvolvimento. 
 
 
-## 3. Desenho do Produto e Histórias de Usuário
-A aplicação foi desenvolvida orientada pelas seguintes histórias de usuário:
+## 3. Desenho do Produto
 
-**Histórias de Usuário 1:** 
-Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.</br>
+A interface do app foi planejada para atender as seguintes necessidades de usuário:
+
+### 3.1 Histórias de Usuário
+
+**Histórias de Usuário 1:** Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.</br>
 **Solução:** o usuário deve se registrar no aplicativo usando e-mail e senha e especificar qual é seu local de trabalho (salão ou cozinha). A partir daí cada vez que o usuário loga ele é direcionado para o seu ambiente de trabalho. Abaixo segue uma imagem da tela de registro (esquerda) e login (direita) da versão tablet:
 
 ![Tela de registro e login](src/assets/reg-login.jpeg)
@@ -48,9 +50,14 @@ A partir do login, cada ambiente fornece acesso a páginas diferentes:
 **Histórias de Usuário 4:** Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá-los rapidamente aos clientes.</br>
 **Solução**:  página "Pedidos Prontos" recebe de forma síncrona os novos pedidos já preparados na cozinha. O funcionário pode marcar cada pedido como __"Pedido Entregue"__, e ele será excluído da lista de pedidos pendente para entrega visível na tela. 
 
+### 3.2 Prototipação:
+Durante o planejamento do projeto nós realizamos protótipos de baixa fidelidade e alta fidelidade, e os ajustes foram implementados a patir de consultas a potenciais usuários e de acordo com a nossa própria percepção. Os ajustes sempre ocorreram no sentido de melhorar a usabilidade e a experiência do usuário.
+![Protótipo de baixa fidelidade](src/assets/prototipo-low-quality.png)
+![Protótipo de alta fidelidade](src/assets/prototipo-high-quality.png)
 
 ## 4. Ferramentas utilizadas
 * [React](https://pt-br.reactjs.org/) - biblioteca Javascript para criar interfaces de usuário
+* [Aphrodite](https://github.com/Khan/aphrodite) - framework CSS-in-JS
 * [Node.js](https://nodejs.org/en/) - plataforma de desenvolvimento.
 * [VSCode](https://code.visualstudio.com/) - editor de texto
 * [NPM](https://www.npmjs.com/) - gerenciador de pacotes
