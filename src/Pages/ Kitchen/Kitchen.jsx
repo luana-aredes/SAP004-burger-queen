@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     borderRadius: '8px',
-    border: 'none',
-    padding: '10px',
     marginTop: '12px',
     marginBottom: '12px',
     fontSize: '1.2em',
@@ -51,65 +49,49 @@ const styles = StyleSheet.create({
   checkItem: {
     width: '23px',
     height: '23px',
+    marginRight: '10px'
   },
+  title: {
+    '@media (max-width: 500px)': {
+      fontSize: '1.4em'
+    }
+  }
 });
 
+//---------------
 const Kitchen = () => {
-  const [user, setUser] = useState(null)
   const [request, setRequest] = useState([])
-  const [id, setId] = useState()
 
   //Função que estava presente quando o firebase esgotou a cota
+  // React.useEffect(() => {
+  //   const request = async () => {
+  //     try {
+  //       const data = await db.collection('requests').get();
+  //       const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+  //       setRequest(arrayData)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   request()
+  // }, [])
+
 
   React.useEffect(() => {
-    const getDataBase = async () => {
+    const request = async () => {
       try {
-        const data = await db.collection('requests').get();
-        const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setRequest(arrayData)
-        console.log(request)
+        db.collection('requests').onSnapshot((snapshot) => {
+          console.log(snapshot)
+          const arrayData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+          setRequest(arrayData)
+        })
       } catch (error) {
         console.log(error)
       }
     }
-    getDataBase()
-  }, [id])
-
-  useEffect(() => {
-    setRequest(getDataBase())
+    request()
   }, [])
 
-  const getDataBase = async () => {
-    try {
-      const data = await db.collection('requests').get();
-      const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      return arrayData
-    } catch (error) {
-      return console.log(error)
-    }
-  }
-
-  //-----------------
-  //Tentando de outra forma:
-
-  // useEffect(() => {
-  //   db.collection('requests').get()
-  //     .then((snapshot) => {
-  //       snapshot.forEach((doc) => setRequest((current) => [...current, id: doc, doc.data()]));
-  //     });
-  // }, []);
-  //------------------------
-  //usando Mock como bd
-
-  // useEffect(() => {
-  //   getRequest()
-  // }, [request]);
-
-  // const getRequest = () => {
-  //   setRequest(mock)
-  // }
-
-  //---------------
 
   const sendToReadyRequestList = readyRequest => {
     //tratamento de then e catch
@@ -125,15 +107,19 @@ const Kitchen = () => {
     db.collection('requests').doc(requestID).delete();
   }
 
+
   const handleReadyRequest = (indexRequest, id) => {
-    // const readyRequest = request[indexRequest];
-    // sendToReadyRequestList(readyRequest)
-    // sendToHistoryOfRequests(readyRequest)
-    // deleteReadyRequest(id)
-    //Excluir da tela (precisa?)
-    // setRequest(request.splice(indexRequest, 1))
-    console.log(request)
-    // setRequest(request.splice(indexRequest, 1))
+    const readyRequest = request[indexRequest];
+    sendToReadyRequestList(readyRequest)
+    sendToHistoryOfRequests(readyRequest)
+    console.log(indexRequest, id)
+    deleteReadyRequest(id)
+
+
+    // request.splice(indexRequest, 1)
+    setRequest(request.filter((item) => {
+      return item.id !== id
+    }))
   };
 
   return (
@@ -145,7 +131,7 @@ const Kitchen = () => {
             src={require('../../assets/clock.png')}
             alt='Timer'
             className={css(styles.clock)} />
-          <h1>
+          <h1 className={css(styles.title)}>
             Pedidos Pendentes
           </h1>
         </div>

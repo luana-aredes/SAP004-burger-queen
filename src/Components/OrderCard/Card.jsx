@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, css } from 'aphrodite';
-
+import { db } from '../../config/firebase';
 
 const styles = StyleSheet.create({
   orderCard: {
@@ -11,6 +11,13 @@ const styles = StyleSheet.create({
     margin: '0.5%',
     padding: '15px',
     backgroundColor: '#C3846D',
+    '@media (max-width: 770px)': {
+      width: '90%',
+      margin: '5px auto'
+    },
+    '@media (max-width: 425px)': {
+      fontSize: '0.8em'
+    }
   },
   headerCard: {
     display: 'flex',
@@ -21,7 +28,6 @@ const styles = StyleSheet.create({
     marginBottom: '5px',
     fontWeight: '600',
     fontSize: '1.2em',
-
   },
   main: {
     borderRadius: '5px',
@@ -31,7 +37,8 @@ const styles = StyleSheet.create({
     height: '50%',
     display: 'flex',
     flexDirection: 'column',
-    fontSize: '1.4em'
+    fontSize: '1.4em',
+    paddingLeft: '10px'
   },
   footerCard: {
     display: 'flex',
@@ -65,15 +72,46 @@ const Card = (props) => {
     }
   }
 
+  const checked = (e, doc) => {
+    const id = e.currentTarget.value
+    if (doc.checked === undefined || doc.checked === false) {
+      db.collection("requests").doc(id).update({
+        checked: true
+      })
+        .then(function () {
+          console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+          console.error("Error updating document: ", error);
+        });
+    } else {
+      db.collection("requests").doc(id).update({
+        checked: false
+      })
+        .then(function () {
+          console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+          console.error("Error updating document: ", error);
+        });
+    }
+
+  }
 
   const requestList = props.request
+
+  console.log(requestList)
   return requestList.map((doc, index) => {
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
+
           {props.place === 'kitchen' ?
-            <input type="checkbox" className={props.classInputCheck} />
-            : false}
+            <input type="checkbox" value={doc.id} checked={doc.checked} onClick={(e) => {
+              checked(e, doc)
+            }} className={props.classInputCheck} />
+            : (false)
+          }
 
           <div>
             <p className={css(styles.paragraph)}>Cliente/Mesa</p>
@@ -81,7 +119,7 @@ const Card = (props) => {
           </div>
           <div>
             <p className={css(styles.paragraph)}>Atendente</p>
-            <p className={css(styles.paragraph)}>XXXXXX</p>
+            <p className={css(styles.paragraph)}>{doc.itemsList[0].attendantName}</p>
           </div>
           <div >
             {props.place === 'kitchen' ?
@@ -93,7 +131,6 @@ const Card = (props) => {
                 <p className={css(styles.paragraph)}>Preparo</p>
                 <p className={css(styles.paragraph)}>{doc.itemsList[0].time}</p>
               </>
-
             }
           </div>
         </header>
@@ -112,20 +149,19 @@ const Card = (props) => {
                   </div>
                 }
               </>
-
             )
           })
           }
         </main>
         <footer className={css(styles.footerCard)}>
-          <img src={require('../../assets/tick.png')} className={props.classImgCheck} />
+          <img src={require('../../assets/tick.png')} className={props.classImgCheck} alt='Checkbox' />
           <button
-            onClick={() => handleClick(index, 'doc.id')}
+            onClick={() => handleClick(index, doc.id)}
             className={props.classBtn}>
             {props.name}
           </button>
         </footer>
-      </section >
+      </section>
     )
   })
 }

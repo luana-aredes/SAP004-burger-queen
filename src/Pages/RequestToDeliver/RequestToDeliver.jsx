@@ -52,34 +52,54 @@ const styles = StyleSheet.create({
     width: '23px',
     height: '23px',
   },
+  title: {
+    '@media (max-width: 500px)': {
+      fontSize: '1.4em'
+    }
+  }
 });
 
 const RequestToDeliver = () => {
   const [readyRequest, setReadyRequest] = useState([])
 
-  //Função que estava presente quando o firebase esgotou a cota
+  // Função que estava presente quando o firebase esgotou a cota
 
-  //   React.useEffect(() => {
-  //     const request = async () => {
-  //       try {
-  //         const data = await db.collection('ready-requests').get();
-  //         const arrayData = data.docs.map(doc => doc.data());
-  //         setReadyRequest(arrayData)
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
+  // React.useEffect(() => {
+  //   const request = async () => {
+  //     try {
+  //       const data = await db.collection('ready-requests').get();
+  //       const arrayData = data.docs.map(doc => doc.data());
+  //       setReadyRequest(arrayData)
+  //       console.log(readyRequest)
+  //     } catch (error) {
+  //       console.log(error)
   //     }
-  //     request()
-  //   }, [setReadyRequest])
+  //   }
+  //   request()
+  // }, [])
+  React.useEffect(() => {
+    const request = async () => {
+      try {
+        db.collection('ready-requests').onSnapshot((snapshot) => {
+          console.log(snapshot)
+          const arrayData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+          setReadyRequest(arrayData)
+          console.log(readyRequest)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    request()
+  }, [])
 
+  // useEffect(() => {
+  //   getRequest()
+  // }, [readyRequest]);
 
-  useEffect(() => {
-    getRequest()
-  }, [readyRequest]);
-
-  const getRequest = () => {
-    setReadyRequest(mock)
-  }
+  // const getRequest = () => {
+  //   setReadyRequest(mock)
+  // }
 
   return (
     <>
@@ -90,7 +110,7 @@ const RequestToDeliver = () => {
             src={require('../../assets/tick.png')}
             alt='Timer'
             className={css(styles.clock)} />
-          <h1>
+          <h1 className={css(styles.title)}>
             Pedidos Prontos
           </h1>
         </div>

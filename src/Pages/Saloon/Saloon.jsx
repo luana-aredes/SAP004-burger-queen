@@ -97,61 +97,31 @@ const Saloon = () => {
   const [clientTable, setclientTable] = useState('')
   const [id, setId] = useState(0)
 
+  React.useEffect(() => {
+    const coffeeMenu = async () => {
+      try {
+        const data = await db.collection('coffee-menu').get()
+        const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        setCoffee(arrayData)
+        console.log(coffee)
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
-  // React.useEffect(() => {
-  //   const coffeeMenu = async () => {
-  //     try {
-  //       const data = await db.collection('coffee-menu').get()
-  //       const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-  //       setCoffee(arrayData)
-  //       console.log(`Estou no salão: ${coffee}`)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-
-  //   const allDayMenu = async () => {
-  //     try {
-  //       const data = await db.collection('all-day-menu').get()
-  //       const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-  //       setAllDay(arrayData)
-  //       console.log(`Estou no salão: ${allDay}`)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   allDayMenu()
-  //   coffeeMenu()
-  // }, [allDay, coffee, button])
-
-  //----------------------------------------
-
-  useEffect(() => {
-    allDayMenu()
+    const allDayMenu = async () => {
+      try {
+        const data = await db.collection('all-day-menu').get()
+        const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        setAllDay(arrayData)
+        console.log(allDay)
+      } catch (error) {
+        console.log(error)
+      }
+    }
     coffeeMenu()
-  }, [id])
-
-  const coffeeMenu = async () => {
-    try {
-      const data = await db.collection('coffee-menu').get()
-      const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-      setCoffee(arrayData)
-      console.log(`Estou no salão: ${coffee}`)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const allDayMenu = async () => {
-    try {
-      const data = await db.collection('all-day-menu').get()
-      const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-      setAllDay(arrayData)
-      console.log(`Estou no salão: ${allDay}`)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+    allDayMenu()
+  }, [])
 
 
   const saveOrderItem = newItem => {
@@ -162,6 +132,9 @@ const Saloon = () => {
   const addItemToOrder = (e, doc) => {
     const price = e.currentTarget.value;
     const item = e.currentTarget.title;
+    const name = db.collection("users").doc(auth.currentUser.uid).get().then((doc) => doc.data().Name)
+
+    console.log(name)
     saveOrderItem({
       item: item,
       price: price,
@@ -169,6 +142,7 @@ const Saloon = () => {
       quantity: 1,
       meatOption: doc.options,
       additional: doc.additional,
+      attendantName: name,
     });
   }
 
