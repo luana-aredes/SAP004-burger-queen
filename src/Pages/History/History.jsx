@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../../config/firebase';
 import Header from '../../Components/Header/Header';
 import Card from '../../Components/OrderCard/Card'
@@ -43,13 +43,12 @@ const RequestHistory = (props) => {
 
   //mock usado quando esgota a cota do firebase
 
-  React.useEffect(() => {
-    setReadyOrders(ReadyOrders)
-  }, [readyOrders])
+  // React.useEffect(() => {
+  //   setReadyOrders(ReadyOrders)
+  // }, [])
 
-  {/*
   //Função que estava presente quando o firebase esgotou a cota
-React.useEffect(() => {
+  useEffect(() => {
     const readyOrders = async () => {
       try {
         const data = await db.collection('history-request').get()
@@ -60,18 +59,16 @@ React.useEffect(() => {
       }
     }
     readyOrders()
-  }, [readyOrders])
-
-
-*/}
-
+  }, [])
 
 
   return (
     <>
       <Header place='kitchen' />
       <main >
-        <h1 className={css(styles.title)}> <img src={History} alt="History" className={css(styles.historyImg)} />  Histórico de Pedidos Prontos</h1>
+        <h1 className={css(styles.title)}>
+          <img src={History} alt="History" className={css(styles.historyImg)} />  Histórico de Pedidos Prontos
+        </h1>
         <div className={css(styles.main)}>
           <Card
             request={readyOrders}
