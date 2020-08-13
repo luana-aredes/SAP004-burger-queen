@@ -31,7 +31,7 @@ Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a te
 ![Tela de registro e login](src/assets/reg-login.jpeg)
 
 
-A partir do login, cada ambiente fornece acesso à páginas diferentes:
+A partir do login, cada ambiente fornece acesso a páginas diferentes:
 * ___Salão:___ acesso às páginas _"Salão"_ (registro dos pedidos dos clientes na comanda e envio para a cozinha) e _"Pedidos Prontos"_ (lista de pedidos já preparadas e na fila de espera para entrega). 
 
 * ___Cozinha___ : acesso às páginas _"Cozinha"_ (lista de pedidos a serem preparados) e _"Histórico"_ (lista para consulta de todos os pedidos preparados)
