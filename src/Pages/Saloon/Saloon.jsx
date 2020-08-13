@@ -115,6 +115,7 @@ const Saloon = () => {
         const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         setAllDay(arrayData)
         console.log(allDay)
+        console.log(allDay)
       } catch (error) {
         console.log(error)
       }
@@ -132,9 +133,7 @@ const Saloon = () => {
   const addItemToOrder = (e, doc) => {
     const price = e.currentTarget.value;
     const item = e.currentTarget.title;
-    const name = db.collection("users").doc(auth.currentUser.uid).get().then((doc) => doc.data().Name)
-
-    console.log(name)
+    //const name = db.collection("users").doc(auth.currentUser.uid).get().then((doc) => doc.data().Name)
     saveOrderItem({
       item: item,
       price: price,
@@ -142,7 +141,7 @@ const Saloon = () => {
       quantity: 1,
       meatOption: doc.options,
       additional: doc.additional,
-      attendantName: name,
+      //attendantName: name,
     });
   }
 

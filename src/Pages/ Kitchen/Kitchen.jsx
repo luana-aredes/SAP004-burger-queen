@@ -3,7 +3,6 @@ import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
 import Header from '../../Components/Header/Header';
 import { StyleSheet, css } from 'aphrodite';
-import mock from './mock'
 
 const styles = StyleSheet.create({
   cardsBox: {
@@ -35,6 +34,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     borderRadius: '8px',
+    border: 'none',
+    padding: '10px',
     marginTop: '12px',
     marginBottom: '12px',
     fontSize: '1.2em',
@@ -92,31 +93,17 @@ const Kitchen = () => {
     request()
   }, [])
 
+  const sendToReadyRequestList = readyRequest => db.collection('ready-requests').add(readyRequest);
 
-  const sendToReadyRequestList = readyRequest => {
-    //tratamento de then e catch
-    db.collection('ready-requests').add(readyRequest)
-  };
+  const sendToHistoryOfRequests = readyRequest => db.collection('history-request').add(readyRequest);
 
-  const sendToHistoryOfRequests = readyRequest => {
-    //tratamento de then e catch
-    db.collection('history-request').add(readyRequest)
-  };
+  const deleteReadyRequest = id => db.collection('requests').doc(id).delete();
 
-  const deleteReadyRequest = requestID => {
-    db.collection('requests').doc(requestID).delete();
-  }
-
-
-  const handleReadyRequest = (indexRequest, id) => {
+  const handleReadyRequest = (id, indexRequest) => {
     const readyRequest = request[indexRequest];
     sendToReadyRequestList(readyRequest)
     sendToHistoryOfRequests(readyRequest)
-    console.log(indexRequest, id)
     deleteReadyRequest(id)
-
-
-    // request.splice(indexRequest, 1)
     setRequest(request.filter((item) => {
       return item.id !== id
     }))
@@ -138,12 +125,12 @@ const Kitchen = () => {
         <div className={css(styles.cardsBox)}>
           <Card request={request}
             name={"Pedido Pronto"}
+            place='kitchen'
             handleReadyRequest={handleReadyRequest}
             classBtn={css(styles.styleBtn)}
             classInputCheck={css(styles.inputCheck)}
             classImgCheck={css(styles.none)}
             classInputCheckItem={css(styles.checkItem)}
-            place='kitchen'
           />
         </div>
       </main>

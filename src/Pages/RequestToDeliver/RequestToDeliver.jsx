@@ -3,7 +3,6 @@ import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
 import Header from '../../Components/Header/Header';
 import { StyleSheet, css } from 'aphrodite';
-import mock from './mock'
 
 const styles = StyleSheet.create({
   cardsBox: {
@@ -82,7 +81,7 @@ const RequestToDeliver = () => {
       try {
         db.collection('ready-requests').onSnapshot((snapshot) => {
           console.log(snapshot)
-          const arrayData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+          const arrayData = snapshot.docs.map(doc => ({ id2: doc.id, ...doc.data() }))
           setReadyRequest(arrayData)
           console.log(readyRequest)
         })
@@ -93,13 +92,14 @@ const RequestToDeliver = () => {
     request()
   }, [])
 
-  // useEffect(() => {
-  //   getRequest()
-  // }, [readyRequest]);
+  const deleteDeliveredRequest = id => db.collection('ready-requests').doc(id).delete();
 
-  // const getRequest = () => {
-  //   setReadyRequest(mock)
-  // }
+  const handleDeliveredRequest = (id) => {
+    deleteDeliveredRequest(id)
+    setReadyRequest(readyRequest.filter((item) => {
+      return item.id2 !== id
+    }))
+  };
 
   return (
     <>
@@ -116,6 +116,8 @@ const RequestToDeliver = () => {
         </div>
         <div className={css(styles.cardsBox)}>
           <Card request={readyRequest}
+            place='saloon'
+            handleDeliveredRequest={handleDeliveredRequest}
             name={"Pedido Entregue"}
             classBtn={css(styles.styleBtn)}
             classInputCheck={css(styles.inputCheck)}
