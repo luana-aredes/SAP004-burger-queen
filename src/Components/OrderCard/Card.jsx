@@ -76,7 +76,6 @@ const Card = (props) => {
 
 
   const requestList = props.request
-  console.log(requestList)
   return requestList.map((doc, index) => {
     return (
       <section className={css(styles.orderCard)}>

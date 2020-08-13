@@ -69,19 +69,21 @@ const OrderTable = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [sendStatus, setSendStatus] = useState('');
   const [meatChoice, setMeatChoice] = useState('');
+  const [requestList, setRequestList] = useState();
 
+  useEffect(() => {
+    getData()
+  })
 
   useEffect(() => {
     sumPriceOfItems(props.request)
   }, [props.request.length])
 
-  const deleteItemOnOrder = (itemsList, productIndex) => {
-    console.log(props.request)
-    console.log(productIndex)
-    console.log(props.request[productIndex])
-    itemsList.splice(productIndex, 1);
-  }
 
+
+  const getData = () => setRequestList(props.request)
+
+  const deleteItemOnOrder = (itemsList, productIndex) => setRequestList(itemsList.splice(productIndex, 1));
 
   const Options = (doc) => {
     if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
@@ -166,7 +168,6 @@ const OrderTable = (props) => {
     sumPriceOfItems(itemsList);
     addTimeStampToRequest(itemsList);
     addInfosClient(itemsList);
-    props.setRequest([])
   };
 
   const sendRequestToDataBase = (itemsList) => {
@@ -174,6 +175,7 @@ const OrderTable = (props) => {
     db.collection('requests').add({ itemsList })
       .then((doc) => {
         setSendStatus('Pedido enviado para a cozinha!')
+        props.setRequest([])
       })
       .catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
   };
