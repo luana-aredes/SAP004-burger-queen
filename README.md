@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Índice
+* [0. Link do projeto](#0.Link-do-projeto) 
+* [1. Resumo do Projeto](#1-Resumo-do-projeto)
+* [2. Histórias de Usuário](#3-Histórias-de-Usuário)
+* [3. Ferramentas utilizadas](#5-Ferramentas-utilizadas)
+* [4. Autoras](#6-Autoras)
+* [5. Créditos](#7-Creditos)
 
-## Available Scripts
 
-In the project directory, you can run:
+ ## 0.Link do projeto
+ :pushpin:  Clique [___ F A Z E R ___](https:) para acessar o webapp.
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 1. Resumo do Projeto :paperclip:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+O objetivo do projeto foi criar uma aplicação sob demanda para um restaurante de hambúrgueres. Esse estabelecimento está em expansão e necessita de uma interface que será usada para atendimento dos clientes e gerenciamento dos pedidos. Para isso a aplicação será utilizada tanto pelos funcionários que trabalham no salão fazendo e entregando pedidos aos clientes como pela cozinha, setor responsável por receber e preparar os pedidos vindos do salão. Os funcionários trabalharão utilizando um tablet, e deve haver um fluxo ordenado e eficiente entre os pedidos realizados, preparados e entregues ao cliente. A lógica do projeto foi implementada em Javascript usando a biblioteca React. Trata-se de um aplicativo web executado para ser rodado especificamente em tablets, mas que se adapta bem a dispositivos de outros tamanhos, se necessário. 
 
-### `npm test`
+Abaixo segue algumas informações importantes sobre o restaurante e levadas em consideração durante o planejamento e execução do projeto:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### Ambientes do estabelecimento:
+1.Salão: funcionários recebem os clientes, anotam e entregam os seus pedidos.
+2.Cozinha: funcionários preparam os pedidos e sinalizam quando eles estão prontos. Os cozinheiros também desejam ter acesso a um histórico de todos os pedidos para eventuais consultas. 
 
-### `npm run build`
+##### Menu
+O restaurante possui dois menus: um com itens de café-da-manhã e outro com itens para o restante do dia. Apesar de serem categorias diferentes, o cliente pode escolher itens das duas categorias em um mesmo pedido. Uma informação importante repassada pelo restaurante é que os clientes são bastante indecisos, sendo comum mudarem o pedido várias vezes antes de finalizar. Isso foi levado em consideração durante o desenvolvimento. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 2. Histórias de Usuário 	:girl:
+A aplicação foi desenvolvida orientada pelas seguintes histórias de usuário:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Histórias de Usuário1:** Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.
+**Solução:** o usuário deve se registrar no aplicativo usando e-mail e senha e especificar qual é seu local de trabalho (salão e cozinha). A partir daí cada vez que o usuário loga ele é direcionado para o seu ambiente de trabalho:
+* _Salão:_ acesso às páginas "Salão" (registro dos pedidos dos clientes na comanda e envio para a cozinha) e "Pedidos Prontos" (lista de pedidos já preparadas e na fila de espera para entrega). 
+* _Cozinha_ : acesso às páginas "Cozinha" (lista de pedidos a serem preparados) e "Histórico" (lista de todos os pedidos para consulta)
 
-### `npm run eject`
+![Tela de registro e login](src/assets/reg-login.jpeg)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Histórias de Usuário2:** Eu como garçom/garçonete quero poder anotar o pedido dos clientes e enviar para o preparo na cozinha. 
+**Solução:** página "Salão" dá acesso à comanda de pedidos, onde o funcionário deve adicionar as informações do cliente (nome e mesa), dos itens e da dquantidade dos itens escolhidos pelos clientes. Também pode visualizar o preço do pedido. O pedido pronto é enviado para a cozinha quando solicitado por ele. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+FOTO DO SALÃO COM INFOS PREENCHIDAS
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Histórias de Usuário3:** Eu como chefe de cozinha quero ver os pedidos dos clientes, marcar os pedidos prontos e notificar o salão para a entrega.
+**Solução**:  página "Cozinha" recebe de forma síncrona os novos pedidos realizados no salão, com o horário do pedido registrado. É possível ter maior controle sobre quais itens de cada pedido já foram preparados checando cada um deles. É possível também sinalizar quais pedidos da lista já estão em preparação, a fim de evitar a execução do mesmo pedido por cozinheiros diferentes, caso haja. Após a finalização do preparo, o cozinheiro pode marcar o pedido como __"Pedido Pronto"__, e ele será excluído da lista visível na tela. Já a página "Histórico" dá acesso ao cozinheiro a todos os pedidos finalizados, incluindo o tempo de preparo de cada um deles.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+FOTO DA COZINHA E DO HISTORICO
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+**Histórias de Usuário4:** Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá-los rapidamente aos clientes.
+**Solução**:  página "Pedidos Prontos" recebe de forma síncrona os novos pedidos já preparados na cozinha. O funcionário pode marcar cada pedido como __"Pedido Entregue"__, e ele será excluído da lista visível na tela. 
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## 3. Ferramentas utilizadas :wrench:
+* [React](https://pt-br.reactjs.org/) - biblioteca Javascript para criar interfaces de usuário
+* [Node.js](https://nodejs.org/en/) - plataforma de desenvolvimento.
+* [VSCode](https://code.visualstudio.com/) - editor de texto
+* [NPM](https://www.npmjs.com/) - gerenciador de pacotes
+* [Jest](https://jestjs.io/pt-BR/) - framework de testes unitários
+* [Figma](https://www.figma.com/) e [MarvelApp] (https://marvelapp.com/) - plataforma de prototipagem
+* [Trello](https://trello.com/pt-BR) - gerenciador de projeto
 
-### Making a Progressive Web App
+## 4. Autoras :email:
+Luana Arêdes
+Nathalia Monalisa Francisco
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## 5. Créditos:
+* Ícones: [FlatIcon](https://www.flaticon.com/)
