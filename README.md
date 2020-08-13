@@ -68,8 +68,9 @@ A partir do login, cada ambiente fornece acesso à páginas diferentes:
 * [Figma](https://www.figma.com/) e [MarvelApp] (https://marvelapp.com/) - plataforma de prototipagem
 * [Trello](https://trello.com/pt-BR) - gerenciador de projeto
 
-## 4. Autoras :email:
-Luana Arêdes
+## 4. Autoras:
+Trabalho desenvolvido durante o bootcamp de programação front-end da Laboratória (SAP004) por:
+Luana Arêdes</br>
 Nathalia Monalisa Francisco
 
 ## 5. Créditos:
