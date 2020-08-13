@@ -59,8 +59,8 @@ A partir do login, cada ambiente fornece acesso a páginas diferentes:
 
 ## 5. Autoras
 Trabalho desenvolvido durante o bootcamp de programação front-end da Laboratória (SAP004) por:
-Luana Arêdes</br>
-Nathalia Monalisa Francisco
+* Luana Arêdes
+* Nathalia Monalisa Francisco
 
 ## 6. Créditos:
 * Ícones: [FlatIcon](https://www.flaticon.com/)
