@@ -75,7 +75,12 @@ const OrderTable = (props) => {
     sumPriceOfItems(props.request)
   }, [props.request.length])
 
-  const deleteItemOnOrder = (itemsList, productIndex) => itemsList.splice(productIndex, 1);
+  const deleteItemOnOrder = (itemsList, productIndex) => {
+    console.log(props.request)
+    console.log(productIndex)
+    console.log(props.request[productIndex])
+    itemsList.splice(productIndex, 1);
+  }
 
 
   const Options = (doc) => {
@@ -157,21 +162,11 @@ const OrderTable = (props) => {
 
   const addTimeStampToRequest = itemsList => itemsList.map(item => item.time = new Date().toLocaleTimeString());
 
-  const clearTable = {
-    item: "",
-    price: "",
-    totalPriceItem: "",
-    quantity: "",
-    meatOption: "",
-    additional: "",
-  }
-
   const validateAndSendRequest = itemsList => {
     sumPriceOfItems(itemsList);
     addTimeStampToRequest(itemsList);
     addInfosClient(itemsList);
     props.setRequest([])
-    console.log(itemsList);
   };
 
   const sendRequestToDataBase = (itemsList) => {
@@ -197,7 +192,6 @@ const OrderTable = (props) => {
 
 
   const list = props.request
-
   return (
     <table >
       <div className={css(styles.scroll)}>
