@@ -6,7 +6,7 @@
 
 O objetivo do projeto foi criar uma aplicação sob demanda para um restaurante de hambúrgueres. Esse estabelecimento está em expansão e necessita de uma interface que será usada para atendimento dos clientes e gerenciamento dos pedidos. Para isso a aplicação será utilizada tanto pelos funcionários que trabalham fazendo e entregando pedidos aos clientes como por funcionários que prepararam os pedidos na cozinha. Os funcionários trabalharão utilizando um tablet, e deve haver um fluxo ordenado e eficiente entre pedidos realizados, preparados e entregues ao cliente. 
 
-A lógica do projeto foi implementada em Javascript usando a biblioteca React. Trata-se de um aplicativo web executado para ser rodado especificamente em tablets, mas que se adapta bem a dispositivos de outros tamanhos. 
+A lógica do projeto foi implementada em Javascript usando a biblioteca React e o framework Aphrodite para CCS-in-JS. Trata-se de um aplicativo web executado para ser rodado especificamente em tablets, mas que se adapta bem a dispositivos de outros tamanhos. 
 
 Abaixo segue algumas informações importantes sobre o restaurante e que foram levadas em consideração durante o planejamento e execução do projeto:
 
@@ -50,9 +50,14 @@ A partir do login, cada ambiente fornece acesso a páginas diferentes:
 **Histórias de Usuário 4:** Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá-los rapidamente aos clientes.</br>
 **Solução**:  página "Pedidos Prontos" recebe de forma síncrona os novos pedidos já preparados na cozinha. O funcionário pode marcar cada pedido como __"Pedido Entregue"__, e ele será excluído da lista de pedidos pendente para entrega visível na tela. 
 
-### 3.2 Prototipação:
-Durante o planejamento do projeto nós realizamos protótipos de baixa fidelidade e alta fidelidade, e os ajustes foram implementados a patir de consultas a potenciais usuários e de acordo com a nossa própria percepção. Os ajustes sempre ocorreram no sentido de melhorar a usabilidade e a experiência do usuário.
+### 3.2 Prototipação
+
+Durante o planejamento do projeto nós realizamos protótipos de baixa e alta fidelidade. Ajustes em relação à concepção inicial da interface foram implementados a partir de consultas a potenciais usuários e de acordo com a nossa própria percepção, sempre com o objetivo de melhorar a usabilidade e a experiência do usuário.
+
+
 ![Protótipo de baixa fidelidade](src/assets/prototipo-low-quality.png)
+
+
 ![Protótipo de alta fidelidade](src/assets/prototipo-high-quality.png)
 
 ## 4. Ferramentas utilizadas
