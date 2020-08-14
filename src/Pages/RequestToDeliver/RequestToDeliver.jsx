@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
 import Header from '../../Components/Header/Header';
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   checkItem: {
     width: '23px',
     height: '23px',
-    marginRight: '10px'
   },
   title: {
     '@media (max-width: 500px)': {
@@ -59,15 +58,32 @@ const styles = StyleSheet.create({
   }
 });
 
-const Kitchen = () => {
-  const [request, setRequest] = useState([])
+const RequestToDeliver = () => {
+  const [readyRequest, setReadyRequest] = useState([])
 
+  // Função que estava presente quando o firebase esgotou a cota
+
+  // React.useEffect(() => {
+  //   const request = async () => {
+  //     try {
+  //       const data = await db.collection('ready-requests').get();
+  //       const arrayData = data.docs.map(doc => doc.data());
+  //       setReadyRequest(arrayData)
+  //       console.log(readyRequest)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   request()
+  // }, [])
   React.useEffect(() => {
     const request = async () => {
       try {
-        db.collection('requests').onSnapshot((snapshot) => {
-          const arrayData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-          setRequest(arrayData)
+        db.collection('ready-requests').onSnapshot((snapshot) => {
+          console.log(snapshot)
+          const arrayData = snapshot.docs.map(doc => ({ id2: doc.id, ...doc.data() }))
+          setReadyRequest(arrayData)
+          console.log(readyRequest)
         })
       } catch (error) {
         console.log(error)
@@ -76,40 +92,33 @@ const Kitchen = () => {
     request()
   }, [])
 
-  const sendToReadyRequestList = readyRequest => db.collection('ready-requests').add(readyRequest);
+  const deleteDeliveredRequest = id => db.collection('ready-requests').doc(id).delete();
 
-  const sendToHistoryOfRequests = readyRequest => db.collection('history-request').add(readyRequest);
-
-  const deleteReadyRequest = id => db.collection('requests').doc(id).delete();
-
-  const handleReadyRequest = (id, indexRequest, doc) => {
-    const readyRequest = request[indexRequest];
-    sendToReadyRequestList(readyRequest)
-    sendToHistoryOfRequests(readyRequest)
-    deleteReadyRequest(id)
-    setRequest(request.filter((item) => {
-      return item.id !== id
+  const handleDeliveredRequest = (id) => {
+    deleteDeliveredRequest(id)
+    setReadyRequest(readyRequest.filter((item) => {
+      return item.id2 !== id
     }))
   };
 
   return (
     <>
-      <Header place={'kitchen'} />
+      <Header />
       <main>
         <div className={css(styles.titleBox)} >
           <img
-            src={require('../../assets/clock.png')}
+            src={require('../../assets/tick.png')}
             alt='Timer'
             className={css(styles.clock)} />
           <h1 className={css(styles.title)}>
-            Pedidos Pendentes
+            Pedidos Prontos
           </h1>
         </div>
         <div className={css(styles.cardsBox)}>
-          <Card request={request}
-            name={"Pedido Pronto"}
-            place='kitchen'
-            handleReadyRequest={handleReadyRequest}
+          <Card request={readyRequest}
+            place='saloon'
+            handleDeliveredRequest={handleDeliveredRequest}
+            name={"Pedido Entregue"}
             classBtn={css(styles.styleBtn)}
             classInputCheck={css(styles.inputCheck)}
             classImgCheck={css(styles.none)}
@@ -121,5 +130,9 @@ const Kitchen = () => {
   )
 }
 
-export default Kitchen
+export default RequestToDeliver;
+
+
+
+
 

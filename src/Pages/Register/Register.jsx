@@ -35,10 +35,10 @@ const Form = (props) => {
     register();
   }
 
+
   const register = React.useCallback(async () => {
     try {
       const loginData = await auth.createUserWithEmailAndPassword(email, pass)
-      console.log(loginData.user)
       await db.collection('users').doc(loginData.user.uid).set({
         Name: name,
         email: email,
@@ -89,11 +89,9 @@ const Form = (props) => {
                 <option value='Salão' > Salão </option>
               </select>
             </div>
-            <Link to={`/login`} >
-              <Button handleCLick={createRegister}
-                name='Registrar'
-                class={css(styles.red)} />
-            </Link>
+            <Button handleCLick={createRegister}
+              name='Registrar'
+              class={css(styles.red)} />
           </fieldset>
           {error ? (
             <div className={css(styles.alertError)}>
@@ -102,6 +100,11 @@ const Form = (props) => {
           ) : null
           }
         </form>
+        <p className={css(styles.linkLogin)}>
+          <Link className={css(styles.yellowFont)} to='/'>
+            Logar
+          </Link>
+        </p>
       </section>
     </main >
   )

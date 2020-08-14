@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
     color: '#E5E5E5',
     fontWeight: 'bold',
     textDecoration: 'none',
-    marginLeft: '10px',
-
+    marginLeft: '20px',
   },
   logotypeBtn: {
     width: '80px',
@@ -26,23 +25,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#8E3712',
-    paddingTop: '5px',
-    '@media (max-width: 600px)': {
+    padding: '5px',
+    '@media (max-width: 500px)': {
       justifyContent: 'center',
     }
   },
   navbarLinks: {
     display: 'flex',
+    width: '80%',
     alignItems: 'center',
     '@media (max-width: 600px)': {
-      fontSize: '0.8em'
+      fontSize: '0.8em',
+    },
+    '@media (min-width: 650px)': {
+      justifyContent: 'flex-end'
     }
   }
 });
 
 const Header = (props) => {
   return (
-    <header className={css(styles.container)}>
+    <header>
       <nav className={css(styles.navbar)}>
         <figure>
           <img className={css(styles.logotypeBtn)}
@@ -64,7 +67,7 @@ const Header = (props) => {
                 to='/saloon'>Salão
               </Link>
               <Link className={css(styles.deliveryList)}
-                to='/delivery'>Pedidos prontos
+                to='/requestToDeliver'>Pedidos prontos
               </Link>
             </>
           }

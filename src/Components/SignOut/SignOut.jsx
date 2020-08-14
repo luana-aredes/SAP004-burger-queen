@@ -25,15 +25,14 @@ const SignOut = (props) => {
     });
   }
 
-  return ( <
-    figure >
-    <
-    img className = { css(styles.logoutBtn) }
-    src = { LogOut }
-    alt = "Sair"
-    onClick = { signOut }
-    /> < /
-    figure >
+  return (
+    <figure >
+      <img className={css(styles.logoutBtn)}
+        src={LogOut}
+        alt="Sair"
+        onClick={signOut}
+      />
+    </figure >
   )
 }
 

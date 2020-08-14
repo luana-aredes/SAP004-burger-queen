@@ -11,19 +11,29 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    fontSize: '1.3em'
+    fontSize: '2.0em',
+    marginTop: '0px',
+    marginBottom: '25px',
+    '@media (min-width: 350px)': {
+      fontSize: '1.0em'
+    },
+    '@media (min-width: 1024px)': {
+      fontSize: '1.3em'
+    },
   },
   tableNumber: {
     backgroundColor: 'red'
   },
   displayFlex: {
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'space-between',
   }
 });
 
 const OrderSheet = (props) => {
   const [clientName, setClientName] = useState();
   const [tableNumber, setTableNumber] = useState();
+
 
   useEffect(() => {
     props.handleInputClientName(clientName)

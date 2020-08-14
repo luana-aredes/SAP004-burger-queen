@@ -5,48 +5,32 @@ import Login from './Pages/Login/Login.jsx';
 import Saloon from './Pages/Saloon/Saloon.jsx';
 import Kitchen from './Pages/ Kitchen/Kitchen';
 import RequestHistory from './Pages/History/History.jsx'
-import Delivery from './Pages/Delivery/Delivery'
+import RequestToDeliver from './Pages/RequestToDeliver/RequestToDeliver'
 
 const App = () => {
 
-  return ( <
-    Router >
-    <
-    Switch >
-    <
-    Route path = "/"
-    exact >
-    <
-    Login / >
-    <
-    /Route> <
-    Route path = "/register" >
-    <
-    Register / >
-    <
-    /Route> <
-    Route path = "/saloon" >
-    <
-    Saloon / >
-    <
-    /Route> <
-    Route path = "/kitchen" >
-    <
-    Kitchen / >
-    <
-    /Route> <
-    Route path = "/requestHistory" >
-    <
-    RequestHistory / >
-    <
-    /Route> <
-    Route path = "/delivery" >
-    <
-    Delivery / >
-    <
-    /Route> < /
-    Switch > <
-    /Router>
+  return (<Router>
+    <Switch>
+      <Route path="/"
+        exact >
+        <Login />
+      </Route>
+      <Route path="/register" >
+        <Register />
+      </Route> <Route path="/saloon" >
+        <Saloon />
+      </Route>
+      <Route path="/kitchen" >
+        <Kitchen />
+      </Route>
+      <Route path="/requestHistory">
+        <RequestHistory />
+      </Route>
+      <Route path="/requestToDeliver" >
+        <RequestToDeliver />
+      </Route>
+    </Switch >
+  </Router>
   )
 }
 
