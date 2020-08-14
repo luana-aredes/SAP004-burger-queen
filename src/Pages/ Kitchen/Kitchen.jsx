@@ -81,11 +81,12 @@ const Kitchen = () => {
   React.useEffect(() => {
     const request = async () => {
       try {
-        db.collection('requests').onSnapshot((snapshot) => {
-          console.log(snapshot)
-          const arrayData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-          setRequest(arrayData)
-        })
+        db.collection('requests')
+          .onSnapshot((snapshot) => {
+            console.log(snapshot)
+            const arrayData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+            setRequest(arrayData)
+          })
       } catch (error) {
         console.log(error)
       }

@@ -120,10 +120,11 @@ const OrderTable = (props) => {
         doc.additional.map((adc, index) => {
           return (
             <span key={index} className={css(styles.block)}>
-              <label><input type="checkbox" value={adc} name={adc}
-                onClick={e => { saveAdc(e, adc, doc) }}
-                checked={null}
-              />{adc}</label>
+              <label>
+                <input type="checkbox" value={adc} name={adc}
+                  onClick={e => { saveAdc(e, adc, doc) }}
+                  checked={null}
+                />{adc}</label>
             </span>
           )
         })

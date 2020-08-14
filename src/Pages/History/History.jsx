@@ -58,7 +58,7 @@ const RequestHistory = (props) => {
 
   //Função que estava presente quando o firebase esgotou a cota
   useEffect(() => {
-    const readyOrders = async () => {
+    const readyOrders = async() => {
       try {
         db.collection('history-request').onSnapshot((snapshot) => {
           console.log(snapshot)
@@ -74,24 +74,30 @@ const RequestHistory = (props) => {
   }, [])
 
 
-  return (
-    <>
-      <Header place='kitchen' />
-      <main >
-        <h1 className={css(styles.title)}>
-          <img src={History} alt="History" className={css(styles.historyImg)} />  Histórico de Pedidos Prontos
-        </h1>
-        <div className={css(styles.main)}>
-          <Card
-            request={readyOrders}
-            classBtn={css(styles.none)}
-            classImgCheck={css(styles.imgCheck)}
-          />
-        </div>
-      </main>
-    </>
+  return ( <
+    >
+    <
+    Header place = 'kitchen' / >
+    <
+    main >
+    <
+    h1 className = { css(styles.title) } >
+    <
+    img src = { History }
+    alt = "History"
+    className = { css(styles.historyImg) }
+    />  Histórico de Pedidos Prontos < /
+    h1 > <
+    div className = { css(styles.main) } >
+    <
+    Card request = { readyOrders }
+    classBtn = { css(styles.none) }
+    classImgCheck = { css(styles.imgCheck) }
+    /> < /
+    div > <
+    /main> < /
+    >
   )
 }
 
 export default RequestHistory
-

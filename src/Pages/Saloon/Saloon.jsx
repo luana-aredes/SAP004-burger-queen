@@ -7,7 +7,6 @@ import Header from '../../Components/Header/Header';
 import OrderTable from '../../Components/OrderTable/OrderTable'
 
 
-
 const styles = StyleSheet.create({
   btnMenu: {
     backgroundColor: '#F3E3CC',
