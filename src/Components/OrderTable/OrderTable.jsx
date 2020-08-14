@@ -10,31 +10,90 @@ const styles = StyleSheet.create({
     border: 'none',
     color: 'white',
     fontWeight: 'bold',
-    width: '25px',
-    height: '25px'
+    fontSize: '1.0em',
+    width: '35px',
+    height: '35px',
+    '@media (min-width: 350px)': {
+      width: '20px',
+      height: '20px',
+    },
+    '@media (min-width: 1024px)': {
+      width: '25px',
+      height: '25px'
+    },
   },
   deleteImg: {
-    width: '25px',
-    height: '25px'
+    width: '35px',
+    height: '35px',
+    '@media (min-width: 350px)': {
+      width: '15px',
+      height: '15px',
+    },
+    '@media (min-width: 1024px)': {
+      width: '25px',
+      height: '25px'
+    },
   },
   increaseBtn: {
     backgroundColor: '#37AE60',
     border: 'none',
     color: 'white',
     fontWeight: 'bold',
-    width: '25px',
-    height: '25px'
+    fontSize: '1.0em',
+    width: '35px',
+    height: '35px',
+    '@media (min-width: 350px)': {
+      width: '20px',
+      height: '20px',
+    },
+    '@media (min-width: 1024px)': {
+      width: '25px',
+      height: '25px'
+    },
   },
   quantifier: {
     border: 'none',
-    width: '25px',
-    height: '25px'
+    width: '35px',
+    height: '35px',
+    fontSize: '1.0em',
+    '@media (min-width: 350px)': {
+      width: '20px',
+      height: '20px',
+    },
+    '@media (min-width: 1024px)': {
+      width: '25px',
+      height: '25px'
+    },
   },
   fontRow: {
-    fontSize: '80%'
+    fontSize: '80%',
+    '@media (min-width: 1024px)': {
+      fontSize: '70%'
+    },
   },
-  columnWidth: {
-    width: '16%'
+  alignCenter: {
+    textAlign: 'center',
+    fontSize: '1.6em',
+    padding: '10px 0px',
+    '@media (min-width: 350px)': {
+      fontSize: '0.5em'
+    },
+    '@media (min-width: 1024px)': {
+      padding: '4px',
+      fontSize: '1.4em',
+      width: '15%'
+    },
+  },
+  alignLeft: {
+    textAlign: 'left',
+    fontSize: '1.4em',
+    padding: '10px 5px',
+    '@media (min-width: 350px)': {
+      fontSize: '0.8em'
+    },
+    '@media (min-width: 1024px)': {
+      padding: '4px'
+    },
   },
   block: {
     display: 'block'
@@ -46,23 +105,70 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: '20px',
     fontSize: '1.2em',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   sendDataBtn: {
     backgroundColor: 'green',
     color: 'white',
     border: 'none',
     padding: '7px 10px',
-    marginLeft: '30px',
+    marginRight: '15px',
     fontWeight: 'bold',
     fontSize: '1.1em',
-
   },
   scroll: {
-    height: '200px',
+    height: '480px',
     overflowY: 'scroll',
+    '@media (min-width: 350px)': {
+      width: '350px',
+      height: '200px'
+
+    },
+    '@media (min-width: 1028px)': {
+
+    },
+    '@media (min-width: 768px)': {
+      width: '580px',
+    },
+    '@media (min-width: 1025px)': {
+      height: '200px',
+      width: '580px',
+    },
   },
   tableColumn: {
-    width: '16%'
+    padding: '8px',
+    width: '15%',
+    '@media (min-width: 350px)': {
+      fontSize: '0.6em',
+      padding: '2px'
+    },
+    '@media (min-width: 1025px)': {
+      width: '15%'
+    },
+  },
+  thead: {
+    fontSize: '1.4em',
+    '@media (min-width: 1024px)': {
+      fontSize: '1.0em'
+    },
+  },
+  inputSize: {
+    width: '20px',
+    height: '20px',
+    marginBottom: '20px',
+    '@media (min-width: 350px)': {
+      marginBottom: '0px',
+      width: '10px',
+      height: '10px',
+    },
+    '@media (min-width: 1024px)': {
+      marginBottom: '5px'
+    },
+  },
+  optionsBurguer: {
+    display: 'flex'
   },
 })
 const OrderTable = (props) => {
@@ -91,7 +197,7 @@ const OrderTable = (props) => {
         doc.meatOption.map((opt, index) => {
           return (
             <span key={index} className={css(styles.block)}>
-              <label><input type="radio" value={opt}
+              <label className={css(styles.optionsBurguer)}><input className={css(styles.inputSize)} type="radio" value={opt}
                 onClick={(e) => {
                   setMeatChoice(opt)
                   doc.clientMeatChoice = e.target.value
@@ -120,7 +226,7 @@ const OrderTable = (props) => {
         doc.additional.map((adc, index) => {
           return (
             <span key={index} className={css(styles.block)}>
-              <label><input type="checkbox" value={adc} name={adc}
+              <label className={css(styles.optionsBurguer)}><input className={css(styles.inputSize)} type="checkbox" value={adc} name={adc}
                 onClick={e => { saveAdc(e, adc, doc) }}
                 checked={null}
               />{adc}</label>
@@ -196,7 +302,7 @@ const OrderTable = (props) => {
   return (
     <table >
       <div className={css(styles.scroll)}>
-        <thead >
+        <thead className={css(styles.thead)}>
           <tr >
             <th className={css(styles.tableColumn)}>Produtos</th>
             <th className={css(styles.tableColumn)}>Opções</th>
@@ -211,10 +317,10 @@ const OrderTable = (props) => {
             list.map((doc, index) => {
               return (
                 <tr className={css(styles.fontRow)} >
-                  <td className={css(styles.columnWidth)} > {doc.item} </td>
-                  <td className={css(styles.columnWidth)} > {Options(doc, index)} </td>
-                  <td className={css(styles.columnWidth)} > {AdditionalBurguer(doc, index)} </td>
-                  <td className={css(styles.columnWidth)} >
+                  <td className={css(styles.alignLeft)} > {doc.item} </td>
+                  <td className={css(styles.alignLeft)} > {Options(doc, index)} </td>
+                  <td className={css(styles.alignLeft)} > {AdditionalBurguer(doc, index)} </td>
+                  <td className={css(styles.alignCenter)} >
                     <button
                       className={css(styles.decreaseBtn)}
                       onClick={() => decreaseQuantityOfItem(list, index)} >
@@ -228,10 +334,14 @@ const OrderTable = (props) => {
                       +
                     </button>
                   </td>
-                  <td className={css(styles.columnWidth)} >
-                    R$ {doc.totalPriceItem}
+                  <td className={css(styles.alignCenter)} >
+                    <div className={css(styles.block)}>
+                      <div>R$</div>
+                      <div> {doc.totalPriceItem}</div>
+                    </div>
+
                   </td>
-                  <td className={css(styles.columnWidth)} >
+                  <td className={css(styles.alignCenter)} >
                     <img className={css(styles.deleteImg)}
                       onClick={() => deleteItemOnOrder(list, index)}
                       src={DeleteImg}
@@ -245,17 +355,19 @@ const OrderTable = (props) => {
       </div>
 
 
-      <tfoot className={css(styles.totalPrice)} >
-        <td>
-          TOTAL R$ {totalPrice.toFixed(2)}
-        </td>
-        <td>
-          <button
-            className={css(styles.sendDataBtn)}
-            onClick={() => validateAndSendRequest(list)} >
-            Enviar
+      <tfoot  >
+        <div className={css(styles.totalPrice)}>
+          <td>
+            TOTAL R$ {totalPrice.toFixed(2)}
+          </td>
+          <td>
+            <button
+              className={css(styles.sendDataBtn)}
+              onClick={() => validateAndSendRequest(list)} >
+              Enviar
 					</button>
-        </td>
+          </td>
+        </div>
       </tfoot>
       <p className={css(styles.statusRequestMessage)} >
         {sendStatus}

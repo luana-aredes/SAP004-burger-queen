@@ -3,6 +3,7 @@ import { db } from '../../config/firebase';
 import Card from '../../Components/OrderCard/Card';
 import Header from '../../Components/Header/Header';
 import { StyleSheet, css } from 'aphrodite';
+import moment from 'moment';
 
 const styles = StyleSheet.create({
   cardsBox: {
@@ -93,13 +94,32 @@ const Kitchen = () => {
     request()
   }, [])
 
+
+
+  // const getDiffTime = (doc) => {
+  //   console.log(doc.itemsList[0].time)
+  //   const horarioAtual = doc.itemsList[0].time
+  //   const horarioFinal = new Date().toLocaleTimeString()
+  //   const diffTime = ''
+  //   //manipulação essa diff
+  //   // var dtChegada = "16:40";
+  //   // var dtPartida = "11:20";
+
+  //   var ms = moment(horarioFinal, "HH:mm").diff(moment(horarioAtual, "HH:mm"));
+  //   var d = moment.duration(ms);
+  //   var s = Math.floor(d.asHours()) + "h" + moment.utc(ms).format(" mm") + "m";
+  //   console.log(s);
+  //   //request.duration = diffTime
+  // }
+
   const sendToReadyRequestList = readyRequest => db.collection('ready-requests').add(readyRequest);
 
   const sendToHistoryOfRequests = readyRequest => db.collection('history-request').add(readyRequest);
 
   const deleteReadyRequest = id => db.collection('requests').doc(id).delete();
 
-  const handleReadyRequest = (id, indexRequest) => {
+  const handleReadyRequest = (id, indexRequest, doc) => {
+    //getDiffTime(doc)
     const readyRequest = request[indexRequest];
     sendToReadyRequestList(readyRequest)
     sendToHistoryOfRequests(readyRequest)

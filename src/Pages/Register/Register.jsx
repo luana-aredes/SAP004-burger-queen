@@ -35,6 +35,7 @@ const Form = (props) => {
     register();
   }
 
+
   const register = React.useCallback(async () => {
     try {
       const loginData = await auth.createUserWithEmailAndPassword(email, pass)

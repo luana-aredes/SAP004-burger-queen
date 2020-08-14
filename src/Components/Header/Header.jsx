@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     color: '#E5E5E5',
     fontWeight: 'bold',
     textDecoration: 'none',
-    marginLeft: '20px'
+    marginLeft: '20px',
   },
   logotypeBtn: {
     width: '80px',
