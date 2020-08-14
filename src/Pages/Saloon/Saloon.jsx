@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { db, auth } from '../../config/firebase';
 import MenuBtn from '../../Components/MenuBtn/MenuBtn';
 import OrderHeader from '../../Components/OrderHeader/OrderHeader';
 import Header from '../../Components/Header/Header';
 import OrderTable from '../../Components/OrderTable/OrderTable'
-
-
 
 const styles = StyleSheet.create({
   btnMenu: {
@@ -101,7 +99,6 @@ const Saloon = () => {
   const [error, setError] = useState(null)
   const [clientName, setClientName] = useState('')
   const [clientTable, setclientTable] = useState('')
-  const [id, setId] = useState(0)
 
   React.useEffect(() => {
     const coffeeMenu = async () => {
@@ -109,7 +106,6 @@ const Saloon = () => {
         const data = await db.collection('coffee-menu').get()
         const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         setCoffee(arrayData)
-        console.log(coffee)
       } catch (error) {
         console.log(error)
       }
@@ -120,8 +116,6 @@ const Saloon = () => {
         const data = await db.collection('all-day-menu').get()
         const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         setAllDay(arrayData)
-        console.log(allDay)
-        console.log(allDay)
       } catch (error) {
         console.log(error)
       }
@@ -130,10 +124,8 @@ const Saloon = () => {
     allDayMenu()
   }, [])
 
-
   const saveOrderItem = newItem => {
     setRequest([...request, newItem])
-    console.log(request)
   };
 
   const getName = () => {
@@ -226,7 +218,6 @@ const Saloon = () => {
               )
           }
           </section>
-
         </section>
         <section className={css(styles.containerCommands)} >
           <OrderHeader handleInputClientName={getClientName}

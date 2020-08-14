@@ -185,8 +185,6 @@ const OrderTable = (props) => {
     sumPriceOfItems(props.request)
   }, [props.request.length])
 
-
-
   const getData = () => setRequestList(props.request)
 
   const deleteItemOnOrder = (itemsList, productIndex) => setRequestList(itemsList.splice(productIndex, 1));
@@ -236,7 +234,6 @@ const OrderTable = (props) => {
       )
     }
   }
-
 
   const increaseQuantityOfItem = (itemsList, productIndex) => {
     itemsList[productIndex].quantity += 1;
@@ -297,7 +294,6 @@ const OrderTable = (props) => {
     }
   };
 
-
   const list = props.request
   return (
     <table >
@@ -339,7 +335,6 @@ const OrderTable = (props) => {
                       <div>R$</div>
                       <div> {doc.totalPriceItem}</div>
                     </div>
-
                   </td>
                   <td className={css(styles.alignCenter)} >
                     <img className={css(styles.deleteImg)}
@@ -353,8 +348,6 @@ const OrderTable = (props) => {
           }
         </tbody>
       </div>
-
-
       <tfoot  >
         <div className={css(styles.totalPrice)}>
           <td>
