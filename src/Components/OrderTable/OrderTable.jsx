@@ -126,9 +126,6 @@ const styles = StyleSheet.create({
       height: '200px'
 
     },
-    '@media (min-width: 1028px)': {
-
-    },
     '@media (min-width: 768px)': {
       width: '580px',
     },
