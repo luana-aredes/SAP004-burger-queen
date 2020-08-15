@@ -7,7 +7,10 @@ const styles = StyleSheet.create({
     padding: '4px',
     fontSize: '1.1em',
     margin: '5px',
-    width: '45%'
+    width: '45%',
+    '@media (min-width: 1025px)': {
+      height: '30px'
+    },
   },
 });
 

@@ -104,14 +104,12 @@ const Card = (props) => {
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
-
           {props.place === 'kitchen' ?
             <input type="checkbox" value={doc.id} checked={doc.checked} onClick={(e) => {
               checked(e, doc)
             }} className={props.classInputCheck} />
             : (false)
           }
-
           <div>
             <p className={css(styles.paragraph)}>Cliente/Mesa</p>
             <p className={css(styles.paragraph)}>{`${doc.itemsList[0].clientName} - ${doc.itemsList[0].tableNumber}`}</p>

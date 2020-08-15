@@ -10,14 +10,15 @@ const styles = StyleSheet.create({
     color: '#E5E5E5',
     fontWeight: 'bold',
     textDecoration: 'none',
-    marginLeft: '20px'
+    marginLeft: '20px',
   },
   logotypeBtn: {
     width: '80px',
-    height: '40px',
-    '@media (max-width: 600px)': {
-      width: '50px'
-    }
+    height: '50px',
+    // '@media (max-width: 600px)': {
+    //   width: '80px',
+    //   height: '60px',
+    // }
   },
   navbar: {
     display: 'flex',
@@ -34,8 +35,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     width: '80%',
     alignItems: 'center',
-    '@media (max-width: 600px)': {
-      fontSize: '0.8em',
+    fontSize: '1.2em',
+    '@media (max-width: 450px)': {
+      fontSize: '1em',
     },
     '@media (min-width: 650px)': {
       justifyContent: 'flex-end'

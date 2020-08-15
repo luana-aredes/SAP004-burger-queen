@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   },
   grayFont: {
     color: '#E5E5E5',
+    fontSize: '1.5em'
   },
   yellowFont: {
     color: 'lightgray',
@@ -54,19 +55,21 @@ const styles = StyleSheet.create({
   },
   registerText: {
     textAlign: 'center',
-    fontSize: '20px',
+    fontSize: '1.7em',
     color: '#E5E5E5',
   },
   select: {
     width: '100%',
+    height: '45px',
     color: 'lightgray',
     border: '2px solid #E5B163',
     boxSizing: 'border-box',
     borderRadius: '10px',
     padding: '2%',
-    fontSize: '1rem',
+    fontSize: '1.0rem',
     backgroundColor: ' #4543B5;',
     margin: '15px auto',
+    outline: 'none'
   },
   alertError: {
     color: '#FF0000',

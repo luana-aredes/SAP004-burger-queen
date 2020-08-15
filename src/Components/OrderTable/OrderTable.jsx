@@ -10,34 +10,113 @@ const styles = StyleSheet.create({
     border: 'none',
     color: 'white',
     fontWeight: 'bold',
-    width: '25px',
-    height: '25px'
+    fontSize: '1.0em',
+    '@media (min-width: 350px)': {
+      width: '20px',
+      height: '20px',
+    },
+    '@media (min-width: 768px)': {
+      width: '30px',
+      height: '30px',
+    },
+    '@media (min-width: 1025px)': {
+      width: '35px',
+      height: '35px',
+    },
   },
   deleteImg: {
-    width: '25px',
-    height: '25px'
+    '@media (min-width: 350px)': {
+      width: '15px',
+      height: '15px',
+    },
+    '@media (min-width: 768px)': {
+      width: '33px',
+      height: '33px',
+    },
+    '@media (min-width: 1025px)': {
+      width: '30px',
+      height: '30px',
+    },
   },
   increaseBtn: {
     backgroundColor: '#37AE60',
     border: 'none',
     color: 'white',
     fontWeight: 'bold',
-    width: '25px',
-    height: '25px'
+    fontSize: '1.0em',
+    '@media (min-width: 350px)': {
+      width: '20px',
+      height: '20px',
+    },
+    '@media (min-width: 768px)': {
+      width: '30px',
+      height: '30px',
+    },
+    '@media (min-width: 1025px)': {
+      width: '35px',
+      height: '35px',
+    },
   },
   quantifier: {
     border: 'none',
-    width: '25px',
-    height: '25px'
+    '@media (min-width: 350px)': {
+      width: '20px',
+      height: '20px',
+      fontSize: '1em',
+    },
+    '@media (min-width: 768px)': {
+      fontSize: '1em',
+      width: '30px',
+      height: '30px',
+    },
+    '@media (min-width: 1025px)': {
+      fontSize: '1em',
+      width: '35px',
+      height: '35px',
+    },
   },
   fontRow: {
-    fontSize: '80%'
+    fontSize: '80%',
+    '@media (min-width: 1025px)': {
+      fontSize: '70%'
+    },
   },
-  columnWidth: {
-    width: '16%'
+  alignCenter: {
+    width: '15%',
+    textAlign: 'center',
+    padding: '10px 0px',
+    '@media (min-width: 350px)': {
+      fontSize: '1.2em'
+    },
+    '@media (min-width: 768px)': {
+      fontSize: '1.8em',
+    },
+    '@media (min-width: 1025px)': {
+      padding: '4px',
+    },
+  },
+  alignLeft: {
+    textAlign: 'left',
+    width: '15%',
+    padding: '10px 5px',
+    '@media (min-width: 350px)': {
+      fontSize: '1.2em'
+    },
+    '@media (min-width: 768px)': {
+      fontSize: '1.8em',
+    },
+    '@media (min-width: 1025px)': {
+      padding: '4px',
+    },
   },
   block: {
-    display: 'block'
+    display: 'block',
+    '@media (min-width: 350px)': {
+      fontSize: '0.8em'
+    },
+    '@media (min-width: 768px)': {
+      fontSize: '0.9em',
+    },
   },
   statusRequestMessage: {
     color: 'blue',
@@ -46,23 +125,87 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: '20px',
     fontSize: '1.2em',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   sendDataBtn: {
     backgroundColor: 'green',
     color: 'white',
     border: 'none',
     padding: '7px 10px',
-    marginLeft: '30px',
+    marginRight: '15px',
     fontWeight: 'bold',
     fontSize: '1.1em',
+    '@media (min-width: 1025px)': {
+      width: '150px',
+      marginRight: '60px'
+
+    }
 
   },
   scroll: {
-    height: '200px',
+    margin: '0px auto',
+    height: '480px',
+    paddingLeft: '8px',
     overflowY: 'scroll',
+    '@media (min-width: 350px)': {
+      width: '350px',
+      height: '200px'
+    },
+    '@media (min-width: 768px)': {
+      width: '580px',
+    },
+    '@media (min-width: 1025px)': {
+      height: '200px',
+      width: '760px'
+    },
   },
   tableColumn: {
-    width: '16%'
+    padding: '8px',
+    width: '15%',
+    '@media (min-width: 350px)': {
+      fontSize: '0.6em',
+      padding: '2px'
+    },
+    '@media (min-width: 768px)': {
+      fontSize: '0.9em',
+      padding: '0px'
+    },
+    '@media (min-width: 1025px)': {
+      fontSize: '1em',
+      width: '15%',
+    },
+  },
+  productColumn: {
+    padding: '7px',
+    textAlign: 'left'
+  },
+  thead: {
+    fontSize: '1.4em',
+    '@media (min-width: 1025px)': {
+      fontSize: '1.3em'
+    },
+  },
+  inputSize: {
+    width: '20px',
+    height: '20px',
+    '@media (min-width: 350px)': {
+      marginBottom: '0px',
+      width: '10px',
+      height: '10px',
+    },
+    '@media (min-width: 768px)': {
+      width: '20px',
+      height: '20px',
+      marginBottom: '20px',
+    },
+    '@media (min-width: 1025px)': {
+      marginBottom: '20px'
+    },
+  },
+  optionsBurguer: {
+    display: 'flex'
   },
 })
 const OrderTable = (props) => {
@@ -79,8 +222,6 @@ const OrderTable = (props) => {
     sumPriceOfItems(props.request)
   }, [props.request.length])
 
-
-
   const getData = () => setRequestList(props.request)
 
   const deleteItemOnOrder = (itemsList, productIndex) => setRequestList(itemsList.splice(productIndex, 1));
@@ -91,7 +232,7 @@ const OrderTable = (props) => {
         doc.meatOption.map((opt, index) => {
           return (
             <span key={index} className={css(styles.block)}>
-              <label><input type="radio" value={opt}
+              <label className={css(styles.optionsBurguer)}><input className={css(styles.inputSize)} type="radio" value={opt}
                 onClick={(e) => {
                   setMeatChoice(opt)
                   doc.clientMeatChoice = e.target.value
@@ -120,18 +261,16 @@ const OrderTable = (props) => {
         doc.additional.map((adc, index) => {
           return (
             <span key={index} className={css(styles.block)}>
-              <label>
-                <input type="checkbox" value={adc} name={adc}
-                  onClick={e => { saveAdc(e, adc, doc) }}
-                  checked={null}
-                />{adc}</label>
+              <label className={css(styles.optionsBurguer)}><input className={css(styles.inputSize)} type="checkbox" value={adc} name={adc}
+                onClick={e => { saveAdc(e, adc, doc) }}
+                checked={null}
+              />{adc}</label>
             </span>
           )
         })
       )
     }
   }
-
 
   const increaseQuantityOfItem = (itemsList, productIndex) => {
     itemsList[productIndex].quantity += 1;
@@ -192,14 +331,13 @@ const OrderTable = (props) => {
     }
   };
 
-
   const list = props.request
   return (
     <table >
       <div className={css(styles.scroll)}>
-        <thead >
+        <thead className={css(styles.thead)}>
           <tr >
-            <th className={css(styles.tableColumn)}>Produtos</th>
+            <th className={css(styles.productColumn, styles.tableColumn)}>Produtos</th>
             <th className={css(styles.tableColumn)}>Opções</th>
             <th className={css(styles.tableColumn)}>Adicional</th>
             <th className={css(styles.tableColumn)}>Quantidade</th>
@@ -212,10 +350,10 @@ const OrderTable = (props) => {
             list.map((doc, index) => {
               return (
                 <tr className={css(styles.fontRow)} >
-                  <td className={css(styles.columnWidth)} > {doc.item} </td>
-                  <td className={css(styles.columnWidth)} > {Options(doc, index)} </td>
-                  <td className={css(styles.columnWidth)} > {AdditionalBurguer(doc, index)} </td>
-                  <td className={css(styles.columnWidth)} >
+                  <td className={css(styles.alignLeft)} > {doc.item} </td>
+                  <td className={css(styles.alignLeft)} > {Options(doc, index)} </td>
+                  <td className={css(styles.alignLeft)} > {AdditionalBurguer(doc, index)} </td>
+                  <td className={css(styles.alignCenter)} >
                     <button
                       className={css(styles.decreaseBtn)}
                       onClick={() => decreaseQuantityOfItem(list, index)} >
@@ -229,10 +367,13 @@ const OrderTable = (props) => {
                       +
                     </button>
                   </td>
-                  <td className={css(styles.columnWidth)} >
-                    R$ {doc.totalPriceItem}
+                  <td className={css(styles.alignCenter)} >
+                    <div className={css(styles.block)}>
+                      <div>R$</div>
+                      <div> {doc.totalPriceItem}</div>
+                    </div>
                   </td>
-                  <td className={css(styles.columnWidth)} >
+                  <td className={css(styles.alignCenter)} >
                     <img className={css(styles.deleteImg)}
                       onClick={() => deleteItemOnOrder(list, index)}
                       src={DeleteImg}
@@ -244,19 +385,19 @@ const OrderTable = (props) => {
           }
         </tbody>
       </div>
-
-
-      <tfoot className={css(styles.totalPrice)} >
-        <td>
-          TOTAL R$ {totalPrice.toFixed(2)}
-        </td>
-        <td>
-          <button
-            className={css(styles.sendDataBtn)}
-            onClick={() => validateAndSendRequest(list)} >
-            Enviar
+      <tfoot  >
+        <div className={css(styles.totalPrice)}>
+          <td>
+            TOTAL R$ {totalPrice.toFixed(2)}
+          </td>
+          <td>
+            <button
+              className={css(styles.sendDataBtn)}
+              onClick={() => validateAndSendRequest(list)} >
+              Enviar
 					</button>
-        </td>
+          </td>
+        </div>
       </tfoot>
       <p className={css(styles.statusRequestMessage)} >
         {sendStatus}
