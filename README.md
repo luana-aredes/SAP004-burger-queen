@@ -1,5 +1,5 @@
 ## 1.Link do projeto
- :pushpin:  Clique [aqui] (https://burger-queen-f7f70.web.app) para acessar o webapp.
+ :pushpin:  Clique [aqui](https://burger-queen-f7f70.web.app) para acessar o webapp.
 
 
 ## 2. Resumo do Projeto
