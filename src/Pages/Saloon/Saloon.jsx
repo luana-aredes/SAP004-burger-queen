@@ -160,11 +160,14 @@ const Saloon = () => {
   const getClientName = inputedName => setClientName(inputedName);
   const getClientTable = inputedTable => setclientTable(inputedTable);
 
+  const cleanClientInfos = (callback) => {
+    callback()
+  }
+
   return (
     <>
       <header>
-        <Header
-        />
+        <Header />
       </header>
       <main className={css(styles.inlineBlock)} >
         <section className={css(styles.containerMenu)} >
@@ -227,13 +230,16 @@ const Saloon = () => {
           </section>
         </section>
         <section className={css(styles.containerCommands)} >
-          <OrderHeader handleInputClientName={getClientName}
+          <OrderHeader
+            handleInputClientName={getClientName}
             handleInputClientTable={getClientTable}
+            cleanClientInfos={cleanClientInfos}
           />
           <OrderTable request={request}
             setRequest={setRequest}
             clientName={clientName}
             clientTable={clientTable}
+            cleanClientInfos={cleanClientInfos}
           />
         </section>
       </main>

@@ -308,14 +308,15 @@ const OrderTable = (props) => {
     addTimeStampToRequest(itemsList);
     addInfosClient(itemsList);
   };
+  const SentDataSucessMessage = () => {
+    setSendStatus('PEDIDO ENVIADO PARA A COZINHA!')
+    setTimeout(() => setSendStatus(''), 2000)
+  };
 
   const sendRequestToDataBase = (itemsList) => {
     setSendStatus('Registrando pedido. Aguarde...');
     db.collection('requests').add({ itemsList })
-      .then((doc) => {
-        setSendStatus('Pedido enviado para a cozinha!')
-        props.setRequest([])
-      })
+      .then(() => SentDataSucessMessage())
       .catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
   };
 

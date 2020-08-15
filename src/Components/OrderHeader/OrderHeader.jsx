@@ -46,6 +46,12 @@ const OrderSheet = (props) => {
     props.handleInputClientTable(tableNumber)
   }, [tableNumber]);
 
+
+  const cleanInputs = () => {
+    setClientName('');
+    setTableNumber('');
+  }
+
   return (
     <main className={css(styles.container)}>
       <section className={css(styles.clientInfos)}>
