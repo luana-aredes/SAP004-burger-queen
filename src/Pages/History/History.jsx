@@ -74,4 +74,3 @@ const RequestHistory = (props) => {
 }
 
 export default RequestHistory
-

@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     '@media (min-width: 350px)': {
       fontSize: '1.0em'
     },
-    '@media (min-width: 1024px)': {
-      fontSize: '1.3em'
+    '@media (min-width: 1025px)': {
+      fontSize: '1.5em'
     },
   },
   tableNumber: {
@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
   displayFlex: {
     display: 'flex',
     justifyContent: 'space-between',
+    '@media (min-width: 768px)': {
+      marginTop: '55px'
+    },
   }
 });
 

@@ -14,8 +14,10 @@ const styles = StyleSheet.create({
     height: '70px',
     paddingLeft: '20px',
     paddingRight: '20px',
+    alignItems: 'center',
     display: 'flex',
     justifyContent: 'space-between',
+    alignContent: 'center',
     fontSize: '2.2em',
     '@media (max-width: 424px)': {
       fontSize: '1.2em'
@@ -23,9 +25,8 @@ const styles = StyleSheet.create({
     '@media (min-width: 760px)': {
       fontSize: '1.4em'
     },
-    '@media (min-width: 1024px)': {
-      fontSize: '1.0em',
-      height: '50px'
+    '@media (min-width: 1025px)': {
+      fontSize: '1.5em',
     }
   },
   btnMenuBackground: {
@@ -39,9 +40,8 @@ const styles = StyleSheet.create({
     '@media (min-width: 760px)': {
       fontSize: '0.7em'
     },
-    '@media (min-width: 1024px)': {
-      fontSize: '0.8em',
-      height: '35px'
+    '@media (min-width: 1025px)': {
+      fontSize: '1.3em',
     },
     fontWeight: 'bold'
   },
@@ -61,10 +61,11 @@ const styles = StyleSheet.create({
 
   },
   containerMenu: {
-    '@media (min-width: 425px)': {
+    '@media (min-width: 350px)': {
       width: '80%',
+      margin: '10px auto',
     },
-    '@media (min-width: 760px)': {
+    '@media (min-width: 1025px)': {
       width: '35%',
     },
     padding: '10px',
@@ -75,18 +76,24 @@ const styles = StyleSheet.create({
     '@media (min-width: 350px)': {
       width: '80%',
       padding: '0px',
+      margin: '10px auto',
     },
-    '@media (min-width: 760px)': {
+    '@media (min-width: 1025px)': {
       width: '60%',
     },
   },
   inlineBlock: {
-    '@media (min-width: 425px)': {
-      display: 'block',
-    },
-    '@media (min-width: 760px)': {
+    marginTop: '15px',
+    '@media (min-width: 350px)': {
       display: 'flex',
-      justifyContent: 'space-between'
+      flexDirection: 'column',
+    },
+
+    '@media (min-width:1024px)': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      padding: '5px 50px'
     },
   }
 })
@@ -154,12 +161,12 @@ const Saloon = () => {
   const getClientTable = inputedTable => setclientTable(inputedTable);
 
   return (
-    <main>
+    <>
       <header>
         <Header
         />
       </header>
-      <body className={css(styles.inlineBlock)} >
+      <main className={css(styles.inlineBlock)} >
         <section className={css(styles.containerMenu)} >
           <section className={css(styles.sectionButtons)} >
             <MenuBtn class={css(styles.btnAllDayAndCoffee, styles.btnCoffeeBackground)}
@@ -229,8 +236,8 @@ const Saloon = () => {
             clientTable={clientTable}
           />
         </section>
-      </body>
-    </main>
+      </main>
+    </>
   )
 }
 

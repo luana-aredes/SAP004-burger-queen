@@ -11,27 +11,31 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: '1.0em',
-    width: '35px',
-    height: '35px',
     '@media (min-width: 350px)': {
       width: '20px',
       height: '20px',
     },
-    '@media (min-width: 1024px)': {
-      width: '25px',
-      height: '25px'
+    '@media (min-width: 768px)': {
+      width: '30px',
+      height: '30px',
+    },
+    '@media (min-width: 1025px)': {
+      width: '35px',
+      height: '35px',
     },
   },
   deleteImg: {
-    width: '35px',
-    height: '35px',
     '@media (min-width: 350px)': {
       width: '15px',
       height: '15px',
     },
-    '@media (min-width: 1024px)': {
-      width: '25px',
-      height: '25px'
+    '@media (min-width: 768px)': {
+      width: '33px',
+      height: '33px',
+    },
+    '@media (min-width: 1025px)': {
+      width: '30px',
+      height: '30px',
     },
   },
   increaseBtn: {
@@ -40,63 +44,79 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: '1.0em',
-    width: '35px',
-    height: '35px',
     '@media (min-width: 350px)': {
       width: '20px',
       height: '20px',
     },
-    '@media (min-width: 1024px)': {
-      width: '25px',
-      height: '25px'
+    '@media (min-width: 768px)': {
+      width: '30px',
+      height: '30px',
+    },
+    '@media (min-width: 1025px)': {
+      width: '35px',
+      height: '35px',
     },
   },
   quantifier: {
     border: 'none',
-    width: '35px',
-    height: '35px',
-    fontSize: '1.0em',
     '@media (min-width: 350px)': {
       width: '20px',
       height: '20px',
+      fontSize: '1em',
     },
-    '@media (min-width: 1024px)': {
-      width: '25px',
-      height: '25px'
+    '@media (min-width: 768px)': {
+      fontSize: '1em',
+      width: '30px',
+      height: '30px',
+    },
+    '@media (min-width: 1025px)': {
+      fontSize: '1em',
+      width: '35px',
+      height: '35px',
     },
   },
   fontRow: {
     fontSize: '80%',
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 1025px)': {
       fontSize: '70%'
     },
   },
   alignCenter: {
+    width: '15%',
     textAlign: 'center',
-    fontSize: '1.6em',
     padding: '10px 0px',
     '@media (min-width: 350px)': {
-      fontSize: '0.5em'
+      fontSize: '1.2em'
     },
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 768px)': {
+      fontSize: '1.8em',
+    },
+    '@media (min-width: 1025px)': {
       padding: '4px',
-      fontSize: '1.4em',
-      width: '15%'
     },
   },
   alignLeft: {
     textAlign: 'left',
-    fontSize: '1.4em',
+    width: '15%',
     padding: '10px 5px',
     '@media (min-width: 350px)': {
-      fontSize: '0.8em'
+      fontSize: '1.2em'
     },
-    '@media (min-width: 1024px)': {
-      padding: '4px'
+    '@media (min-width: 768px)': {
+      fontSize: '1.8em',
+    },
+    '@media (min-width: 1025px)': {
+      padding: '4px',
     },
   },
   block: {
-    display: 'block'
+    display: 'block',
+    '@media (min-width: 350px)': {
+      fontSize: '0.8em'
+    },
+    '@media (min-width: 768px)': {
+      fontSize: '0.9em',
+    },
   },
   statusRequestMessage: {
     color: 'blue',
@@ -117,24 +137,28 @@ const styles = StyleSheet.create({
     marginRight: '15px',
     fontWeight: 'bold',
     fontSize: '1.1em',
+    '@media (min-width: 1025px)': {
+      width: '150px',
+      marginRight: '60px'
+
+    }
+
   },
   scroll: {
+    margin: '0px auto',
     height: '480px',
+    paddingLeft: '8px',
     overflowY: 'scroll',
     '@media (min-width: 350px)': {
       width: '350px',
       height: '200px'
-
-    },
-    '@media (min-width: 1028px)': {
-
     },
     '@media (min-width: 768px)': {
       width: '580px',
     },
     '@media (min-width: 1025px)': {
       height: '200px',
-      width: '580px',
+      width: '760px'
     },
   },
   tableColumn: {
@@ -144,27 +168,40 @@ const styles = StyleSheet.create({
       fontSize: '0.6em',
       padding: '2px'
     },
-    '@media (min-width: 1025px)': {
-      width: '15%'
+    '@media (min-width: 768px)': {
+      fontSize: '0.9em',
+      padding: '0px'
     },
+    '@media (min-width: 1025px)': {
+      fontSize: '1em',
+      width: '15%',
+    },
+  },
+  productColumn: {
+    padding: '7px',
+    textAlign: 'left'
   },
   thead: {
     fontSize: '1.4em',
-    '@media (min-width: 1024px)': {
-      fontSize: '1.0em'
+    '@media (min-width: 1025px)': {
+      fontSize: '1.3em'
     },
   },
   inputSize: {
     width: '20px',
     height: '20px',
-    marginBottom: '20px',
     '@media (min-width: 350px)': {
       marginBottom: '0px',
       width: '10px',
       height: '10px',
     },
-    '@media (min-width: 1024px)': {
-      marginBottom: '5px'
+    '@media (min-width: 768px)': {
+      width: '20px',
+      height: '20px',
+      marginBottom: '20px',
+    },
+    '@media (min-width: 1025px)': {
+      marginBottom: '20px'
     },
   },
   optionsBurguer: {
@@ -300,7 +337,7 @@ const OrderTable = (props) => {
       <div className={css(styles.scroll)}>
         <thead className={css(styles.thead)}>
           <tr >
-            <th className={css(styles.tableColumn)}>Produtos</th>
+            <th className={css(styles.productColumn, styles.tableColumn)}>Produtos</th>
             <th className={css(styles.tableColumn)}>Opções</th>
             <th className={css(styles.tableColumn)}>Adicional</th>
             <th className={css(styles.tableColumn)}>Quantidade</th>
