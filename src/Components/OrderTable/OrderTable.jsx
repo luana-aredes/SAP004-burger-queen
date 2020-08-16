@@ -262,7 +262,6 @@ const OrderTable = (props) => {
 
   }
 
-
   const includingAdditionalValue = (doc) => {
     if (doc.clientAddChoice) {
       doc.additionalPrice = parseInt(doc.clientAddChoice.length)

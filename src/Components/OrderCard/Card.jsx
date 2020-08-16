@@ -101,23 +101,10 @@ const Card = (props) => {
 
 
 
-  function ordemDecrescente(a, b) {
-    return a.time < b.time;
-  }
 
   const requestList = props.request
 
-  const order = () => {
-    console.log(requestList)
-    return requestList.sort(ordemDecrescente)
-
-  }
-  order()
-
-
-
   return requestList.map((doc, index) => {
-    console.log(doc)
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
@@ -150,7 +137,6 @@ const Card = (props) => {
         </header>
         <main className={css(styles.main)}>
           {doc.itemsList.map(item => {
-            console.log(item)
             return (
               <>
                 {
