@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
       height: '20px',
     },
     '@media (min-width: 768px)': {
-      width: '30px',
-      height: '30px',
+      width: '30%',
+      height: '30%',
     },
     '@media (min-width: 1025px)': {
       width: '35px',
@@ -25,6 +25,8 @@ const styles = StyleSheet.create({
     },
   },
   deleteImg: {
+    width: '30px',
+    height: '30px',
     '@media (min-width: 350px)': {
       width: '15px',
       height: '15px',
@@ -49,8 +51,8 @@ const styles = StyleSheet.create({
       height: '20px',
     },
     '@media (min-width: 768px)': {
-      width: '30px',
-      height: '30px',
+      width: '30%',
+      height: '30%',
     },
     '@media (min-width: 1025px)': {
       width: '35px',
@@ -66,8 +68,8 @@ const styles = StyleSheet.create({
     },
     '@media (min-width: 768px)': {
       fontSize: '1em',
-      width: '30px',
-      height: '30px',
+      width: '30%',
+      height: '30%',
     },
     '@media (min-width: 1025px)': {
       fontSize: '1em',
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
   },
   statusRequestMessage: {
     color: 'blue',
+    fontSize: '1.4em'
   },
   totalPrice: {
     fontWeight: 'bold',
@@ -208,6 +211,7 @@ const styles = StyleSheet.create({
     display: 'flex'
   },
 })
+
 const OrderTable = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [sendStatus, setSendStatus] = useState('');
@@ -244,6 +248,7 @@ const OrderTable = (props) => {
       )
     }
   };
+
   const saveAdc = (e, adc, doc) => {
     const newAdc = e.currentTarget.value;
     if (doc.clientAddChoice) {
@@ -253,16 +258,31 @@ const OrderTable = (props) => {
     } else {
       doc.clientAddChoice = [newAdc]
     }
+    includingAdditionalValue(doc)
+
   }
 
-  const AdditionalBurguer = (doc) => {
+
+  const includingAdditionalValue = (doc) => {
+    if (doc.clientAddChoice) {
+      doc.additionalPrice = parseInt(doc.clientAddChoice.length)
+      doc.totalPriceItem = ((doc.additionalPrice + parseFloat(doc.price)) * doc.quantity).toFixed(2);
+    } else {
+      doc.totalPriceItem = (parseFloat(doc.price) * doc.quantity).toFixed(2);
+    }
+    let summedPrice = 0
+    summedPrice += parseFloat(doc.totalPriceItem);
+    setTotalPrice(summedPrice)
+  }
+
+  const AdditionalBurguer = (doc, list) => {
     if (doc.item === 'Hamburguer simples' || doc.item === 'Hamburguer duplo') {
       return (
         doc.additional.map((adc, index) => {
           return (
             <span key={index} className={css(styles.block)}>
               <label className={css(styles.optionsBurguer)}><input className={css(styles.inputSize)} type="checkbox" value={adc} name={adc}
-                onClick={e => { saveAdc(e, adc, doc) }}
+                onClick={e => { saveAdc(e, adc, doc, list, index) }}
                 checked={null}
               />{adc}</label>
             </span>
@@ -280,7 +300,7 @@ const OrderTable = (props) => {
 
   const decreaseQuantityOfItem = (itemsList, productIndex) => {
     const product = itemsList[productIndex]
-    product.quantity > 0 ? product.quantity -= 1 : product.quantity = 0;
+    product.quantity > 1 ? product.quantity -= 1 : product.quantity = 1;
     totalPriceOfItem(itemsList, productIndex);
     sumPriceOfItems(itemsList)
   };
@@ -307,14 +327,20 @@ const OrderTable = (props) => {
     sumPriceOfItems(itemsList);
     addTimeStampToRequest(itemsList);
     addInfosClient(itemsList);
+
+  };
+  const SentDataSucessMessage = () => {
+    setSendStatus('PEDIDO ENVIADO PARA A COZINHA!')
+    setTimeout(() => setSendStatus(''), 2000)
   };
 
   const sendRequestToDataBase = (itemsList) => {
-    setSendStatus('Registrando pedido. Aguarde...');
+    setSendStatus('REGISTRANDO PEDIDO. AGUARDE...');
     db.collection('requests').add({ itemsList })
-      .then((doc) => {
-        setSendStatus('Pedido enviado para a cozinha!')
+      .then(() => {
+        SentDataSucessMessage()
         props.setRequest([])
+        props.cleanClientInfos()
       })
       .catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
   };
@@ -352,7 +378,7 @@ const OrderTable = (props) => {
                 <tr className={css(styles.fontRow)} >
                   <td className={css(styles.alignLeft)} > {doc.item} </td>
                   <td className={css(styles.alignLeft)} > {Options(doc, index)} </td>
-                  <td className={css(styles.alignLeft)} > {AdditionalBurguer(doc, index)} </td>
+                  <td className={css(styles.alignLeft)} > {AdditionalBurguer(doc)} </td>
                   <td className={css(styles.alignCenter)} >
                     <button
                       className={css(styles.decreaseBtn)}
@@ -407,6 +433,3 @@ const OrderTable = (props) => {
 };
 
 export default OrderTable;
-
-
-

@@ -13,6 +13,7 @@ import HomeImages from '../../Components/HomeImages/HomeImages';
 const Form = (props) => {
   const [email, setEmail] = React.useState('')
   const [pass, setPass] = React.useState('')
+  const [confirmationPassword, setConfirmationPassword] = React.useState('')
   const [name, setName] = React.useState('')
   const [sector, setSector] = React.useState('')
   const [error, setError] = React.useState(null)
@@ -38,18 +39,23 @@ const Form = (props) => {
 
   const register = React.useCallback(async () => {
     try {
-      const loginData = await auth.createUserWithEmailAndPassword(email, pass)
-      await db.collection('users').doc(loginData.user.uid).set({
-        Name: name,
-        email: email,
-        uid: loginData.user.uid,
-        Sector: sector
-      })
-      setEmail('')
-      setPass('')
-      setName('')
-      setError(null)
-      props.history.push('/')
+      if (pass === confirmationPassword) {
+        const loginData = await auth.createUserWithEmailAndPassword(email, pass)
+        await db.collection('users').doc(loginData.user.uid).set({
+          Name: name,
+          email: email,
+          uid: loginData.user.uid,
+          Sector: sector
+        })
+        setEmail('')
+        setPass('')
+        setConfirmationPassword('')
+        setName('')
+        setError(null)
+        props.history.push('/')
+      } else {
+        setError('As senhas não conferem, tente novamente!')
+      }
     } catch (error) {
       if (authMainErrors[error.code]) {
         setError(authMainErrors[error.code])
@@ -57,7 +63,7 @@ const Form = (props) => {
         (setError('Ocorreu um erro. Tente novamente'))
       }
     }
-  }, [email, pass, name, sector, props.history])
+  }, [email, pass, confirmationPassword, name, sector, props.history])
 
   return (
     <main className={css(styles.pageContainer)} >
@@ -77,8 +83,12 @@ const Form = (props) => {
               placeholder='E-mail' />
             <Input onChange={e => (setPass(e.target.value))}
               value={pass}
-              type='text'
+              type='password'
               placeholder='Senha' />
+            <Input onChange={e => (setConfirmationPassword(e.target.value))}
+              value={confirmationPassword}
+              type='password'
+              placeholder='Confirme a senha' />
             <div >
               <label className={css(styles.grayFont)} > Em qual setor você trabalha ? </label>
               <select className={css(styles.select)}
