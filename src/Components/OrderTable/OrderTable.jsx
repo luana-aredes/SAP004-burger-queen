@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
       height: '20px',
     },
     '@media (min-width: 768px)': {
-      width: '30px',
-      height: '30px',
+      width: '30%',
+      height: '30%',
     },
     '@media (min-width: 1025px)': {
       width: '35px',
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
       height: '20px',
     },
     '@media (min-width: 768px)': {
-      width: '30px',
-      height: '30px',
+      width: '30%',
+      height: '30%',
     },
     '@media (min-width: 1025px)': {
       width: '35px',
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     },
     '@media (min-width: 768px)': {
       fontSize: '1em',
-      width: '30px',
-      height: '30px',
+      width: '30%',
+      height: '30%',
     },
     '@media (min-width: 1025px)': {
       fontSize: '1em',
