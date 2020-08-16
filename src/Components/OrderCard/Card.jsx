@@ -99,8 +99,25 @@ const Card = (props) => {
 
   }
 
+
+
+  function ordemDecrescente(a, b) {
+    return a.time < b.time;
+  }
+
   const requestList = props.request
+
+  const order = () => {
+    console.log(requestList)
+    return requestList.sort(ordemDecrescente)
+
+  }
+  order()
+
+
+
   return requestList.map((doc, index) => {
+    console.log(doc)
     return (
       <section className={css(styles.orderCard)}>
         <header className={css(styles.headerCard)}>
@@ -133,17 +150,19 @@ const Card = (props) => {
         </header>
         <main className={css(styles.main)}>
           {doc.itemsList.map(item => {
+            console.log(item)
             return (
               <>
-                {props.place === 'kitchen' ?
-                  <label className={css(styles.labelInput)}>
-                    <input type="checkbox" className={props.classInputCheckItem} />
-                    {item.quantity} {item.item} {checkMeatChoice(item)} {CheckAdditionalChoice(item)}
-                  </label>
-                  :
-                  <div>
-                    {item.quantity} {item.item} {checkMeatChoice(item)} {CheckAdditionalChoice(item)}
-                  </div>
+                {
+                  props.place === 'kitchen' ?
+                    <label className={css(styles.labelInput)}>
+                      <input type="checkbox" className={props.classInputCheckItem} />
+                      {item.quantity} {item.item} {checkMeatChoice(item)} {CheckAdditionalChoice(item)}
+                    </label>
+                    :
+                    <div>
+                      {item.quantity} {item.item} {checkMeatChoice(item)} {CheckAdditionalChoice(item)}
+                    </div>
                 }
               </>
             )
@@ -158,7 +177,7 @@ const Card = (props) => {
             {props.name}
           </button>
         </footer>
-      </section>
+      </section >
     )
   })
 }
