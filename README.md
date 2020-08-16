@@ -58,7 +58,7 @@ Visualização do salão:
 ![gif Cozinha](src/assets/cozinha2.gif)
 
 Visualização da cozinha>
-![gif Cozinha](src/assets/gif_salao2.gif)
+![gif Salão](src/assets/gif_salao2.gif)
 
 
 ## 4. Ferramentas utilizadas
