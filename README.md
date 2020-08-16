@@ -27,7 +27,8 @@ A interface do app foi planejada para atender as seguintes necessidades de usuá
 
 ### 3.1 Histórias de Usuário
 
-**Histórias de Usuário 1:** Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.</br>
+##### Histórias de Usuário 1:
+**Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.**
 **Solução:** o usuário deve se registrar no aplicativo usando e-mail e senha e especificar qual é seu local de trabalho (salão ou cozinha). A partir daí cada vez que o usuário loga ele é direcionado para o seu ambiente de trabalho:
 * ___Salão:___ acesso às páginas _"Salão"_ (registro dos pedidos dos clientes na comanda e envio para a cozinha) e _"Pedidos Prontos"_ (lista de pedidos já preparadas e na fila de espera para entrega). 
 * ___Cozinha___ : acesso às páginas _"Cozinha"_ (lista de pedidos a serem preparados) e _"Histórico"_ (lista para consulta de todos os pedidos preparados)
@@ -36,7 +37,7 @@ A interface do app foi planejada para atender as seguintes necessidades de usuá
 **Histórias de Usuário 2:** Eu como garçom/garçonete quero poder anotar o pedido dos clientes e enviar para o preparo na cozinha.
 
 **Solução:** página "Salão" dá acesso à comanda de pedidos, onde o funcionário deve adicionar as informações do cliente (nome e mesa), dos itens e da quantidade dos itens escolhidos pelos clientes. Também pode visualizar o preço total do pedido. O pedido pronto é enviado para a cozinha quando finalizado. 
-<hr>
+
 **Histórias de Usuário 3:** Eu como chefe de cozinha quero ver os pedidos dos clientes, marcar os pedidos prontos e notificar o salão para a entrega.
 
 **Solução**:  página "Cozinha" recebe de forma síncrona os novos pedidos realizados no salão, com o horário do pedido registrado. É possível ter maior controle sobre quais itens de cada pedido já foram preparados checando cada um deles. É possível também sinalizar quais pedidos da lista já estão em preparação, a fim de evitar a execução do mesmo pedido por cozinheiros diferentes, caso haja mais de um no estabelecimento. Após a finalização do preparo o cozinheiro pode marcar o pedido como __"Pedido Pronto"__, e ele será excluído da lista de pedidos pendentes para preparo que está visível na tela. Já a página "Histórico" dá acesso ao cozinheiro a todos os pedidos já finalizados, incluindo o tempo de preparo de cada um deles.
