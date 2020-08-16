@@ -55,10 +55,11 @@ Durante o planejamento do projeto nós realizamos protótipos de baixa e alta fi
 
 ### 3.3 Resultado Final
 Visualização do salão:
-![gif Cozinha](src/assets/cozinha2.gif)
-
-Visualização da cozinha>
 ![gif Salão](src/assets/gif_salao2.gif)
+
+
+Visualização da cozinha:
+![gif Cozinha](src/assets/cozinha2.gif)
 
 
 ## 4. Ferramentas utilizadas
