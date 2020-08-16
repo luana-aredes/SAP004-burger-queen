@@ -36,15 +36,18 @@ A partir do login, cada ambiente fornece acesso a páginas diferentes:
 * ___Cozinha___ : acesso às páginas _"Cozinha"_ (lista de pedidos a serem preparados) e _"Histórico"_ (lista para consulta de todos os pedidos preparados)
 
 
-**Histórias de Usuário 2:** Eu como garçom/garçonete quero poder anotar o pedido dos clientes e enviar para o preparo na cozinha.</br>
+**Histórias de Usuário 2:** Eu como garçom/garçonete quero poder anotar o pedido dos clientes e enviar para o preparo na cozinha.
+
 **Solução:** página "Salão" dá acesso à comanda de pedidos, onde o funcionário deve adicionar as informações do cliente (nome e mesa), dos itens e da quantidade dos itens escolhidos pelos clientes. Também pode visualizar o preço total do pedido. O pedido pronto é enviado para a cozinha quando finalizado. 
 
 
-**Histórias de Usuário 3:** Eu como chefe de cozinha quero ver os pedidos dos clientes, marcar os pedidos prontos e notificar o salão para a entrega.</br>
+**Histórias de Usuário 3:** Eu como chefe de cozinha quero ver os pedidos dos clientes, marcar os pedidos prontos e notificar o salão para a entrega.
+
 **Solução**:  página "Cozinha" recebe de forma síncrona os novos pedidos realizados no salão, com o horário do pedido registrado. É possível ter maior controle sobre quais itens de cada pedido já foram preparados checando cada um deles. É possível também sinalizar quais pedidos da lista já estão em preparação, a fim de evitar a execução do mesmo pedido por cozinheiros diferentes, caso haja mais de um no estabelecimento. Após a finalização do preparo o cozinheiro pode marcar o pedido como __"Pedido Pronto"__, e ele será excluído da lista de pedidos pendentes para preparo que está visível na tela. Já a página "Histórico" dá acesso ao cozinheiro a todos os pedidos já finalizados, incluindo o tempo de preparo de cada um deles.
 
 
-**Histórias de Usuário 4:** Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá-los rapidamente aos clientes.</br>
+**Histórias de Usuário 4:** Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá-los rapidamente aos clientes.
+
 **Solução**:  página "Pedidos Prontos" recebe de forma síncrona os novos pedidos já preparados na cozinha. O funcionário pode marcar cada pedido como __"Pedido Entregue"__, e ele será excluído da lista de pedidos pendente para entrega visível na tela. 
 
 ### 3.2 Prototipação
