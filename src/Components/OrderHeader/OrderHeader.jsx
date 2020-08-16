@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import ClientInfosInput from '../ClientInfosInput/ClientInfosInput.jsx';
 
@@ -34,24 +34,6 @@ const styles = StyleSheet.create({
 });
 
 const OrderSheet = (props) => {
-  const [clientName, setClientName] = useState();
-  const [tableNumber, setTableNumber] = useState();
-
-
-  useEffect(() => {
-    props.handleInputClientName(clientName)
-  }, [clientName]);
-
-  useEffect(() => {
-    props.handleInputClientTable(tableNumber)
-  }, [tableNumber]);
-
-
-  const cleanInputs = () => {
-    setClientName('');
-    setTableNumber('');
-  }
-
   return (
     <main className={css(styles.container)}>
       <section className={css(styles.clientInfos)}>
@@ -61,14 +43,14 @@ const OrderSheet = (props) => {
         <form className={css(styles.displayFlex)}>
           <ClientInfosInput type='text'
             placeholder='Nome do cliente'
-            value={clientName}
-            onChange={(e) => setClientName(e.target.value)} />
+            value={props.clientName}
+            onChange={(e) => props.setClientName(e.target.value)} />
 
           <ClientInfosInput
             class={css(styles.tableNumber)}
             type='number' placeholder='Mesa'
-            value={tableNumber}
-            onChange={(e) => setTableNumber(e.target.value)} />
+            value={props.tableNumber}
+            onChange={(e) => props.setTableNumber(e.target.value)} />
         </form>
       </section>
     </main>
