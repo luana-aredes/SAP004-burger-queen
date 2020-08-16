@@ -25,6 +25,8 @@ const styles = StyleSheet.create({
     },
   },
   deleteImg: {
+    width: '30px',
+    height: '30px',
     '@media (min-width: 350px)': {
       width: '15px',
       height: '15px',
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
   },
   statusRequestMessage: {
     color: 'blue',
+    fontSize: '1.4em'
   },
   totalPrice: {
     fontWeight: 'bold',
@@ -326,13 +329,18 @@ const OrderTable = (props) => {
     addInfosClient(itemsList);
 
   };
+  const SentDataSucessMessage = () => {
+    setSendStatus('PEDIDO ENVIADO PARA A COZINHA!')
+    setTimeout(() => setSendStatus(''), 2000)
+  };
 
   const sendRequestToDataBase = (itemsList) => {
-    setSendStatus('Registrando pedido. Aguarde...');
+    setSendStatus('REGISTRANDO PEDIDO. AGUARDE...');
     db.collection('requests').add({ itemsList })
-      .then((doc) => {
-        setSendStatus('Pedido enviado para a cozinha!')
+      .then(() => {
+        SentDataSucessMessage()
         props.setRequest([])
+        props.cleanClientInfos()
       })
       .catch(() => setSendStatus('Erro ao registrar pedido. Tente novamente!'))
   };

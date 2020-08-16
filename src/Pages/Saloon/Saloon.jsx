@@ -103,9 +103,9 @@ const Saloon = () => {
   const [allDay, setAllDay] = useState([])
   const [button, setButton] = useState(true)
   const [request, setRequest] = useState([])
-  const [error, setError] = useState(null)
-  const [clientName, setClientName] = useState('')
-  const [clientTable, setclientTable] = useState('')
+  const [clientName, setClientName] = useState();
+  const [tableNumber, setTableNumber] = useState();
+
 
   React.useEffect(() => {
     const coffeeMenu = async () => {
@@ -139,6 +139,11 @@ const Saloon = () => {
     return db.collection("users").doc(auth.currentUser.uid).get()
   }
 
+  const cleanClientInfos = () => {
+    setClientName('');
+    setTableNumber('');
+  }
+
   const addItemToOrder = (e, doc) => {
     const price = e.currentTarget.value;
     const item = e.currentTarget.title;
@@ -157,14 +162,10 @@ const Saloon = () => {
     })
   }
 
-  const getClientName = inputedName => setClientName(inputedName);
-  const getClientTable = inputedTable => setclientTable(inputedTable);
-
   return (
     <>
       <header>
-        <Header
-        />
+        <Header />
       </header>
       <main className={css(styles.inlineBlock)} >
         <section className={css(styles.containerMenu)} >
@@ -227,13 +228,18 @@ const Saloon = () => {
           </section>
         </section>
         <section className={css(styles.containerCommands)} >
-          <OrderHeader handleInputClientName={getClientName}
-            handleInputClientTable={getClientTable}
+          <OrderHeader
+            setClientName={setClientName}
+            setTableNumber={setTableNumber}
+            clientName={clientName}
+            tableNumber={tableNumber}
           />
+
           <OrderTable request={request}
             setRequest={setRequest}
             clientName={clientName}
-            clientTable={clientTable}
+            clientTable={tableNumber}
+            cleanClientInfos={cleanClientInfos}
           />
         </section>
       </main>
