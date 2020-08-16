@@ -30,9 +30,6 @@ A interface do app foi planejada para atender as seguintes necessidades de usuá
 **Histórias de Usuário 1:** Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.</br>
 **Solução:** o usuário deve se registrar no aplicativo usando e-mail e senha e especificar qual é seu local de trabalho (salão ou cozinha). A partir daí cada vez que o usuário loga ele é direcionado para o seu ambiente de trabalho. Abaixo segue uma imagem da tela de registro (esquerda) e login (direita) da versão tablet:
 
-![Tela de registro e login](src/assets/reg-login.jpeg)
-
-
 A partir do login, cada ambiente fornece acesso a páginas diferentes:
 * ___Salão:___ acesso às páginas _"Salão"_ (registro dos pedidos dos clientes na comanda e envio para a cozinha) e _"Pedidos Prontos"_ (lista de pedidos já preparadas e na fila de espera para entrega). 
 
@@ -55,6 +52,14 @@ A partir do login, cada ambiente fornece acesso a páginas diferentes:
 Durante o planejamento do projeto nós realizamos protótipos de baixa e alta fidelidade (imagem abaixo). Ajustes em relação à concepção inicial da interface foram implementados a partir de consultas a potenciais usuários e de acordo com a nossa própria percepção, sempre com o objetivo de melhorar a usabilidade e a experiência do usuário.
 
 ![Protótipo de alta fidelidade](src/assets/prototipo-high-quality.png)
+
+### 3.3 Resultado Final
+Visualização do salão:
+![gif Cozinha](src/assets/cozinha2.gif)
+
+Visualização da cozinha>
+![gif Cozinha](src/assets/gif_salao2.gif)
+
 
 ## 4. Ferramentas utilizadas
 * [React](https://pt-br.reactjs.org/) - biblioteca Javascript para criar interfaces de usuário
