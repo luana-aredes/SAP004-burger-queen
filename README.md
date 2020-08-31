@@ -25,7 +25,7 @@ Visualização da cozinha:</br>
 
 ## 2. Usuários
 
-O Projeto foi pensado e desenvolvido para ser utilizado pelos funcionários da hamburgueria,que são os atendentes e os profissionais que preparam o pedido.  
+O Projeto foi pensado e desenvolvido para ser utilizado pelos funcionários da hamburgueria, que são os atendentes e os profissionais que preparam o pedido.  
 
 ### 2.1 Histórias do Usuário
 
@@ -64,7 +64,7 @@ Apesar de serem categorias diferentes, o cliente pode escolher itens das duas ca
 
 ## 4. Prototipação
 
-Durante o planejamento do projeto nós realizamos protótipos de baixa e alta fidelidade (imagem abaixo). Ajustes em relação à concepção inicial da interface foram implementados a partir de consultas a potenciais usuários e de acordo com a nossa própria percepção, sempre com o objetivo de melhorar a usabilidade e a experiência do usuário.
+Durante o planejamento do projeto nós realizamos protótipos de alta fidelidade (imagem abaixo). Ajustes em relação à concepção inicial da interface foram implementados a partir de consultas a potenciais usuários e de acordo com a nossa própria percepção, sempre com o objetivo de melhorar a usabilidade e a experiência do usuário.
 
 ![Protótipo de alta fidelidade](src/assets/prototipo-high-quality.png)
 
